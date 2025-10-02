@@ -1,5 +1,5 @@
 # <h1 align="center">Laporan Praktikum Modul Pengenalan Bahasa C++ (1)</h1>
-<p align="center">Toriq</p>
+<p align="center">Thoriq al kayyis</p>
 
 ## Dasar Teori
 
@@ -13,10 +13,18 @@ Berikan penjelasan teori terkait materi modul ini dengan bahasa anda sendiri ser
 #include <iostream>
 using namespace std;
 
-int main() {
-    cout << "ini adalah file code guided praktikan" << endl;
+int main () {
+    int n;
+    const float pi = 3.14;
+
+    cout << "Masukan Angka: ";
+    cin >> n ;
+
+    cout << "Angka dikeluarkan: " << n << endl;
+    cout << "Nilai konstanta pi: " << pi << endl;
     return 0;
 }
+
 ```
 Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
 
@@ -29,7 +37,16 @@ Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktika
 using namespace std;
 
 int main() {
-    cout << "ini adalah file code unguided praktikan" << endl;
+    float a, b;
+    cout << "Masukkan dua bilangan float: ";
+    cin >> a >> b;
+    cout << "Penjumlahan: " << a + b << endl;
+    cout << "Pengurangan: " << a - b << endl;
+    cout << "Perkalian: " << a * b << endl;
+    if (b != 0)
+        cout << "Pembagian: " << a / b << endl;
+    else
+        cout << "Pembagian: tidak dapat dilakukan (pembagi nol)" << endl;
     return 0;
 }
 ```
