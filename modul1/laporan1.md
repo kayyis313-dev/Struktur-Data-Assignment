@@ -37,16 +37,15 @@ Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktika
 using namespace std;
 
 int main() {
-    float a, b;
+    float x, y;
     cout << "Masukkan dua bilangan float: ";
-    cin >> a >> b;
-    cout << "Penjumlahan: " << a + b << endl;
-    cout << "Pengurangan: " << a - b << endl;
-    cout << "Perkalian: " << a * b << endl;
-    if (b != 0)
-        cout << "Pembagian: " << a / b << endl;
-    else
-        cout << "Pembagian: tidak dapat dilakukan (pembagi nol)" << endl;
+    cin >> x >> y;
+    cout << "Penjumlahan: " << x + y << endl;
+    cout << "Pengurangan: " << x - y << endl;
+    cout << "Perkalian: " << x * y << endl;
+    if (y != 0)
+        cout << "Pembagian: " << x / y << endl;
+        
     return 0;
 }
 ```
