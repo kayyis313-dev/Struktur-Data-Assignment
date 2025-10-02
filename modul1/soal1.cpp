@@ -10,7 +10,6 @@ int main() {
     cout << "Perkalian: " << x * y << endl;
     if (y != 0)
         cout << "Pembagian: " << x / y << endl;
-    else
-        cout << "Pembagian: tidak dapat dilakukan (pembagi nol)" << endl;
+        
     return 0;
 }
