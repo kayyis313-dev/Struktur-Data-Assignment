@@ -30,9 +30,7 @@ Kode di atas digunakan untuk menerima inputan angka dari pengguna, lalu menampil
 
 ## Unguided 
 
-### 1. Buatlah program yang menerima input-an dua buah bilangan betipe float, kemudian
-### memberikan output-an hasil penjumlahan, pengurangan, perkalian, dan pembagian dari dua
-### bilangan tersebut
+### 1. Buatlah program yang menerima input-an dua buah bilangan betipe float, kemudian memberikan output-an hasil penjumlahan, pengurangan, perkalian, dan pembagian dari dua bilangan tersebut
 
 
 ```C++
