@@ -60,7 +60,7 @@ Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktika
 ## Unguided 
 
 ### 2. [Soal]
-
+```C++
 #include <iostream>
 using namespace std;
 
@@ -87,6 +87,7 @@ int main(){
 
     return 0;
 }
+
 
 #### Output:
 ![240302_00h00m06s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/6d1727a8-fb77-4ecf-81ff-5de9386686b7)
