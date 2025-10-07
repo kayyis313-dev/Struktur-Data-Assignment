@@ -110,7 +110,9 @@ Kode di atas digunakan untuk mengubah angka ( dari 0 sampai 100) yang kita input
 
 ## Unguided 
 
-### 3. [Soal]
+### 3.  Buatlah program yang dapat memberikan input dan output sbb.
+<img width="179" height="169" alt="image" src="https://github.com/user-attachments/assets/43676769-9cda-4491-a9a5-7a64bf76fcdc" />
+
 ```C++
 #include <iostream>
 using namespace std;
