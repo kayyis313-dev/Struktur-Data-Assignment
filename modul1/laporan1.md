@@ -165,5 +165,7 @@ kesimpulannya ialah telah menerapkan konsep dasar dalam pemrograman c++,seperti 
 
 ## Referensi
 Horton, I., Van Weert, P. (2020). Arrays and Loops. In: Beginning C++20. Apress, Berkeley, CA. https://doi.org/10.1007/978-1-4842-5884-2_5
+
 Chakraborty, S., Gupta, A., & Unadkat, D. (2017, August). Verifying array manipulating programs by tiling. In International Static Analysis Symposium (pp. 428-449). Cham: Springer International Publishing.
+
 Wittenberg, L. (2017). Data Structures and Algorithms in C++: Pocket Primer. Walter de Gruyter GmbH & Co KG.
