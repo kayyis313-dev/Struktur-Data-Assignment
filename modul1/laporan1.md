@@ -149,10 +149,11 @@ int main() {
 
     return 0;
 }
+```
 
+### Output:
+<img width="1275" height="278" alt="Screenshot 2025-10-07 201259" src="https://github.com/user-attachments/assets/62541091-981a-42db-bbd0-d14a85f4e209" />
 
-#### Output:
-<img width="1275" height="278" alt="image" src="https://github.com/user-attachments/assets/ef934cca-11ad-42aa-97cf-37a79f0aa983" />
 
 #### Full code Screenshot:
 <img width="1919" height="1122" alt="image" src="https://github.com/user-attachments/assets/b9446f6c-56b4-4f01-9fb0-3e2b43e36f56" />
