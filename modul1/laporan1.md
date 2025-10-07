@@ -64,42 +64,15 @@ Kode di atas digunakan untuk melakukan operasi aritmatika dasar(penjumlahan, pen
 ### 2.  Buatlah sebuah program yang menerima masukan angka dan mengeluarkan output nilaiangka tersebut dalam bentuk tulisan. Angka yang akan di- input-kan user adalah bilangan bulat positif mulai dari 0 s.d 100
 
 ```C++
-#include <iostream>
-using namespace std;
 
-int main(){
-    string satuan[9] = {"satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan",};
-    string belasan[9] = {"sebelas", "dua belas", "tiga belas", "empat belas", "lima belas", "enam belas", "tujuh belas", "delapan belas", "sembilan belas"};
-    string puluhan[9] = {"sepuluh", "dua puluh", "tiga puluh", "empat puluh", "lima puluh", "enam puluh", "tujuh puluh", "delapan puluh", "sembilan puluh"};
-
-    int angka;
-    cout << "Input Angka: ";
-    cin >> angka;
-
-    if (angka < 10) {
-        cout << satuan[angka - 1] << endl;
-    } else if (angka < 20) {
-        cout << belasan[angka - 11] << endl;
-    } else if (angka %10 == 0) {
-        cout << puluhan[angka / 10 - 1] << endl;
-    } else if (angka == 100) {
-        cout << "seratus" << endl;
-    } else if (angka > 20 && angka < 100) {
-        cout << puluhan[ (angka/10)-1 ] << " " << satuan[ (angka%10)-1 ] << endl;
-    }
-
-    return 0;
-}
 ```
 
 #### Output:
-<img width="1264" height="132" alt="image" src="https://github.com/user-attachments/assets/363a11e6-77aa-4b75-ab4f-72d321419b3b" />
-
+<img width="1265" height="225" alt="image" src="https://github.com/user-attachments/assets/4b8a799a-6ed2-4da2-b9f5-62c849a8df75" />
 
 #### Full code Screenshot:
-<img width="1915" height="1120" alt="image" src="https://github.com/user-attachments/assets/db37ec88-42af-443d-8070-85d34aec5890" />
 
-Kode di atas digunakan untuk mengubah angka
+Kode di atas digunakan untuk mengubah angka ( dari 0 sampai 100
 
 ## Unguided 
 
