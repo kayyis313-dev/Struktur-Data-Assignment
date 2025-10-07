@@ -26,7 +26,7 @@ int main () {
 }
 
 ```
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+Kode di atas digunakan untuk menerima inputan angka dari pengguna, lalu menampilkan angka tersebut dan juga menampilkan nilai konstanta tersebut.
 
 ## Unguided 
 
