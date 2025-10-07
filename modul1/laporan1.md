@@ -61,7 +61,8 @@ Kode di atas digunakan untuk melakukan operasi aritmatika dasar(penjumlahan, pen
 
 ## Unguided 
 
-### 2. [Soal]
+### 2.  Buatlah sebuah program yang menerima masukan angka dan mengeluarkan output nilaiangka tersebut dalam bentuk tulisan. Angka yang akan di- input-kan user adalah bilangan bulat positif mulai dari 0 s.d 100
+
 ```C++
 #include <iostream>
 using namespace std;
@@ -92,11 +93,13 @@ int main(){
 ```
 
 #### Output:
-![240302_00h00m06s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/6d1727a8-fb77-4ecf-81ff-5de9386686b7)
+<img width="1264" height="132" alt="image" src="https://github.com/user-attachments/assets/363a11e6-77aa-4b75-ab4f-72d321419b3b" />
 
 
 #### Full code Screenshot:
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+<img width="1915" height="1120" alt="image" src="https://github.com/user-attachments/assets/db37ec88-42af-443d-8070-85d34aec5890" />
+
+Kode di atas digunakan untuk mengubah angka
 
 ## Unguided 
 
