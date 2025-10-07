@@ -7,7 +7,7 @@ Berikan penjelasan teori terkait materi modul ini dengan bahasa anda sendiri ser
 
 ## Guided 
 
-### 1. [Nama Topik]
+### 1. [input & output]
 
 ```C++
 #include <iostream>
@@ -26,7 +26,7 @@ int main () {
 }
 
 ```
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+Kode di atas digunakan untuk menerima inputan angka dari pengguna, lalu menampilkan angka tersebut dan juga menampilkan nilai konstanta tersebut.
 
 ## Unguided 
 
@@ -60,7 +60,34 @@ Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktika
 ## Unguided 
 
 ### 2. [Soal]
+```C++
+#include <iostream>
+using namespace std;
 
+int main(){
+    string satuan[9] = {"satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan",};
+    string belasan[9] = {"sebelas", "dua belas", "tiga belas", "empat belas", "lima belas", "enam belas", "tujuh belas", "delapan belas", "sembilan belas"};
+    string puluhan[9] = {"sepuluh", "dua puluh", "tiga puluh", "empat puluh", "lima puluh", "enam puluh", "tujuh puluh", "delapan puluh", "sembilan puluh"};
+
+    int angka;
+    cout << "Input Angka: ";
+    cin >> angka;
+
+    if (angka < 10) {
+        cout << satuan[angka - 1] << endl;
+    } else if (angka < 20) {
+        cout << belasan[angka - 11] << endl;
+    } else if (angka %10 == 0) {
+        cout << puluhan[angka / 10 - 1] << endl;
+    } else if (angka == 100) {
+        cout << "seratus" << endl;
+    } else if (angka > 20 && angka < 100) {
+        cout << puluhan[ (angka/10)-1 ] << " " << satuan[ (angka%10)-1 ] << endl;
+    }
+
+    return 0;
+}
+```
 
 #### Output:
 ![240302_00h00m06s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/6d1727a8-fb77-4ecf-81ff-5de9386686b7)
@@ -72,6 +99,43 @@ Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktika
 ## Unguided 
 
 ### 3. [Soal]
+```C++
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Input: ";
+    cin >> n;
+
+    cout << "Output:" << endl;
+
+    for (int i = n; i >= 1; i--) {
+        for (int s = 0; s < n - i; s++) {
+            cout << "  "; // dua spasi biar rapi
+        }
+
+        for (int j = i; j >= 1; j--) {
+            cout << j << " ";
+        }
+
+        cout << "* ";
+
+        for (int j = 1; j <= i; j++) {
+            cout << j << " ";
+        }
+
+        cout << endl;
+    }
+
+    for (int s = 0; s < n; s++) {
+        cout << "  ";
+    }
+    cout << "*" << endl;
+
+    return 0;
+}
+
 
 #### Output:
 ![240302_00h00m06s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/6d1727a8-fb77-4ecf-81ff-5de9386686b7)
