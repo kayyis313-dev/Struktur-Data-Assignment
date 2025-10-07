@@ -30,7 +30,8 @@ Kode di atas digunakan untuk menerima inputan angka dari pengguna, lalu menampil
 
 ## Unguided 
 
-### 1. [Soal]
+### 1. Buatlah program yang menerima input-an dua buah bilangan betipe float, kemudian memberikan output-an hasil penjumlahan, pengurangan, perkalian, dan pembagian dari dua bilangan tersebut
+
 
 ```C++
 #include <iostream>
@@ -43,58 +44,35 @@ int main() {
     cout << "Penjumlahan: " << x + y << endl;
     cout << "Pengurangan: " << x - y << endl;
     cout << "Perkalian: " << x * y << endl;
-    if (y != 0)
-        cout << "Pembagian: " << x / y << endl;
+    cout << "Pembagian: " << x / y << endl;
         
     return 0;
 }
 ```
 #### Output:
-![240302_00h00m06s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/6d1727a8-fb77-4ecf-81ff-5de9386686b7)
+<img width="1265" height="206" alt="image" src="https://github.com/user-attachments/assets/6b1048d2-bcc5-411c-91c6-d9dbfcec5b1c" />
 
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+
+Kode di atas digunakan untuk melakukan operasi aritmatika dasar(penjumlahan, pengurangan, perkalian, dan pembagian) terhadap dua bilangan bertipe float yang dimasukkan oleh pengguna.
 
 #### Full code Screenshot:
-![240309_10h21m35s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/41e9641c-ad4e-4e50-9ca4-a0215e336b04)
+<img width="1919" height="1097" alt="image" src="https://github.com/user-attachments/assets/892fe3ff-c177-4eab-88bb-05fc76b76482" />
+
 
 ## Unguided 
 
-### 2. [Soal]
+### 2.  Buatlah sebuah program yang menerima masukan angka dan mengeluarkan output nilaiangka tersebut dalam bentuk tulisan. Angka yang akan di- input-kan user adalah bilangan bulat positif mulai dari 0 s.d 100
+
 ```C++
-#include <iostream>
-using namespace std;
 
-int main(){
-    string satuan[9] = {"satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan",};
-    string belasan[9] = {"sebelas", "dua belas", "tiga belas", "empat belas", "lima belas", "enam belas", "tujuh belas", "delapan belas", "sembilan belas"};
-    string puluhan[9] = {"sepuluh", "dua puluh", "tiga puluh", "empat puluh", "lima puluh", "enam puluh", "tujuh puluh", "delapan puluh", "sembilan puluh"};
-
-    int angka;
-    cout << "Input Angka: ";
-    cin >> angka;
-
-    if (angka < 10) {
-        cout << satuan[angka - 1] << endl;
-    } else if (angka < 20) {
-        cout << belasan[angka - 11] << endl;
-    } else if (angka %10 == 0) {
-        cout << puluhan[angka / 10 - 1] << endl;
-    } else if (angka == 100) {
-        cout << "seratus" << endl;
-    } else if (angka > 20 && angka < 100) {
-        cout << puluhan[ (angka/10)-1 ] << " " << satuan[ (angka%10)-1 ] << endl;
-    }
-
-    return 0;
-}
 ```
 
 #### Output:
-![240302_00h00m06s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/6d1727a8-fb77-4ecf-81ff-5de9386686b7)
-
+<img width="1265" height="225" alt="image" src="https://github.com/user-attachments/assets/4b8a799a-6ed2-4da2-b9f5-62c849a8df75" />
 
 #### Full code Screenshot:
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+
+Kode di atas digunakan untuk mengubah angka ( dari 0 sampai 100
 
 ## Unguided 
 
