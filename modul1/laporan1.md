@@ -60,6 +60,7 @@ Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktika
 ## Unguided 
 
 ### 2. [Soal]
+
 #include <iostream>
 using namespace std;
 
