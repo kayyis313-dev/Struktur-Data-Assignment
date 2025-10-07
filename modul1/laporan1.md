@@ -164,4 +164,4 @@ Kode di atas digunakan untuk menampilkan pola angkka berbentuk simetris (piramid
 kesimpulannya ialah telah menerapkan konsep dasar dalam pemrograman c++,seperti input/output, percabangan, perulangan, penggnaan konstanta,serta array, untuk membuat program sederhana dengan fungsii  yang beda-beda.
 
 ## Referensi
-[1] I. Holm, Narrator, and J. Fullerton-Smith, Producer, How to Build a Human [DVD]. London: BBC; 2002. 
+Horton, I., Van Weert, P. (2020). Arrays and Loops. In: Beginning C++20. Apress, Berkeley, CA. https://doi.org/10.1007/978-1-4842-5884-2_5
