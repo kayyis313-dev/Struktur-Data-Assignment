@@ -164,7 +164,7 @@ Kode di atas digunakan untuk menampilkan pola angkka berbentuk simetris (piramid
 kesimpulannya ialah telah menerapkan konsep dasar dalam pemrograman c++,seperti input/output, percabangan, perulangan, penggnaan konstanta,serta array, untuk membuat program sederhana dengan fungsii  yang beda-beda.
 
 ## Referensi
-Horton, I., Van Weert, P. (2020). Arrays and Loops. In: Beginning C++20. Apress, Berkeley, CA. https://doi.org/10.1007/978-1-4842-5884-2_5
+Horton, I., & Van Weert, P. (2023). Arrays and Loops. In Beginning C++ 23: From Beginner to Pro (pp. 147-203). Berkeley, CA: Apress.
 
 Chakraborty, S., Gupta, A., & Unadkat, D. (2017, August). Verifying array manipulating programs by tiling. In International Static Analysis Symposium (pp. 428-449). Cham: Springer International Publishing.
 
