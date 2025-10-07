@@ -64,15 +64,49 @@ Kode di atas digunakan untuk melakukan operasi aritmatika dasar(penjumlahan, pen
 ### 2.  Buatlah sebuah program yang menerima masukan angka dan mengeluarkan output nilaiangka tersebut dalam bentuk tulisan. Angka yang akan di- input-kan user adalah bilangan bulat positif mulai dari 0 s.d 100
 
 ```C++
+#include <iostream>
+using namespace std;
 
+int main() {
+    string satuan[9] = {"satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan"};
+    string belasan[9] = {"sebelas", "dua belas", "tiga belas", "empat belas", "lima belas", 
+                         "enam belas", "tujuh belas", "delapan belas", "sembilan belas"};
+    string puluhan[9] = {"sepuluh", "dua puluh", "tiga puluh", "empat puluh", "lima puluh", 
+                         "enam puluh", "tujuh puluh", "delapan puluh", "sembilan puluh"};
+
+    int angka;
+    cout << "Masukkan angka (0 - 100): ";
+    cin >> angka;
+
+    if (angka < 0 || angka > 100) {
+        cout << "Angka di luar jangkauan!" << endl;
+    } else if (angka == 0) {
+        cout << "nol" << endl;
+    } else if (angka < 10) {
+        cout << satuan[angka - 1] << endl;
+    } else if (angka == 10) {
+        cout << "sepuluh" << endl;
+    } else if (angka < 20) {
+        cout << belasan[angka - 11] << endl;
+    } else if (angka % 10 == 0 && angka < 100) {
+        cout << puluhan[(angka / 10) - 1] << endl;
+    } else if (angka > 20 && angka < 100) {
+        cout << puluhan[(angka / 10) - 1] << " " << satuan[(angka % 10) - 1] << endl;
+    } else if (angka == 100) {
+        cout << "seratus" << endl;
+    }
+
+    return 0;
+}
 ```
 
 #### Output:
 <img width="1265" height="225" alt="image" src="https://github.com/user-attachments/assets/4b8a799a-6ed2-4da2-b9f5-62c849a8df75" />
 
 #### Full code Screenshot:
+<img width="1906" height="1104" alt="image" src="https://github.com/user-attachments/assets/264a1e75-d2bb-473b-8bbe-7c8e4fc8b777" />
 
-Kode di atas digunakan untuk mengubah angka ( dari 0 sampai 100
+Kode di atas digunakan untuk mengubah angka ( dari 0 sampai 100) yang kita inputkan, menjadi bentuk tulisan atau terbilang nya itu dalam bahasa indonesia.
 
 ## Unguided 
 
@@ -116,13 +150,15 @@ int main() {
 
 
 #### Output:
-![240302_00h00m06s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/6d1727a8-fb77-4ecf-81ff-5de9386686b7)
+<img width="1275" height="278" alt="image" src="https://github.com/user-attachments/assets/ef934cca-11ad-42aa-97cf-37a79f0aa983" />
 
 #### Full code Screenshot:
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+<img width="1919" height="1122" alt="image" src="https://github.com/user-attachments/assets/b9446f6c-56b4-4f01-9fb0-3e2b43e36f56" />
+
+Kode di atas digunakan untuk menampilkan pola angkka berbentuk simetris (piramida terbalik dengan tanda * ditengah) berdaarkan angka yang kita inputkan.
 
 ## Kesimpulan
-Ringkasan dan interpretasi pandangan kalia dari hasil praktikum dan pembelajaran yang didapat[1].
+kesimpulannya ialah telah menerapkan konsep dasar dalam pemrograman c++,seperti input/output, percabangan, perulangan, penggnaan konstanta,serta array, untuk membuat program sederhana dengan fungsii  yang beda-beda.
 
 ## Referensi
 [1] I. Holm, Narrator, and J. Fullerton-Smith, Producer, How to Build a Human [DVD]. London: BBC; 2002. 
