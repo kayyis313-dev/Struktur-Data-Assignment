@@ -30,9 +30,9 @@ Kode di atas digunakan untuk menerima inputan angka dari pengguna, lalu menampil
 
 ## Unguided 
 
-### 1.  Buatlah program yang menerima input-an dua buah bilangan betipe float, kemudian
-memberikan output-an hasil penjumlahan, pengurangan, perkalian, dan pembagian dari dua
-bilangan tersebut.
+### 1. Buatlah program yang menerima input-an dua buah bilangan betipe float, kemudian
+### memberikan output-an hasil penjumlahan, pengurangan, perkalian, dan pembagian dari dua
+### bilangan tersebut
 
 
 ```C++
@@ -56,6 +56,7 @@ int main() {
 
 
 Kode di atas digunakan untuk melakukan operasi aritmatika dasar(penjumlahan, pengurangan, perkalian, dan pembagian) terhadap dua bilangan bertipe float yang dimasukkan oleh pengguna.
+
 #### Full code Screenshot:
 <img width="1919" height="1097" alt="image" src="https://github.com/user-attachments/assets/892fe3ff-c177-4eab-88bb-05fc76b76482" />
 
