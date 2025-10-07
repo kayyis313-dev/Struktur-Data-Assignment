@@ -98,7 +98,44 @@ Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktika
 
 ## Unguided 
 
-### 3. [Soal]
+### 2. [Soal]
+```C++
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Input: ";
+    cin >> n;
+
+    cout << "Output:" << endl;
+
+    for (int i = n; i >= 1; i--) {
+        for (int s = 0; s < n - i; s++) {
+            cout << "  "; // dua spasi biar rapi
+        }
+
+        for (int j = i; j >= 1; j--) {
+            cout << j << " ";
+        }
+
+        cout << "* ";
+
+        for (int j = 1; j <= i; j++) {
+            cout << j << " ";
+        }
+
+        cout << endl;
+    }
+
+    for (int s = 0; s < n; s++) {
+        cout << "  ";
+    }
+    cout << "*" << endl;
+
+    return 0;
+}
+
 
 #### Output:
 ![240302_00h00m06s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/6d1727a8-fb77-4ecf-81ff-5de9386686b7)
