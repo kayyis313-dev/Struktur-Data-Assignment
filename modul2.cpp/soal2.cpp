@@ -16,7 +16,7 @@ int main() {
 
     tukarNilai(&a, &b, &c);
 
-    cout << "\nNilai setelah ditukar (versi pointer):\n";
+    cout << "\nSetelah ditukar nilainya :\n";
     cout << "a = " << a << ", b = " << b << ", c = " << c << endl;
 
     return 0;
