@@ -1,1 +1,1 @@
-# Struktur-Data-Assignment
+# Stuktur-Data-Assignment
