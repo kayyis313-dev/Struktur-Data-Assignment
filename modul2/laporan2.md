@@ -2,19 +2,19 @@
 <p align="center">Thoriq Al Kayyis</p>
 
 ## Dasar Teori
-# 1. Array
+### 1. Array
 Array adalah struktur data yang berisi kumpulan elemen dengan tipe data yang sama, di mana setiap elemen disimpan pada alamat memori tertentu. Selain array satu dimensi, terdapat juga array dua dimensi yang berbentuk seperti matriks dengan susunan baris dan kolom, sehingga dapat digunakan untuk merepresentasikan data yang lebih kompleks.
 
-# 2. Function
+### 2. Function
 Fungsi merupakan sekumpulan perintah atau kode yang memiliki nama, dapat menerima masukan dari pemanggilnya, menjalankan proses tertentu, dan dapat mengembalikan nilai hasil dari proses tersebut.
 
-# 3. Procedure
+### 3. Procedure
 Prosedur adalah sekumpulan langkah atau instruksi algoritmik yang memiliki nama dan digunakan untuk menjalankan tugas tertentu yang menghasilkan efek atau perubahan yang telah ditentukan.
 
-# 4. Pointer
+### 4. Pointer
 Pointer dalam bahasa C++ adalah variabel yang menyimpan alamat memori dari variabel lain. Dengan pointer, kita bisa mengakses dan memodifikasi data secara langsung di lokasi memori yang ditunjuk.
 
-# 5. Reference
+### 5. Reference
 Reference adalah variabel yang berfungsi sebagai nama lain atau alias dari variabel yang sudah ada, sehingga memungkinkan kita untuk mengakses dan memanipulasi data aslinya secara langsung tanpa membuat salinan baru.
 
 ## Guided 
