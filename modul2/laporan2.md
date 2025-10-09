@@ -247,12 +247,17 @@ int main(){
 }
 ```
 #### Output:
+<img width="1245" height="264" alt="image" src="https://github.com/user-attachments/assets/afbb946f-992e-4c49-acad-3e6558cb8829" />
+<img width="1217" height="557" alt="image" src="https://github.com/user-attachments/assets/86275210-ac4c-4fe2-9b6a-79510c33f189" />
 
+
+kode diatas digunakan untuk menampilkan, mencari nilai maksimum,minimum, serta menghitung rata-rata dari data array menggunakan menu interaktif berbasis fungsi
 
 #### Full code Screenshot:
+<img width="1909" height="1100" alt="image" src="https://github.com/user-attachments/assets/0d48949e-6117-41ea-a058-4897bd4ebd50" />
 
 ## Kesimpulan
-Ringkasan dan interpretasi pandangan kalia dari hasil praktikum dan pembelajaran yang didapat[1].
+Dalam pertemuan ini, mahasiswa mempelajari cara membuat menu sederhana yang berisi beberapa fungsi dan prosedur, serta bagaimana mengubah nilai variabel menggunakan dua metode berbeda, yaitu melalui pointer dan reference. tolong parafrashe.
 
 ## Referensi
 [1] I. Holm, Narrator, and J. Fullerton-Smith, Producer, How to Build a Human [DVD]. London: BBC; 2002.
