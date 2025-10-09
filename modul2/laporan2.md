@@ -1,9 +1,21 @@
-# <h1 align="center">Laporan Praktikum Modul Pengenalan Bahasa C++ (1)</h1>
+# <h1 align="center">Laporan Praktikum Modul Pengenalan Bahasa C++ (2)</h1>
 <p align="center">Thoriq Al Kayyis</p>
 
 ## Dasar Teori
+## 1. Array
+Array adalah struktur data yang berisi kumpulan elemen dengan tipe data yang sama, di mana setiap elemen disimpan pada alamat memori tertentu. Selain array satu dimensi, terdapat juga array dua dimensi yang berbentuk seperti matriks dengan susunan baris dan kolom, sehingga dapat digunakan untuk merepresentasikan data yang lebih kompleks.
 
-Berikan penjelasan teori terkait materi modul ini dengan bahasa anda sendiri serta susunan yang terstruktur per topiknya.
+## 2. Function
+Fungsi merupakan sekumpulan perintah atau kode yang memiliki nama, dapat menerima masukan dari pemanggilnya, menjalankan proses tertentu, dan dapat mengembalikan nilai hasil dari proses tersebut.
+
+## 3. Procedure
+Prosedur adalah sekumpulan langkah atau instruksi algoritmik yang memiliki nama dan digunakan untuk menjalankan tugas tertentu yang menghasilkan efek atau perubahan yang telah ditentukan.
+
+## 4. Pointer
+Pointer dalam bahasa C++ adalah variabel yang menyimpan alamat memori dari variabel lain. Dengan pointer, kita bisa mengakses dan memodifikasi data secara langsung di lokasi memori yang ditunjuk.
+
+## 5. Reference
+Reference adalah variabel yang berfungsi sebagai nama lain atau alias dari variabel yang sudah ada, sehingga memungkinkan kita untuk mengakses dan memanipulasi data aslinya secara langsung tanpa membuat salinan baru.
 
 ## Guided 
 
@@ -112,12 +124,14 @@ int main(){
 }
 ```
 #### Output:
-![240302_00h00m06s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/6d1727a8-fb77-4ecf-81ff-5de9386686b7)
+<img width="1248" height="447" alt="image" src="https://github.com/user-attachments/assets/fcca3cd4-bba5-4c8a-8ad1-fdc03935080f" />
 
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+
+Kode di atas digunakan untuk menerapkan operasi dasar pada matriks berukuran 3x3, yaitu penjumlahan, pengurangan, dan perkalian, kemudian menampilkan hasil perhitungannya ke layar melalui sebuah fungsi
 
 #### Full code Screenshot:
-![240309_10h21m35s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/41e9641c-ad4e-4e50-9ca4-a0215e336b04)
+<img width="1919" height="1130" alt="image" src="https://github.com/user-attachments/assets/eedf233f-c257-4051-9506-d99043f00223" />
+
 
 ## Unguided 
 
@@ -149,6 +163,11 @@ int main() {
 }
 
 ```
+#### Output:
+
+
+#### Full code Screenshot:
+
 
 ## Unguided 
 
