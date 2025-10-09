@@ -1,4 +1,4 @@
-# <h1 align="center">Laporan Praktikum Modul Pengenalan Bahasa C++ (2)</h1>
+# <h1 align="center">Laporan Praktikum Modul Pengenalan Bahasa C++ (Bagian Kedua)</h1>
 <p align="center">Thoriq Al Kayyis</p>
 
 ## Dasar Teori
