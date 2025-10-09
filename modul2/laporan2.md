@@ -38,7 +38,7 @@ cout << "After swapping, value of a : " << a << " and b=" << b << endl;
 return 0;
 }
 ```
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+Kode di atas digunakan untuk Menukarkan nilai dari dua variabel menggunakan fungsi yang menerima parameter berupa pointer.
 
 ## Unguided 
 
