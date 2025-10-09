@@ -260,5 +260,8 @@ kode diatas digunakan untuk menampilkan, mencari nilai maksimum,minimum, serta m
 Dalam pertemuan ini, mahasiswa mempelajari cara membuat menu sederhana yang berisi beberapa fungsi dan prosedur, serta bagaimana mengubah nilai variabel menggunakan dua metode berbeda, yaitu melalui pointer dan reference. tolong parafrashe.
 
 ## Referensi
-[1] Belajar Pointer C++: Dasar-Dasar, Fungsi, dan Contoh Kode
-https://www.codepolitan.com/blog/belajar-pointer-c-dasardasar-fungsi-dan-contoh-kode/ 
+[1] Belajar Pointer C++: Dasar-Dasar, Fungsi, dan Contoh Kode. Melalui
+https://www.codepolitan.com/blog/belajar-pointer-c-dasardasar-fungsi-dan-contoh-kode/
+[2] Belajar C++ #10: Mengenal Fungsi dan Prosedur pada C++. Diakses melalui 
+https://www.petanikode.com/cpp-fungsi/
+[3] Yamashita, K., Fujioka, R., Kogure, S., Noguchi, Y., Konishi, T., & Itoh, Y. (2017). Classroom practice for understanding pointers using learning support system for visualizing memory image and target domain world. Research and Practice in Technology Enhanced Learning, 12(1), 17.
