@@ -13,9 +13,29 @@ Berikan penjelasan teori terkait materi modul ini dengan bahasa anda sendiri ser
 #include <iostream>
 using namespace std;
 
-int main() {
-    cout << "ini adalah file code guided praktikan" << endl;
-    return 0;
+void tukar(int *x, int *y) {
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+main () {
+    int a = 20, b = 30;
+    int *ptr;
+
+    ptr = &a;
+
+    cout << "Value a : " << a << endl;
+    cout << "Address a : " << &a << endl;
+    cout << "Value stored in otr (address of a) : " << ptr << endl;
+    cout << "Value pointed to by ptr: " << *ptr << endl;
+
+
+tukar(&a, &b);
+cout << "After swapping, value of a : " << a << " and b=" << b << endl;
+
+return 0;
 }
 ```
 Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
