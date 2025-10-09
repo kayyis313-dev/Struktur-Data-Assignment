@@ -156,7 +156,7 @@ int main() {
 
     tukarNilai(&a, &b, &c);
 
-    cout << "\nSetelah ditukar nilainya :\n";
+    cout << "\nSetelah ditukar nilainya (pointer) :\n";
     cout << "a = " << a << ", b = " << b << ", c = " << c << endl;
 
     return 0;
@@ -164,9 +164,11 @@ int main() {
 
 ```
 #### Output:
-
+<img width="1248" height="206" alt="image" src="https://github.com/user-attachments/assets/6c380e6d-9343-41f9-a106-2d47dc1b4b04" />
+kode diatas digunakan untuk melakukan pertukaran nilai dari tiga variabel secara bergiliran dengan memanfaatkan pointer, sehingga perubahan nilai terjadi langsung pada variabel aslinya di dalam fungsi utama.
 
 #### Full code Screenshot:
+<img width="1919" height="1126" alt="image" src="https://github.com/user-attachments/assets/a8887b32-6fe1-4092-8535-53b592ff63b6" />
 
 
 ## Unguided 
@@ -244,6 +246,10 @@ int main(){
     return 0;
 }
 ```
+#### Output:
+
+
+#### Full code Screenshot:
 
 ## Kesimpulan
 Ringkasan dan interpretasi pandangan kalia dari hasil praktikum dan pembelajaran yang didapat[1].
