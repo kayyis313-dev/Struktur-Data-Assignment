@@ -1,4 +1,4 @@
-# <h1 align="center">Laporan Praktikum Modul Pengenalan Bahasa C++ (1)</h1>
+# <h1 align="center">Codeblocks IDE & Pengenalan Bahas C++ (1)</h1>
 <p align="center">Thoriq al kayyis</p>
 
 ## Dasar Teori
