@@ -2,8 +2,7 @@
 <p align="center">Thoriq al kayyis</p>
 
 ## Dasar Teori
-
-Berikan penjelasan teori terkait materi modul ini dengan bahasa anda sendiri serta susunan yang terstruktur per topiknya.
+Bahasa pemrograman C merupakan bahasa terstruktur yang menyusun program menjadi beberapa blok agar proses pembuatan dan pengembangannya lebih mudah. Sementara itu, program C++ umumnya disimpan dengan ekstensi .CPP (singkatan dari C plus plus). Supaya dapat dijalankan, program tersebut harus terlebih dahulu melalui proses kompilasi menggunakan kompiler C++
 
 ## Guided 
 
