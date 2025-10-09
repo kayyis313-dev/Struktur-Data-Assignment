@@ -260,4 +260,5 @@ kode diatas digunakan untuk menampilkan, mencari nilai maksimum,minimum, serta m
 Dalam pertemuan ini, mahasiswa mempelajari cara membuat menu sederhana yang berisi beberapa fungsi dan prosedur, serta bagaimana mengubah nilai variabel menggunakan dua metode berbeda, yaitu melalui pointer dan reference. tolong parafrashe.
 
 ## Referensi
-[1] I. Holm, Narrator, and J. Fullerton-Smith, Producer, How to Build a Human [DVD]. London: BBC; 2002.
+[1] Belajar Pointer C++: Dasar-Dasar, Fungsi, dan Contoh Kode
+https://www.codepolitan.com/blog/belajar-pointer-c-dasardasar-fungsi-dan-contoh-kode/ 
