@@ -1,20 +1,20 @@
-# <h1 align="center">Laporan Praktikum Modul Pengenalan Bahasa C++ (2)</h1>
+# <h1 align="center">Laporan Praktikum Modul Pengenalan Bahasa C++ (Bagian Kedua)</h1>
 <p align="center">Thoriq Al Kayyis</p>
 
 ## Dasar Teori
-## 1. Array
+#### 1. Array
 Array adalah struktur data yang berisi kumpulan elemen dengan tipe data yang sama, di mana setiap elemen disimpan pada alamat memori tertentu. Selain array satu dimensi, terdapat juga array dua dimensi yang berbentuk seperti matriks dengan susunan baris dan kolom, sehingga dapat digunakan untuk merepresentasikan data yang lebih kompleks.
 
-## 2. Function
+#### 2. Function
 Fungsi merupakan sekumpulan perintah atau kode yang memiliki nama, dapat menerima masukan dari pemanggilnya, menjalankan proses tertentu, dan dapat mengembalikan nilai hasil dari proses tersebut.
 
-## 3. Procedure
+#### 3. Procedure
 Prosedur adalah sekumpulan langkah atau instruksi algoritmik yang memiliki nama dan digunakan untuk menjalankan tugas tertentu yang menghasilkan efek atau perubahan yang telah ditentukan.
 
-## 4. Pointer
+#### 4. Pointer
 Pointer dalam bahasa C++ adalah variabel yang menyimpan alamat memori dari variabel lain. Dengan pointer, kita bisa mengakses dan memodifikasi data secara langsung di lokasi memori yang ditunjuk.
 
-## 5. Reference
+#### 5. Reference
 Reference adalah variabel yang berfungsi sebagai nama lain atau alias dari variabel yang sudah ada, sehingga memungkinkan kita untuk mengakses dan memanipulasi data aslinya secara langsung tanpa membuat salinan baru.
 
 ## Guided 
@@ -156,7 +156,7 @@ int main() {
 
     tukarNilai(&a, &b, &c);
 
-    cout << "\nSetelah ditukar nilainya :\n";
+    cout << "\nSetelah ditukar nilainya (pointer) :\n";
     cout << "a = " << a << ", b = " << b << ", c = " << c << endl;
 
     return 0;
@@ -164,9 +164,11 @@ int main() {
 
 ```
 #### Output:
-
+<img width="1248" height="206" alt="image" src="https://github.com/user-attachments/assets/6c380e6d-9343-41f9-a106-2d47dc1b4b04" />
+kode diatas digunakan untuk melakukan pertukaran nilai dari tiga variabel secara bergiliran dengan memanfaatkan pointer, sehingga perubahan nilai terjadi langsung pada variabel aslinya di dalam fungsi utama.
 
 #### Full code Screenshot:
+<img width="1919" height="1126" alt="image" src="https://github.com/user-attachments/assets/a8887b32-6fe1-4092-8535-53b592ff63b6" />
 
 
 ## Unguided 
@@ -244,9 +246,22 @@ int main(){
     return 0;
 }
 ```
+#### Output:
+<img width="1245" height="264" alt="image" src="https://github.com/user-attachments/assets/afbb946f-992e-4c49-acad-3e6558cb8829" />
+<img width="1217" height="557" alt="image" src="https://github.com/user-attachments/assets/86275210-ac4c-4fe2-9b6a-79510c33f189" />
+
+
+kode diatas digunakan untuk menampilkan, mencari nilai maksimum,minimum, serta menghitung rata-rata dari data array menggunakan menu interaktif berbasis fungsi
+
+#### Full code Screenshot:
+<img width="1909" height="1100" alt="image" src="https://github.com/user-attachments/assets/0d48949e-6117-41ea-a058-4897bd4ebd50" />
 
 ## Kesimpulan
-Ringkasan dan interpretasi pandangan kalia dari hasil praktikum dan pembelajaran yang didapat[1].
+Dalam pertemuan ini, mahasiswa mempelajari cara membuat menu sederhana yang berisi beberapa fungsi dan prosedur, serta bagaimana mengubah nilai variabel menggunakan dua metode berbeda, yaitu melalui pointer dan reference. tolong parafrashe.
 
 ## Referensi
-[1] I. Holm, Narrator, and J. Fullerton-Smith, Producer, How to Build a Human [DVD]. London: BBC; 2002.
+[1] Belajar Pointer C++: Dasar-Dasar, Fungsi, dan Contoh Kode. Melalui
+https://www.codepolitan.com/blog/belajar-pointer-c-dasardasar-fungsi-dan-contoh-kode/
+. [2] Belajar C++ #10: Mengenal Fungsi dan Prosedur pada C++. Diakses melalui 
+https://www.petanikode.com/cpp-fungsi/
+. [3] Yamashita, K., Fujioka, R., Kogure, S., Noguchi, Y., Konishi, T., & Itoh, Y. (2017). Classroom practice for understanding pointers using learning support system for visualizing memory image and target domain world. Research and Practice in Technology Enhanced Learning, 12(1), 17.
