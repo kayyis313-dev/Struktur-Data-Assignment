@@ -4,7 +4,7 @@
 ## Dasar Teori
 
 Bahasa pemrograman C merupakan bahasa yang bersifat terstruktur, di mana program dibagi menjadi beberapa blok atau bagian agar proses pembuatan dan pengembangannya menjadi lebih mudah.
-Sementara itu, program C++ biasanya disimpan dengan ekstensi `.CPP`(singkatan dari *C plus plus*).
+Sementara itu, program C++ biasanya disimpan dengan ekstensi .CPP(singkatan dari *C plus plus*).
 Sebelum program tersebut dapat dijalankan (dieksekusi), ia harus terlebih dahulu dikompilasi menggunakan kompiler C++.
 
 ## Guided 
