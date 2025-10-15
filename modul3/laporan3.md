@@ -1,5 +1,5 @@
 # <h1 align="center">Laporan Praktikum Modul3 Pengenalan Bahasa C++ (Abstract Data Type (ADT))</h1>
-<p align="center">Arvinanto Bahtiar</p>
+<p align="center">Thoriq Al Kayyis</p>
 
 ## Dasar Teori
 
