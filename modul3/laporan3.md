@@ -1,9 +1,11 @@
-# <h1 align="center">Laporan Praktikum Modul Pengenalan Bahasa C++ (1)</h1>
-<p align="center">Arvinanto Bahtiar</p>
+# <h1 align="center">Laporan Praktikum Modul3 Pengenalan Bahasa C++ (Abstract Data Type (ADT))</h1>
+<p align="center">Thoriq Al Kayyis</p>
 
 ## Dasar Teori
 
-Berikan penjelasan teori terkait materi modul ini dengan bahasa anda sendiri serta susunan yang terstruktur per topiknya.
+Bahasa pemrograman C merupakan bahasa yang bersifat terstruktur, di mana program dibagi menjadi beberapa blok atau bagian agar proses pembuatan dan pengembangannya menjadi lebih mudah.
+Sementara itu, program C++ biasanya disimpan dengan ekstensi .CPP(singkatan dari *C plus plus*).
+Sebelum program tersebut dapat dijalankan (dieksekusi), ia harus terlebih dahulu dikompilasi menggunakan kompiler C++.
 
 ## Guided 
 
@@ -22,7 +24,7 @@ Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktika
 
 ## Unguided 
 
-### 1. [Soal]
+### 1. . Buat program yang dapat menyimpan data mahasiswa (max. 10) ke dalam sebuah array dengan field nama, nim, uts, uas, tugas, dan nilai akhir. Nilai akhir diperoleh dari FUNGSI dengan rumus 0.3*uts+0.4*uas+0.3*tugas.
 
 ```C++
 #include <iostream>
@@ -41,6 +43,48 @@ Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktika
 #### Full code Screenshot:
 ![240309_10h21m35s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/41e9641c-ad4e-4e50-9ca4-a0215e336b04)
 
+## Unguided 
+
+### 2. soal
+
+```C++
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "ini adalah file code unguided praktikan" << endl;
+    return 0;
+}
+```
+#### Output:
+![240302_00h00m06s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/6d1727a8-fb77-4ecf-81ff-5de9386686b7)
+
+Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+
+#### Full code Screenshot:
+![240309_10h21m35s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/41e9641c-ad4e-4e50-9ca4-a0215e336b04)
+
+
+## Unguided 
+
+### 3.  Buatlah program dengan ketentuan : - 2 buah array 2D integer berukuran 3x3 dan 2 buah pointer integer - fungsi/prosedur yang menampilkan isi sebuah array integer 2D - fungsi/prosedur yang akan menukarkan isi dari 2 array integer 2D pada posisi tertentu - fungsi/prosedur yang akan menukarkan isi dari variabel yang ditunjuk oleh 2 buah pointer
+
+```C++
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "ini adalah file code unguided praktikan" << endl;
+    return 0;
+}
+```
+#### Output:
+![240302_00h00m06s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/6d1727a8-fb77-4ecf-81ff-5de9386686b7)
+
+Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+
+#### Full code Screenshot:
+![240309_10h21m35s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/41e9641c-ad4e-4e50-9ca4-a0215e336b04)
 
 ## Kesimpulan
 Ringkasan dan interpretasi pandangan kalia dari hasil praktikum dan pembelajaran yang didapat[1].
