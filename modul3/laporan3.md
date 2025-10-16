@@ -85,6 +85,8 @@ Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktika
 
 #### Full code Screenshot:
 <img width="1919" height="1135" alt="image" src="https://github.com/user-attachments/assets/8b179f71-e5ac-4bd3-984a-01f8a415b379" />
+<img width="1255" height="192" alt="image" src="https://github.com/user-attachments/assets/133186c9-f8a6-4dba-8b46-d0ea08d6a3b8" />
+
 
 ## Unguided 
 
