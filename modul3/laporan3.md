@@ -28,20 +28,63 @@ Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktika
 
 ```C++
 #include <iostream>
+#include <string>
 using namespace std;
 
+struct mhs {
+    string nama, nim;
+    float uts, uas, tugas;
+};
+
+float nilaiAkhir(mhs d) {
+    return (0.3 * d.uts) + (0.4 * d.uas) + (0.3 * d.tugas);
+}
+
+void input(mhs &d) {
+    cout << "\nNama mahasiswa : ";
+    cin >> d.nama;
+    cout << "NIM            : ";
+    cin >> d.nim;
+    cout << "Nilai UTS      : ";
+    cin >> d.uts;
+    cout << "Nilai UAS      : ";
+    cin >> d.uas;
+    cout << "Nilai Tugas    : ";
+    cin >> d.tugas;
+}
+
 int main() {
-    cout << "ini adalah file code unguided praktikan" << endl;
+    mhs data[10];
+    int jml;
+    cout << "Masukkan jumlah mahasiswa (max 10): ";
+    cin >> jml;
+
+    if (jml > 10) {
+        cout << "Kebanyakan, maksimal cuma 10!" << endl;
+        return 0;
+    }
+
+    for (int i = 0; i < jml; i++) {
+        cout << "\nData ke-" << i + 1 << endl;
+        input(data[i]);
+    }
+
+    cout << "\n--- Hasil Nilai Akhir ---" << endl;
+    for (int i = 0; i < jml; i++) {
+        cout << data[i].nama << " (" << data[i].nim << ")"
+             << " -> Nilai Akhir: " << nilaiAkhir(data[i]) << endl;
+    }
+
     return 0;
 }
 ```
 #### Output:
-![240302_00h00m06s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/6d1727a8-fb77-4ecf-81ff-5de9386686b7)
+<img width="1235" height="609" alt="image" src="https://github.com/user-attachments/assets/75c7596c-4e88-42d5-bfa0-7373d7bd8bae" />
 
 Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
 
 #### Full code Screenshot:
-![240309_10h21m35s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/41e9641c-ad4e-4e50-9ca4-a0215e336b04)
+<img width="1919" height="1135" alt="image" src="https://github.com/user-attachments/assets/8b179f71-e5ac-4bd3-984a-01f8a415b379" />
 
 ## Unguided 
 
