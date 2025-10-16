@@ -13,5 +13,5 @@ cin >> (m).nilai2;
 
 }
 float rata2(mahasiswa m){
- return float(m.nilai1+m.nilai2)/2;
+ return float(m.nilai1+m.nilai2) / 2;
 }

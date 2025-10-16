@@ -7,6 +7,6 @@ struct mahasiswa{
 
 };
 
-void inputmhs(mahasiswa &m);
+void inputMhs(mahasiswa &m);
 float rata2(mahasiswa m);
 #endif
