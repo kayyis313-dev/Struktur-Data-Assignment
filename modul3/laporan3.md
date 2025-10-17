@@ -148,14 +148,56 @@ Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktika
 
 ## Unguided 
 
-### 2. soal
+### 2. <img width="508" height="332" alt="image" src="https://github.com/user-attachments/assets/b4afd600-52cf-4f16-b24c-e6f5ec3bcbd0" />
+
 
 ```C++
+// pelajaran.h
+#ifndef PELAJARAN_H
+#define PELAJARAN_H
+
 #include <iostream>
+#include <string>
+using namespace std;
+
+struct pelajaran {
+    string namaMapel;
+    string kodeMapel;
+};
+
+pelajaran create_pelajaran(string namapel, string kodepel);
+void tampil_pelajaran(pelajaran pel);
+
+#endif
+
+//pelajaran.cpp
+#include "pelajaran.h"
+
+pelajaran create_pelajaran(string namapel, string kodepel) {
+    pelajaran p;
+    p.namaMapel = namapel;
+    p.kodeMapel = kodepel;
+    return p;
+}
+
+void tampil_pelajaran(pelajaran pel) {
+    cout << "nama pelajaran : " << pel.namaMapel << endl;
+    cout << "nilai : " << pel.kodeMapel << endl;
+}
+
+//main.cpp
+#include <iostream>
+#include <string>
+#include "pelajaran.h"
 using namespace std;
 
 int main() {
-    cout << "ini adalah file code unguided praktikan" << endl;
+    string namapel = "Struktur Data";
+    string kodepel = "STD";
+
+    pelajaran pel = create_pelajaran(namapel, kodepel);
+    tampil_pelajaran(pel);
+
     return 0;
 }
 ```
