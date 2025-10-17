@@ -283,6 +283,10 @@ Kode di atas digunakan untuk mencetak Program tersebut berfungsi untuk menampilk
 
 #### Full code Screenshot:
 <img width="1916" height="1124" alt="image" src="https://github.com/user-attachments/assets/b57c79f7-ab6b-4b9e-a023-8613ab9c4457" />
+<img width="1919" height="891" alt="image" src="https://github.com/user-attachments/assets/351887da-ff52-4a83-9a73-f2616b71087f" />
+<img width="1919" height="803" alt="image" src="https://github.com/user-attachments/assets/c4997107-f4b9-4b9c-b20d-7bfab873e83e" />
+
+
 
 
 ## Kesimpulan
