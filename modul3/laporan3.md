@@ -278,14 +278,14 @@ int main(){
 <img width="1254" height="630" alt="image" src="https://github.com/user-attachments/assets/2ea82509-0250-426a-9b97-072e94efe167" />
 
 
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+Kode di atas digunakan untuk mencetak Program tersebut berfungsi untuk menampilkan isi dari dua array dua dimensi (matriks), menukar elemen tertentu antara kedua matriks tersebut, serta menukar nilai dua variabel dengan memanfaatkan pointer.
 
 #### Full code Screenshot:
 <img width="1916" height="1124" alt="image" src="https://github.com/user-attachments/assets/b57c79f7-ab6b-4b9e-a023-8613ab9c4457" />
 
 
 ## Kesimpulan
-Ringkasan dan interpretasi pandangan kalia dari hasil praktikum dan pembelajaran yang didapat[1].
+pembelajaran kali ini, kita mempelajari cara menggunakan struct dan membuat ADT (Abstract Data Type) dengan membuat beberapa program terpisah yang nantinya dijalankan bersama melalui satu file utama, yaitu main.cpp.
 
 ## Referensi
 [1] I. Holm, Narrator, and J. Fullerton-Smith, Producer, How to Build a Human [DVD]. London: BBC; 2002.
