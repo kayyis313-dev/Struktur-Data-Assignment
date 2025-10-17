@@ -148,8 +148,8 @@ Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktika
 
 ## Unguided 
 
-### 2. <img width="508" height="332" alt="image" src="https://github.com/user-attachments/assets/b4afd600-52cf-4f16-b24c-e6f5ec3bcbd0" />
-
+### 2. 
+<img width="508" height="332" alt="image" src="https://github.com/user-attachments/assets/b4afd600-52cf-4f16-b24c-e6f5ec3bcbd0" />
 
 ```C++
 // pelajaran.h
@@ -200,15 +200,15 @@ int main() {
 
     return 0;
 }
+
 ```
 #### Output:
-<img width="1251" height="347" alt="Screenshot 2025-10-16 224127" src="https://github.com/user-attachments/assets/a5840285-4d93-4993-ae6b-454a3d590e4f" />
+<img width="1251" height="347" alt="Screenshot 2025-10-16 224127" src="https://github.com/user-attachments/assets/2c8b5698-255d-4392-95ab-92b2424116c7" />
 
-
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+Kode di atas digunakan untuk mencetak mencetak nama mata pelajaran dan kode pelajarannya dengan memanfaatkan ADT (Abstract Data Type) berupa struct pelajaran yang diimplementasikan melalui tiga file: pelajaran.h, pelajaran.cpp, dan main.cpp.
 
 #### Full code Screenshot:
-![240309_10h21m35s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/41e9641c-ad4e-4e50-9ca4-a0215e336b04)
+<img width="1916" height="1124" alt="image" src="https://github.com/user-attachments/assets/65ba05a2-fc4a-46eb-8d5f-c29a5ae0c1cc" />
 
 
 ## Unguided 
