@@ -18,17 +18,30 @@ Melalui penggunaan struct, kita dapat menyimpan beberapa variabel dengan tipe da
 
 ## Guided 
 
-### 1. [Nama Topik]
+### 1. [ADT struct]
+
+### a. ADT (mahasiswa.cpp)
 
 ```C++
 #include <iostream>
+#include "mahasiswa.h"
+
 using namespace std;
 
-int main() {
-    cout << "ini adalah file code guided praktikan" << endl;
-    return 0;
+void inputMhs(mahasiswa &m){
+cout << "input nama : ";
+cin >> (m).nim;
+cout << "input nilai : ";
+cin >> (m).nilai1;
+cout << "input nilai2 : ";
+cin >> (m).nilai2;
+
+}
+float rata2(mahasiswa m){
+ return float(m.nilai1+m.nilai2) / 2;
 }
 ```
+### b. 
 Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
 
 ## Unguided 
