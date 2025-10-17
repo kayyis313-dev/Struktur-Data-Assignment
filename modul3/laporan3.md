@@ -288,4 +288,4 @@ Kode di atas digunakan untuk mencetak Program tersebut berfungsi untuk menampilk
 pembelajaran kali ini, kita mempelajari cara menggunakan struct dan membuat ADT (Abstract Data Type) dengan membuat beberapa program terpisah yang nantinya dijalankan bersama melalui satu file utama, yaitu main.cpp.
 
 ## Referensi
-[1] I. Holm, Narrator, and J. Fullerton-Smith, Producer, How to Build a Human [DVD]. London: BBC; 2002.
+[1]. https://www.petanikode.com/cpp-struct/
