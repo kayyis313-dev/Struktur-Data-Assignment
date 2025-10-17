@@ -20,8 +20,24 @@ Melalui penggunaan struct, kita dapat menyimpan beberapa variabel dengan tipe da
 
 ### 1. [ADT struct]
 
-### a. ADT (mahasiswa.cpp)
+### a. ADT (mahasiswa.h)
 
+```C++
+#ifndef MAHASISWA_H_INCLUDED
+#define MAHASISWA_H_INCLUDED
+
+struct mahasiswa{
+    char nim[10];
+    int nilai1, nilai2;
+
+};
+
+void inputMhs(mahasiswa &m);
+float rata2(mahasiswa m);
+#endif
+
+```
+### b. ADT (mahasiswa.cpp)
 ```C++
 #include <iostream>
 #include "mahasiswa.h"
@@ -40,8 +56,12 @@ cin >> (m).nilai2;
 float rata2(mahasiswa m){
  return float(m.nilai1+m.nilai2) / 2;
 }
+
 ```
-### b. 
+### c. ADT (main.cpp)
+```C++
+
+```
 Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
 
 ## Unguided 
