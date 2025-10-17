@@ -37,6 +37,8 @@ float rata2(mahasiswa m);
 #endif
 
 ```
+Bagian ini mendefinisikan struct mahasiswa yang digunakan untuk menyimpan informasi berupa NIM dan dua nilai. Selain itu, terdapat juga deklarasi fungsi inputMhs() yang berfungsi untuk memasukkan data mahasiswa, serta fungsi rata2() yang digunakan untuk menghitung nilai rata-rata mahasiswa tersebut.
+
 ### b. ADT (mahasiswa.cpp)
 ```C++
 #include <iostream>
@@ -58,11 +60,25 @@ float rata2(mahasiswa m){
 }
 
 ```
+Bagian ini memuat definisi fungsi yang berasal dari file header.
+Fungsi inputMhs() berperan untuk mengambil atau menerima data mahasiswa dari pengguna, sedangkan fungsi rata2() berfungsi untuk melakukan perhitungan dan mengembalikan hasil berupa nilai rata-rata dari dua nilai yang telah diinputkan.
+
 ### c. ADT (main.cpp)
 ```C++
+#include <iostream>
+#include "mahasiswa.h"
+using namespace std;
 
+int main(){
+    mahasiswa mhs;
+    inputMhs(mhs);
+    cout << "rata-rata: " << rata2(mhs);
+    return 0;
+}
 ```
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+Bagian utama program yang menjalankan proses utama. Program akan memanggil inputMhs() untuk mengisi data mahasiswa, kemudian memanggil rata2() untuk menghitung rata-rata dan menampilkan hasilnya ke layar.
+
+Kode di atas digunakan untuk mencetak nilai rata-rata dari dua nilai yang dimasukkan oleh pengguna
 
 ## Unguided 
 
