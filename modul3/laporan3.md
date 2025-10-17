@@ -7,11 +7,11 @@ Bahasa pemrograman C merupakan bahasa yang bersifat terstruktur, di mana program
 Sementara itu, program C++ biasanya disimpan dengan ekstensi .CPP(singkatan dari *C plus plus*).
 Sebelum program tersebut dapat dijalankan (dieksekusi), ia harus terlebih dahulu dikompilasi menggunakan kompiler C++.
 
-# ADT
+### ADT
 ADT adalah konsep yang memisahkan antara bagian yang tampak oleh pengguna (interface) dan bagian yang tidak tampak (implementasi).
 Bagian interface berisi daftar nama serta fungsi-fungsi yang dapat digunakan oleh pemrogram, sedangkan implementasi menjelaskan bagaimana fungsi-fungsi tersebut bekerja di dalam program.
 
-# Struct
+### Struct
 struct merupakan tipe data buatan pengguna (user-defined type) yang berfungsi untuk mengelompokkan sejumlah data yang saling berhubungan ke dalam satu kesatuan.
 
 Melalui penggunaan struct, kita dapat menyimpan beberapa variabel dengan tipe data berbeda di bawah satu nama struktur yang sama
