@@ -288,4 +288,6 @@ Kode di atas digunakan untuk mencetak Program tersebut berfungsi untuk menampilk
 pembelajaran kali ini, kita mempelajari cara menggunakan struct dan membuat ADT (Abstract Data Type) dengan membuat beberapa program terpisah yang nantinya dijalankan bersama melalui satu file utama, yaitu main.cpp.
 
 ## Referensi
-[1]. https://www.petanikode.com/cpp-struct/
+[1]. Belajar C++ #12: Mengenal Tipe Data Struct, https://www.petanikode.com/cpp-struct/.
+[2]. Tipe Data Abstrak dalam C++, https://eecs280staff.github.io/notes/08_ADTs_in_C%2B%2B.html. dan melalui Abstract Data Types, 
+https://www.geeksforgeeks.org/dsa/abstract-data-types/?utm_source
