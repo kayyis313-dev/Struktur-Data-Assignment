@@ -17,6 +17,7 @@ berupa serangkaian elemen data yang saling berkait (berhubungan) dan bersifat fl
 tumbuh dan mengerut sesuai kebutuhan. Data yang disimpan dalam Linked list bisa berupa data
 tunggal atau data majemuk. 
 
+
 ## Guided 
 
 ### 1. [ADT Linked List (insert)] 
@@ -189,7 +190,9 @@ int main() {
 ```
 Kode di atas digunakan untuk membentuk struktur Linked List yang memiliki fungsi penyisipan (insert), yaitu menambahkan node baru ke dalam daftar, serta menampilkan hasil setelah proses penambahan dilakukan.
 
+
 ### 2. [ADT Linked list(insert, delete, count, clear)]
+
 ```C++
 //list.h
 //header guard digunakan untuk mencegah file  header yang sama
@@ -237,6 +240,7 @@ int nbList(linkedList List);
 void deleteList(linkedList &List);
 
 #endif
+
 
 //list.cpp
 #include "list.h"
@@ -414,6 +418,7 @@ void deleteList(linkedList &List){
     cout << "List sudah terhapus!" << endl;
 }
 
+
 //main.cpp
 #include "list.h"
 #include <iostream>
@@ -462,6 +467,8 @@ int main() {
 }
 ```
 Kode di atas digunakan untuk membangun ADT Linked List yang dilengkapi dengan beberapa fungsi tambahan, seperti penghapusan node, alokasi dan dealokasi memori, manipulasi data, serta menampilkan jumlah node setelah proses penghapusan.
+
+
 
 ## Unguided 
 
@@ -582,6 +589,7 @@ Kode di atas digunakan untuk membuat ADT Single Linked List yang memiliki fungsi
 
 #### Full code Screenshot:
 <img width="1896" height="1113" alt="image" src="https://github.com/user-attachments/assets/b8fb1f57-e809-4064-b03c-b0a066f1efc9" />
+
 
 
 ## Unguided 
