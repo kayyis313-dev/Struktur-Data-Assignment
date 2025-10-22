@@ -19,7 +19,7 @@ tunggal atau data majemuk.
 
 ## Guided 
 
-### 1. [ADT Linked List]
+### 1. [ADT Linked List (insert)] 
 
 ```C++
 //list.h
@@ -189,7 +189,7 @@ int main() {
 ```
 Kode di atas digunakan untuk membentuk struktur Linked List yang memiliki fungsi penyisipan (insert), yaitu menambahkan node baru ke dalam daftar, serta menampilkan hasil setelah proses penambahan dilakukan.
 
-### 2. [ADT Linked list]
+### 2. [ADT Linked list(insert, delete, count, clear)]
 ```C++
 //list.h
 //header guard digunakan untuk mencegah file  header yang sama
