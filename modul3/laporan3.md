@@ -7,20 +7,78 @@ Bahasa pemrograman C merupakan bahasa yang bersifat terstruktur, di mana program
 Sementara itu, program C++ biasanya disimpan dengan ekstensi .CPP(singkatan dari *C plus plus*).
 Sebelum program tersebut dapat dijalankan (dieksekusi), ia harus terlebih dahulu dikompilasi menggunakan kompiler C++.
 
+### ADT
+ADT adalah konsep yang memisahkan antara bagian yang tampak oleh pengguna (interface) dan bagian yang tidak tampak (implementasi).
+Bagian interface berisi daftar nama serta fungsi-fungsi yang dapat digunakan oleh pemrogram, sedangkan implementasi menjelaskan bagaimana fungsi-fungsi tersebut bekerja di dalam program.
+
+### Struct
+struct merupakan tipe data buatan pengguna (user-defined type) yang berfungsi untuk mengelompokkan sejumlah data yang saling berhubungan ke dalam satu kesatuan.
+
+Melalui penggunaan struct, kita dapat menyimpan beberapa variabel dengan tipe data berbeda di bawah satu nama struktur yang sama
+
 ## Guided 
 
-### 1. [Nama Topik]
+### 1. [ADT struct]
+
+### a. ADT (mahasiswa.h)
 
 ```C++
+#ifndef MAHASISWA_H_INCLUDED
+#define MAHASISWA_H_INCLUDED
+
+struct mahasiswa{
+    char nim[10];
+    int nilai1, nilai2;
+
+};
+
+void inputMhs(mahasiswa &m);
+float rata2(mahasiswa m);
+#endif
+
+```
+Bagian ini mendefinisikan struct mahasiswa yang digunakan untuk menyimpan informasi berupa NIM dan dua nilai. Selain itu, terdapat juga deklarasi fungsi inputMhs() yang berfungsi untuk memasukkan data mahasiswa, serta fungsi rata2() yang digunakan untuk menghitung nilai rata-rata mahasiswa tersebut.
+
+### b. ADT (mahasiswa.cpp)
+```C++
 #include <iostream>
+#include "mahasiswa.h"
+
 using namespace std;
 
-int main() {
-    cout << "ini adalah file code guided praktikan" << endl;
+void inputMhs(mahasiswa &m){
+cout << "input nama : ";
+cin >> (m).nim;
+cout << "input nilai : ";
+cin >> (m).nilai1;
+cout << "input nilai2 : ";
+cin >> (m).nilai2;
+
+}
+float rata2(mahasiswa m){
+ return float(m.nilai1+m.nilai2) / 2;
+}
+
+```
+Bagian ini memuat definisi fungsi yang berasal dari file header.
+Fungsi inputMhs() berperan untuk mengambil atau menerima data mahasiswa dari pengguna, sedangkan fungsi rata2() berfungsi untuk melakukan perhitungan dan mengembalikan hasil berupa nilai rata-rata dari dua nilai yang telah diinputkan.
+
+### c. ADT (main.cpp)
+```C++
+#include <iostream>
+#include "mahasiswa.h"
+using namespace std;
+
+int main(){
+    mahasiswa mhs;
+    inputMhs(mhs);
+    cout << "rata-rata: " << rata2(mhs);
     return 0;
 }
 ```
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+Bagian utama program yang menjalankan proses utama. Program akan memanggil inputMhs() untuk mengisi data mahasiswa, kemudian memanggil rata2() untuk menghitung rata-rata dan menampilkan hasilnya ke layar.
+
+Kode di atas digunakan untuk mencetak nilai rata-rata dari dua nilai yang dimasukkan oleh pengguna
 
 ## Unguided 
 
@@ -80,34 +138,80 @@ int main() {
 ```
 #### Output:
 <img width="1235" height="609" alt="image" src="https://github.com/user-attachments/assets/75c7596c-4e88-42d5-bfa0-7373d7bd8bae" />
+<img width="1255" height="192" alt="image" src="https://github.com/user-attachments/assets/133186c9-f8a6-4dba-8b46-d0ea08d6a3b8" />
 
 Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
 
 #### Full code Screenshot:
 <img width="1919" height="1135" alt="image" src="https://github.com/user-attachments/assets/8b179f71-e5ac-4bd3-984a-01f8a415b379" />
-<img width="1255" height="192" alt="image" src="https://github.com/user-attachments/assets/133186c9-f8a6-4dba-8b46-d0ea08d6a3b8" />
+
 
 
 ## Unguided 
 
-### 2. soal
+### 2. 
+<img width="508" height="332" alt="image" src="https://github.com/user-attachments/assets/b4afd600-52cf-4f16-b24c-e6f5ec3bcbd0" />
 
 ```C++
+// pelajaran.h
+#ifndef PELAJARAN_H
+#define PELAJARAN_H
+
 #include <iostream>
+#include <string>
+using namespace std;
+
+struct pelajaran {
+    string namaMapel;
+    string kodeMapel;
+};
+
+pelajaran create_pelajaran(string namapel, string kodepel);
+void tampil_pelajaran(pelajaran pel);
+
+#endif
+
+//pelajaran.cpp
+#include "pelajaran.h"
+
+pelajaran create_pelajaran(string namapel, string kodepel) {
+    pelajaran p;
+    p.namaMapel = namapel;
+    p.kodeMapel = kodepel;
+    return p;
+}
+
+void tampil_pelajaran(pelajaran pel) {
+    cout << "nama pelajaran : " << pel.namaMapel << endl;
+    cout << "nilai : " << pel.kodeMapel << endl;
+}
+
+//main.cpp
+#include <iostream>
+#include <string>
+#include "pelajaran.h"
 using namespace std;
 
 int main() {
-    cout << "ini adalah file code unguided praktikan" << endl;
+    string namapel = "Struktur Data";
+    string kodepel = "STD";
+
+    pelajaran pel = create_pelajaran(namapel, kodepel);
+    tampil_pelajaran(pel);
+
     return 0;
 }
+
 ```
 #### Output:
-![240302_00h00m06s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/6d1727a8-fb77-4ecf-81ff-5de9386686b7)
+<img width="1251" height="347" alt="Screenshot 2025-10-16 224127" src="https://github.com/user-attachments/assets/2c8b5698-255d-4392-95ab-92b2424116c7" />
 
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+Kode di atas digunakan untuk mencetak mencetak nama mata pelajaran dan kode pelajarannya dengan memanfaatkan ADT (Abstract Data Type) berupa struct pelajaran yang diimplementasikan melalui tiga file: pelajaran.h, pelajaran.cpp, dan main.cpp.
 
 #### Full code Screenshot:
-![240309_10h21m35s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/41e9641c-ad4e-4e50-9ca4-a0215e336b04)
+<img width="1916" height="1124" alt="image" src="https://github.com/user-attachments/assets/65ba05a2-fc4a-46eb-8d5f-c29a5ae0c1cc" />
+<img width="1919" height="891" alt="image" src="https://github.com/user-attachments/assets/351887da-ff52-4a83-9a73-f2616b71087f" />
+<img width="1919" height="803" alt="image" src="https://github.com/user-attachments/assets/c4997107-f4b9-4b9c-b20d-7bfab873e83e" />
 
 
 ## Unguided 
@@ -177,14 +281,16 @@ int main(){
 <img width="1254" height="630" alt="image" src="https://github.com/user-attachments/assets/2ea82509-0250-426a-9b97-072e94efe167" />
 
 
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+Kode di atas digunakan untuk mencetak Program tersebut berfungsi untuk menampilkan isi dari dua array dua dimensi (matriks), menukar elemen tertentu antara kedua matriks tersebut, serta menukar nilai dua variabel dengan memanfaatkan pointer.
 
 #### Full code Screenshot:
 <img width="1916" height="1124" alt="image" src="https://github.com/user-attachments/assets/b57c79f7-ab6b-4b9e-a023-8613ab9c4457" />
 
 
 ## Kesimpulan
-Ringkasan dan interpretasi pandangan kalia dari hasil praktikum dan pembelajaran yang didapat[1].
+pembelajaran kali ini, kita mempelajari cara menggunakan struct dan membuat ADT (Abstract Data Type) dengan membuat beberapa program terpisah yang nantinya dijalankan bersama melalui satu file utama, yaitu main.cpp.
 
 ## Referensi
-[1] I. Holm, Narrator, and J. Fullerton-Smith, Producer, How to Build a Human [DVD]. London: BBC; 2002.
+[1]. Belajar C++ #12: Mengenal Tipe Data Struct, https://www.petanikode.com/cpp-struct/.
+[2]. Tipe Data Abstrak dalam C++, https://eecs280staff.github.io/notes/08_ADTs_in_C%2B%2B.html. dan melalui Abstract Data Types, 
+https://www.geeksforgeeks.org/dsa/abstract-data-types/?utm_source
