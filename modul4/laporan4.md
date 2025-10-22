@@ -7,11 +7,11 @@ Bahasa pemrograman C merupakan bahasa yang bersifat terstruktur, di mana program
 Sementara itu, program C++ biasanya disimpan dengan ekstensi .CPP(singkatan dari *C plus plus*).
 Sebelum program tersebut dapat dijalankan (dieksekusi), ia harus terlebih dahulu dikompilasi menggunakan kompiler C++.
 
-### 1. ADT
+#### 1. ADT
 ADT adalah konsep yang memisahkan antara bagian yang bisa dilihat dan digunakan oleh pemrogram (interface) dengan bagian yang berisi cara kerjanya di dalam program (implementasi).
 Bagian interface berisi daftar nama atau fungsi yang bisa dipakai, sedangkan implementasi menjelaskan bagaimana fungsi-fungsi itu dijalankan agar program bisa bekerja sesuai tujuan.
 
-### 2. Linked List
+#### 2. Linked List
 Linked list (biasa disebut list saja) adalah salah satu bentuk struktur data (representasi penyimpanan)
 berupa serangkaian elemen data yang saling berkait (berhubungan) dan bersifat fleksibel karena dapat
 tumbuh dan mengerut sesuai kebutuhan. Data yang disimpan dalam Linked list bisa berupa data
