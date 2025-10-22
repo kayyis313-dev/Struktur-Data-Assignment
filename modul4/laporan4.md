@@ -586,7 +586,8 @@ Kode di atas digunakan untuk membuat ADT Single Linked List yang memiliki fungsi
 
 ## Unguided 
 
-### 2. soal
+### 2. 
+<img width="940" height="339" alt="image" src="https://github.com/user-attachments/assets/b5b4d5b3-a58d-4a7c-9338-e973e222821b" />
 
 ```C++
 #include <iostream>
