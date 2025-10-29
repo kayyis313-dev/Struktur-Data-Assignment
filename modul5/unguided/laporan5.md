@@ -7,10 +7,10 @@ Bahasa pemrograman C merupakan bahasa yang bersifat terstruktur, di mana program
 Sementara itu, program C++ biasanya disimpan dengan ekstensi .CPP(singkatan dari *C plus plus*).
 Sebelum program tersebut dapat dijalankan (dieksekusi), ia harus terlebih dahulu dikompilasi menggunakan kompiler C++.
 
-#### 1. 
+#### A. Pada materi ini TUJUAN PRAKTIKUM supaya bisa memahami penggunaan linked list dengan pointer operator- operator dalam program, Memahami operasi-operasi dasar dalam linked list, Membuat program dengan menggunakan linked list dengan prototype yang ada
 
-#### 2. 
-
+#### 1. Searching
+Searching merupakan operasi dasar list dengan melakukan aktivitas pencarian terhadap node tertentu. Proses ini berjalan dengan mengunjungi setiap node dan berhenti setelah node yang dicari ketemu. Dengan melakukan operasi searching, operasi-operasi seperti insert after, delete after, dan update akan lebih mudah.
 
 
 ## Guided 
@@ -440,7 +440,7 @@ Program ini menerapkan konsep ADT Single Linked List dalam bahasa C++ untuk meng
 <img width="940" height="665" alt="image" src="https://github.com/user-attachments/assets/ed05625c-ba46-44c7-8101-4d1f18876c2b" />
 
 
-### [ADT Singlylist]
+### [ Updated ADT Singlylist]
 
 ```C++
 //singlylist.h
@@ -590,21 +590,17 @@ int main() {
 ### 4. Hitunglah jumlah total info seluruh elemen (9+12+8+0+2=31).
 <img width="1119" height="33" alt="image" src="https://github.com/user-attachments/assets/870e1bcd-99f3-40b2-a525-f4d71988c4d9" />
 
-Kode di atas digunakan untukmembangun dan mengelola struktur data Single Linked List menggunakan bahasa C++.
-Dalam program ini, setiap elemen (node) menyimpan data serta penunjuk ke elemen berikutnya.
+Kode di atas digunakan untuk mempelajari dan menerapkan konsep dasar struktur data Linked List (daftar berantai tunggal) dalam bahasa C++.
+dengan kata lain Program ini mengaplikasikan struktur data Singly Linked List menggunakan bahasa C++ guna mengelola kumpulan data secara fleksibel, termasuk melakukan operasi penambahan, pencarian, serta penjumlahan nilai elemen.
 
-Dengan kata lain, program ini digunakan untuk menunjukkan cara kerja dasar dari ADT (Abstract Data Type) Single Linked List, yang meliputi operasi penambahan, penghapusan, penelusuran, dan pembersihan data.
 
 #### Full code Screenshot:
 <img width="1919" height="1125" alt="image" src="https://github.com/user-attachments/assets/98f7b5de-c6e1-4d74-8b3e-b1e3e756f27e" />
 
 
 ## Kesimpulan
-Dalam pembelajaran ini, kita mempelajari berbagai fungsi seperti deleteFirst, deleteAfter, dan fungsi lainnya yang digunakan untuk menghapus node pada struktur data yang telah dibuat. Program ini juga menerapkan konsep ADT (Abstract Data Type) dalam proses pengelolaannya.
+Melalui pembelajaran ini, mahasiswa belajar mengimplementasikan struktur data Singly Linked List pada bahasa C++.
+Latihan ini membantu memahami penggunaan node dan pointer dengan memori dinamis dalam berbagai operasi, termasuk menambah, menampilkan, mencari, dan menghitung elemen di dalam list.
 
 ## Referensi
-[1] CS115 Lab: Abstract Data Types (ADT's)
-      Implemented as CLASSES in C++. https://www.labs.cs.uregina.ca/115/04-abstractD/
-[2] Linked List C++. https://www.teachmesoft.com/2019/03/linked-list-c-disertai-contoh-tugas.html>
-[3] Linked List: Pengertian dan Implementasi Dasar
-Published by Fazry on May 25, 2024> https://rumahcoding.co.id/linked-list-pengertian-dan-implementasi-dasar/
+[1] C++ Program To Check If A Singly Linked List Is Palindrome. https://www.geeksforgeeks.org/cpp/cpp-program-to-check-if-a-singly-linked-list-is-palindrome/
