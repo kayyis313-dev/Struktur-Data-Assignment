@@ -580,14 +580,15 @@ int main() {
 
 ```
 ### 2. Hasil ADT Singly Linked list
-#### Output:
+### Output:
 <img width="1102" height="152" alt="image" src="https://github.com/user-attachments/assets/d6888608-98f5-4318-bf7c-ddb7b397e745" />
 
 ### 3. Carilah elemen dengan info 8 dengan membuat fungsi baru. fungsi findElm( L : List, x : infotype ) : address
-#### Output:
+### Output:
 <img width="1094" height="31" alt="image" src="https://github.com/user-attachments/assets/3dc4f611-b0aa-4477-8d17-aca6551b078c" />
 
 ### 4. Hitunglah jumlah total info seluruh elemen (9+12+8+0+2=31).
+### Output:
 <img width="1119" height="33" alt="image" src="https://github.com/user-attachments/assets/870e1bcd-99f3-40b2-a525-f4d71988c4d9" />
 
 Kode di atas digunakan untuk mempelajari dan menerapkan konsep dasar struktur data Linked List (daftar berantai tunggal) dalam bahasa C++.
