@@ -1,47 +1,59 @@
-// stack.cpp
-#include <iostream>
 #include "stack.h"
+#include <iostream>
+
 using namespace std;
 
-void initStack(Stack &S) {
-    S.atas = -1;
+void createStack(Stack &S) {
+    S.top = -1;
 }
 
-void push(Stack &S, Data x) {
-    if (S.atas == MAKS - 1) {
-        cout << "Stack penuh!" << endl;
+void push(Stack &S, infotype X) {
+    if(S.top == MAX - 1){
+        cout << "Stack Penuh!" << endl;
     } else {
-        S.atas++;
-        S.item[S.atas] = x;
+        S.top++;
+        S.data[S.top] = X;
     }
 }
 
-Data pop(Stack &S) {
-    if (S.atas == -1) {
+infotype pop(Stack &S) {
+    if(S.top == - 1){
         cout << "Stack kosong!" << endl;
         return -1;
     } else {
-        Data temp = S.item[S.atas];
-        S.atas--;
-        return temp;
+        int val = S.data[S.top];
+        S.top--;
+        return val;
     }
 }
 
-void tampil(Stack S) {
-    cout << "(TOP) ";
-    for (int i = S.atas; i >= 0; i--) {
-        cout << S.item[i] << " ";
+void printInfo(Stack S) {
+    if(S.top == - 1){
+        cout << "Stack Kosong!" << endl;
+    } else {
+        cout << "[TOP] " ;
+        for(int i = S.top; i >= 0; --i){
+            cout << S.data[i] << " ";
+        }
     }
     cout << endl;
 }
 
-void balik(Stack &S) {
-    Stack bantuan;
-    initStack(bantuan);
-
-    while (S.atas != -1) {
-        push(bantuan, pop(S));
+void balikStack(Stack &S) {
+    if(S.top == - 1){
+        cout << "Stack Kosong!" << endl;
+    } else {
+        if (S.top <= 0) return;
     }
 
-    S = bantuan;
+    int i = 0;
+    int j = S.top;
+
+    while (i < j) {
+        int temp = S.data[i];
+        S.data[i] = S.data[j];
+        S.data[j] = temp;
+        i++;
+        j--; 
+    }
 }

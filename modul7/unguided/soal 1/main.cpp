@@ -18,6 +18,7 @@ int main() {
     push(S, 9);
 
     printInfo(S);
+
     cout << "balik stack" << endl;
     balikStack(S);
     printInfo(S);
