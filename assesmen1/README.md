@@ -1,4 +1,6 @@
-# Stuktur-Data-Assignment [assisment1] <Thoriq Al Kayyis>
+# Stuktur-Data-Assignment [assisment1] 
+<p align="center">Thoriq Al Kayyis</p>
+
 
 ### soal1
 ```C++
