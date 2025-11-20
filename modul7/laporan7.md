@@ -1,607 +1,827 @@
-# <h1 align="center">Laporan Praktikum Modul 5 - Singly Linked List (Bagian Kedua)</h1>
+# <h1 align="center">Laporan Praktikum Modul 7 - Stack</h1>
 <p align="center">Thoriq Al Kayyis</p>
 
 ## Dasar Teori
+Stack adalah struktur data linier yang mengikuti aturan tertentu untuk melakukan operasi. Menambah dan menghapus elemen dari tumpukan hanya dapat terjadi di satu lokasi, yaitu ujung tumpukan. Stack bersifat LIFO (Last in First Out) dan objek yang terakhir masuk ke dalam Stack akan menjadi benda pertama yang dikeluarkan dari Stack itu.
 
-Bahasa pemrograman C merupakan bahasa yang bersifat terstruktur, di mana program dibagi menjadi beberapa blok atau bagian agar proses pembuatan dan pengembangannya menjadi lebih mudah.
-Sementara itu, program C++ biasanya disimpan dengan ekstensi .CPP(singkatan dari *C plus plus*).
-Sebelum program tersebut dapat dijalankan (dieksekusi), ia harus terlebih dahulu dikompilasi menggunakan kompiler C++.
+#### A. Materi Minggu pertemuan 7
+Pada pertemuan ke-7, mahasiswa diminta untuk mengembangkan sebuah struktur data Stack yang dilengkapi dengan beberapa operasi dasar, yaitu fungsi *push* untuk menambah data dan *pop* untuk menghapus data dari stack.
 
-#### A. Pada materi ini TUJUAN PRAKTIKUM supaya bisa memahami penggunaan linked list dengan pointer operator- operator dalam program, Memahami operasi-operasi dasar dalam linked list, Membuat program dengan menggunakan linked list dengan prototype yang ada
+#### 1. Push
+Fungsi ini digunakan untuk memasukkan elemen baru ke dalam stack dengan menempatkannya pada posisi paling atas. Namun, operasi ini tidak dapat dilakukan apabila stack sudah mencapai kapasitas maksimum.
 
-#### 1. Searching
-Searching merupakan operasi dasar list dengan melakukan aktivitas pencarian terhadap node tertentu. Proses ini berjalan dengan mengunjungi setiap node dan berhenti setelah node yang dicari ketemu. Dengan melakukan operasi searching, operasi-operasi seperti insert after, delete after, dan update akan lebih mudah.
+#### 2. Pop
+Operasi ini berfungsi untuk menghapus sekaligus mengambil elemen pada posisi teratas stack. Namun, proses tersebut hanya bisa dilakukan jika stack memiliki isi. Apabila stack dalam keadaan kosong, maka akan terjadi kondisi yang disebut underflow.
 
+## Guided 1
 
-## Guided 
-
-### . [ADT Linked List] 
+### . [stack menggunakan linked list] 
 
 ```C++
-//listbuah.h
-//Header guard digunakan untuk mencegah file header yg sama
+//stack.h
+#ifndef STACK
+#define STACK
+#define Nil NULL
 
-#ifndef LISTBUAH_H
-#define LISTBUAH_H
-#define Nil NULL 
-
-#include <iostream>
+#include<iostream>
 using namespace std;
 
-// deklarasi isi data struct mahasiswa
-struct buah{
-    string nama;
-    int jumlah;
-    float harga;
-};
+typedef struct node *address;
 
-typedef buah dataBuah; //memberikan nama alias dataMahasiswa untuk struct mahasiswa
-
-typedef struct node *address; //mendefinisikan alias address sebagai pointer ke struct node
-
-struct node{ //node untuk isi linked listnya, isi setiap node adalah data & pointer next
-    dataBuah isidata;
+struct node{
+    int dataAngka;
     address next;
 };
 
-struct linkedlist{//ini linked listnya 
-    address first;
+struct stack{
+    address top;
 };
 
-//semua function &prosedur yg akan dipakai 
-//materi modul 4
-bool isEmpty(linkedlist List);
-void createList(linkedlist &List);
-address alokasi(string nama, int jumlah, float harga);
+bool isEmpty(stack listStack);
+void createStack(stack &listStack);
+address alokasi(int angka);
 void dealokasi(address &node);
-void printList(linkedlist List);
-void insertFirst(linkedlist &List, address nodebaru);
-void insertAfter(linkedlist &List, address nodebaru, address prev);
-void insertLast(linkedlist &List, address nodebaru);
-void delFirst(linkedlist &List);
-void delLast(linkedlist &List);
-void delAfter(linkedlist &list, address nodeHapus, address nodePrev);
-int nbList(linkedlist List);
-void deleteList(linkedlist &List);
 
-//materi modul 5(part 1 - update)
-void updateFirst(linkedlist List);
-void updateLast(linkedlist List);
-void updateAfter(linkedlist List, address prev);
-
-//materi modul 5(part 2 - searching)
-void FindNodeByData(linkedlist list, string data);
-void FindNodeByAddress(linkedlist list, address node);
-void FindNodeByRange(linkedlist list, float hargaAwal, float hargaAkhir);
+void push(stack &listStack, address nodeBaru);
+void pop(stack &listStack);
+void update(stack &listStack, int posisi);
+void view(stack listStack);
+void searchData(stack listStack, int data);
 
 #endif
 
-//listbuah.cpp
-#include "listBuah.h"
+
+//stack.cpp
+#include "stack.h"
 #include <iostream>
+
+//ubah kapasitas sesuai kebutuhan
 using namespace std;
 
-//fungsi untuk cek apakah list kosong atau tidak
-bool isEmpty(linkedlist List) {
-    if(List.first == Nil){
-        return true; 
+bool isEmpty(stack listStack){
+    if(listStack.top == Nil){
+        return true;
     } else {
         return false;
     }
 }
 
-//pembuatan linked list kosong
-void createList(linkedlist &List) {
-    List.first = Nil;
+void createStack(stack &listStack){
+    listStack.top = Nil;
 }
 
-//pembuatan node baru dengan menerapkan manajemen memori
-address alokasi(string nama, int jumlah, float harga) { 
-    address nodeBaru = new node; 
-    nodeBaru->isidata.nama = nama;
-    nodeBaru->isidata.jumlah = jumlah; 
-    nodeBaru->isidata.harga = harga;
+address alokasi(int angka){
+    address nodeBaru = new node;
+    nodeBaru->dataAngka = angka;
     nodeBaru->next = Nil;
     return nodeBaru;
 }
 
-//penghapusan node dengan menerapkan manajemen memori
-void dealokasi(address &node) {
+void dealokasi(address &node){
     node->next = Nil;
     delete node;
 }
 
-//prosedur-prosedur untuk insert / menambahkan node baru kedalam list
-void insertFirst(linkedlist &List, address nodeBaru) {
-    nodeBaru->next = List.first; 
-    List.first = nodeBaru;
+void push(stack &listStack, address nodeBaru){
+    nodeBaru->next = listStack.top;
+    listStack.top = nodeBaru;
+    cout << "Node " << nodeBaru->dataAngka << " berhasil ditambahkan kedalam stack!" << endl;
 }
 
-void insertAfter(linkedlist &List, address nodeBaru, address Prev) {
-    if (Prev != Nil) {
-        nodeBaru->next = Prev->next;
-        Prev->next = nodeBaru;
-    } else {
-        cout << "Node sebelumnya tidak valid!" << endl;
-    }
-}
-
-void insertLast(linkedlist &List, address nodeBaru) {
-    if (isEmpty(List)) {
-        List.first = nodeBaru;
-    } else {
-        address nodeBantu = List.first;
-        while (nodeBantu->next != Nil) {
-            nodeBantu = nodeBantu->next;
-        }
-        nodeBantu->next = nodeBaru;
-    }
-}
-
-//prosedur-prosedur untuk delete / menghapus node yang ada didalam list
-void delFirst(linkedlist &List){
+void pop(stack &listStack){
     address nodeHapus;
-    if (isEmpty(List) == false) {
-        nodeHapus = List.first;
-        List.first = List.first->next;
+    if(isEmpty(listStack) == true){
+        cout << "Stack kosong!" << endl;
+    } else {
+        nodeHapus = listStack.top;
+        listStack.top = listStack.top->next;
         nodeHapus->next = Nil;
         dealokasi(nodeHapus);
-        cout << "Node pertama berhasil terhapus!" << endl;
-    } else {
-        cout << "List kosong!" << endl;
+        cout << "node " <<  nodeHapus->dataAngka << " berhasil dihapus dari stack!" << endl;
     }
 }
 
-void delLast(linkedlist &List){
-    address nodeHapus, nodePrev;
-    if(isEmpty(List) == false){
-        nodeHapus = List.first;
-        if(nodeHapus->next == Nil){
-            List.first->next = Nil;
-            dealokasi(nodeHapus);
-        } else { 
-            while(nodeHapus->next != Nil){
-                nodePrev = nodeHapus; 
-                nodeHapus = nodeHapus->next;
+void update(stack &listStack, int posisi){
+    if(isEmpty(listStack) == true){
+        cout << "Stack kosong!" << endl;
+    } else {
+        if(posisi == 0){
+            cout << "Posisi tidak valid!" << endl;
+        } else {
+            address nodeBantu = listStack.top;
+            int count = 1;
+            bool found = false;
+            while(nodeBantu != Nil){
+                if(count < posisi){
+                    nodeBantu = nodeBantu->next;
+                    count++;
+                } else if(count == posisi){
+                    cout << "Update node poisisi ke-" << posisi << endl;
+                    cout << "Masukkan angka : ";
+                    cin >> nodeBantu->dataAngka;
+                    cout << "Data berhasil diupdate!" << endl;
+                    cout << endl;
+                    found = true;
+                    break;
+                }
             }
-            nodePrev->next = Nil; 
-            dealokasi(nodeHapus);
-        }
-        cout << "Node terakhir berhasil terhapus!" << endl;
-    } else {
-        cout << "list kosong" << endl;
-    }
-}
-
-void delAfter(linkedlist &List, address nodeHapus, address nodePrev){
-    if(isEmpty(List) == true){
-        cout << "List kosong!" << endl;
-    } else { //jika list tidak kosong
-        if (nodePrev != Nil && nodePrev->next != Nil) { 
-            nodeHapus = nodePrev->next;       
-            nodePrev->next = nodeHapus->next;  
-            nodeHapus->next = Nil;         
-            dealokasi(nodeHapus);
-            cout << "Node setelah node " << nodePrev->isidata.nama << " berhasil terhapus!" << endl;
-        } else {
-            cout << "Node sebelumnya (prev) tidak valid!" << endl;
+            if(found == false){
+                cout << "Posisi " << posisi << " tidak valid!" << endl;
+            }
         }
     }
 }
 
-//prosedur untuk menampilkan isi list
-void printList(linkedlist List) {
-    if (isEmpty(List)) {
-        cout << "List kosong." << endl;
-    } else {
-        address nodeBantu = List.first;
-        while (nodeBantu != Nil) { 
-            cout << "Nama Buah : " << nodeBantu->isidata.nama << ", Jumlah : " << nodeBantu->isidata.jumlah << ", Harga : " << nodeBantu->isidata.harga << endl;
-            nodeBantu = nodeBantu->next;
-        }
-    }
-}
-
-//function untuk menampilkan jumlah node didalam list
-int nbList(linkedlist List) {
-    int count = 0;
-    address nodeBantu = List.first;
-    while (nodeBantu != Nil) {
-        count++;
-        nodeBantu = nodeBantu->next; 
-    }
-    return count;
-}
-
-//prosedur untuk menghapus list (menghapus semua node didalam list)
-void deleteList(linkedlist &List){
-    address nodeBantu, nodeHapus;
-    nodeBantu = List.first;
-    while(nodeBantu != Nil){
-        nodeHapus = nodeBantu;
-        nodeBantu = nodeBantu->next;
-        dealokasi(nodeHapus); 
-    }
-    List.first = Nil; 
-    cout << "List berhasil terhapus!" << endl;
-}
-
-/*----- MATERI PERTEMUAN 5 - SINGLY LINKED LIST (BAGIAN KEDUA) - PART 1 (UPDATE) -----*/
-//prosedur-prosedur untuk melakukan update data node
-void updateFirst(linkedlist List){
-    if(isEmpty(List) == true){
+void view(stack listStack){
+    if(isEmpty(listStack) == true){
         cout << "List kosong!" << endl;
     } else {
-        cout << "Masukkan update data node pertama : " << endl;
-        cout << "Nama buah : ";
-        cin >> List.first->isidata.nama;
-        cout << "Jumlah : ";
-        cin >> List.first->isidata.jumlah;
-        cout << "Harga : ";
-        cin >> List.first->isidata.harga;
-        cout << "Data Berhasil Diupdate!" << endl;
-        cout << endl;
-    }
-}
-
-void updateLast(linkedlist List){
-    if (isEmpty(List) == true) {
-        cout << "List Kosong!" << endl;
-    } else {
-        address nodeBantu = List.first;
-        while (nodeBantu->next != Nil) {
-            nodeBantu = nodeBantu->next;
-        }
-        cout << "masukkan update data node terakhir : " << endl;
-        cout << "Nama buah : ";
-        cin >> nodeBantu->isidata.nama;
-        cout << "Jumlah : ";
-        cin >> nodeBantu->isidata.jumlah;
-        cout << "Harga : ";
-        cin >> nodeBantu->isidata.harga;
-        cout << "Data Berhasil Diupdate!" << endl;
-        cout << endl;
-    }
-}
-
-void updateAfter(linkedlist List, address nodePrev){
-    if(isEmpty(List) == true){
-        cout << "List kosong!" << endl;
-    } else {
-        if (nodePrev != Nil && nodePrev->next != Nil){
-            address nodeBantu = nodePrev->next;
-            cout << "masukkan update data node setelah node " << nodePrev->isidata.nama << " : " << endl;
-            cout << "Nama buah : ";
-            cin >> nodeBantu->isidata.nama;
-            cout << "Jumlah : ";
-            cin >> nodeBantu->isidata.jumlah;
-            cout << "Harga : ";
-            cin >> nodeBantu->isidata.harga;
-            cout << "Data Berhasil Diupdate!" << endl;
-            cout << endl;
-        } else {
-            cout << "Node sebelumnya (prev) tidak valid!" << endl;
-        }
-    }
-}
-
-/*----- MATERI PERTEMUAN 5 - SINGLY LINKED LIST (BAGIAN KEDUA) - PART 2 (SEARCHING) -----*/
-//prosedur-prosedur untuk searching data
-//prosedur untuk mencari node berdasarkan data
-void FindNodeByData(linkedlist list, string data){
-    if(isEmpty(list) == true){
-        cout << "List kosong!" << endl;
-    } else {
-        address nodeBantu = list.first;
-        int posisi = 0;
-        bool found = false;
+        address nodeBantu = listStack.top;
         while(nodeBantu != Nil){
-            posisi++;
-            if(nodeBantu->isidata.nama == data){
-                cout << "Data " << data << " ditemukan pada posisi ke-" << posisi << "!" << endl;
-                cout << "Nama Buah : " << nodeBantu->isidata.nama << ", Jumlah : " << nodeBantu->isidata.jumlah << ", Harga : " << nodeBantu->isidata.harga << endl;
-                found = true;
-                break;
-            }
+            cout << nodeBantu->dataAngka << " ";
             nodeBantu = nodeBantu->next;
+        }
+    }
+    cout << endl;
+}
+
+void searchData(stack listStack, int data){
+    if(isEmpty(listStack) == true){
+        cout << "List kosong!" << endl;
+    } else {
+        address nodeBantu = listStack.top;
+        int posisi = 1;
+        bool found = false;
+        cout << "Mencari data " << data << "..." << endl;
+        while(nodeBantu != Nil){
+            if(nodeBantu->dataAngka == data){
+                cout << "Data " << data << " ditemukan pada posisi ke-" << posisi << endl;
+                found = true;
+                cout << endl;
+                break;
+            } else {
+                posisi++;
+                nodeBantu = nodeBantu->next;
+            }
         }
         if(found == false){
-            cout << "Node dengan data " << data << " tidak ditemukan!" << endl;
+            cout << "Data " << data << " tidak ditemukan didalam stack!" << endl;
+            cout << endl;
         }
     }
-    cout << endl;
-}
-
-//prosedur untuk mencari node berdasarkan alamat node
-void FindNodeByAddress(linkedlist list, address node) {
-    if(isEmpty(list) == true) {
-        cout << "List kosong!" << endl;
-    } else {
-        address nodeBantu = list.first;
-        int posisi = 0;
-        bool found = false;
-        while (nodeBantu != Nil) {
-            posisi++;
-            if(nodeBantu == node) {
-                cout << "Node ditemukan pada posisi ke-" << posisi << "!" << endl;
-                cout << "Alamat node : " << nodeBantu << endl;
-                cout << "Nama Buah : " << nodeBantu->isidata.nama << ", Jumlah : " << nodeBantu->isidata.jumlah << ", Harga : " << nodeBantu->isidata.harga << endl;
-                found = true;
-                break;
-            }
-            nodeBantu = nodeBantu->next;
-        }
-        if(found == false) {
-            cout << "Node dengan alamat " << node << " tidak ditemukan dalam list!" << endl;
-        }
-    }
-    cout << endl;
-}
-
-//prosedur untuk mencari node berdasarkan range data (range harga)
-void FindNodeByRange(linkedlist list, float hargaAwal, float hargaAkhir) {
-    if(isEmpty(list) == true) {
-        cout << "List kosong!" << endl;
-    } else {
-        address nodeBantu = list.first;
-        int posisi = 0;
-        bool found = false;
-        cout << "--- Buah dalam range harga " << hargaAwal << " - " << hargaAkhir << " ---" << endl;
-        cout << "-------------------------------------------" << endl;
-        while (nodeBantu != Nil) {
-            posisi++;
-            float harga = nodeBantu->isidata.harga;
-            if(harga >= hargaAwal && harga <= hargaAkhir) {
-                cout << "Data ditemukan pada posisi ke-" << posisi << " :" << endl;
-                cout << "Nama Buah : " << nodeBantu->isidata.nama << ", Jumlah : " << nodeBantu->isidata.jumlah << ", Harga : " << nodeBantu->isidata.harga << endl;
-                cout << "-------------------------------------------" << endl;
-                found = true;
-            }
-            nodeBantu = nodeBantu->next;
-        }
-        if(found == false) {
-            cout << "Tidak ada data buah dalam range harga tersebut!" << endl;
-            cout << "-------------------------------------------" << endl;
-        }
-    }
-    cout << endl;
 }
 
 
 //main.cpp
-#include "listbuah.h"
+#include "stack.h"
+#include <iostream>
 
-#include<iostream>
 using namespace std;
 
 int main(){
-    linkedlist List;
+    stack listStack;
     address nodeA, nodeB, nodeC, nodeD, nodeE = Nil;
-    createList(List);
+    createStack(listStack);
 
-    dataBuah dtBuah;
+    nodeA = alokasi(1);
+    nodeB = alokasi(2);
+    nodeC = alokasi(3);
+    nodeD = alokasi(4);
+    nodeE = alokasi(5);
 
-    nodeA = alokasi("Jeruk", 100, 3000);
-    nodeB = alokasi("Apel", 75, 4000);
-    nodeC = alokasi("Pir", 87, 5000);
-    nodeD = alokasi("Semangka", 43, 11500);
-    nodeE = alokasi("Durian", 15, 31450);
-
-    insertFirst(List, nodeA);
-    insertLast(List, nodeB);
-    insertAfter(List, nodeC, nodeA);
-    insertAfter(List, nodeD, nodeC);
-    insertLast(List, nodeE);
-
-    cout << "--- ISI LIST SETELAH DILAKUKAN INSERT ---" << endl;
-    printList(List);
-    cout << "Jumlah node : " << nbList(List) << endl;
+    push(listStack, nodeA);
+    push(listStack, nodeB);
+    push(listStack, nodeC);
+    push(listStack, nodeD);
+    push(listStack, nodeE);
     cout << endl;
 
-   updateFirst(List);
-   updateLast(List);
-   updateAfter(List, nodeD);
-
-    cout << "--- ISI LIST SETELAH DILAKUKAN UPDATE ---" << endl;
-    printList(List);
-    cout << "Jumlah node : " << nbList(List) << endl;
+    cout << "--- Stack setelah push ---" << endl;
+    view(listStack);
     cout << endl;
 
-    FindNodeByData (List, "Kelapa");
-    FindNodeByAddress(List, nodeC);
-    FindNodeByRange(List, 5000, 10000);
-
-    delFirst(List);
-    delLast(List);
-    delAfter(List, nodeD, nodeC);
-
-    cout << "--- ISI LIST SETELAH DILAKUKAN DELETE ---" << endl;
-    printList(List);
-    cout << "Jumlah node : " << nbList(List) << endl;
+    pop(listStack);
+    pop(listStack);
     cout << endl;
 
-    deleteList(List);
-    cout << "--- ISI LIST SETELAH DILAKUKAN HAPUS LIST ---" << endl;
-    printList(List);
-    cout << "Jumlah node : " << nbList(List) << endl;
+    cout << "--- Stack setelah pop 2 kali ---" << endl;
+    view(listStack);
     cout << endl;
+
+    update(listStack, 2);
+    update(listStack, 1);
+    update(listStack, 4);
+    cout << endl;
+
+    cout << "--- Stack setelah update ---" << endl;
+    view(listStack);
+    cout << endl;
+
+    searchData(listStack, 4);
+    searchData(listStack, 9);
 
     return 0;
 }
+   
 ```
-Program ini menerapkan konsep ADT Single Linked List dalam bahasa C++ untuk mengelola data buah. Di dalamnya digunakan konsep node, pointer, dan manajemen memori dinamis guna melakukan operasi seperti penyimpanan, penambahan, penghapusan, pembaruan, serta pencarian data.
+Program ini yang membangun struktur stack menggunakan single linked list sehingga penyimpanan datanya dapat dilakukan secara dinamis. Program ini memiliki beberapa operasi, seperti push untuk menambahkan node baru di posisi teratas dan pop untuk menghapus node paling atas. Selain itu, program juga mendukung perubahan nilai pada posisi tertentu, menampilkan isi stack dari atas ke bawah, serta melakukan pencarian untuk memastikan apakah suatu data terdapat dalam stack.
 
 
-## Unguided
+## Guided 1
 
-## 2. 
-<img width="974" height="576" alt="image" src="https://github.com/user-attachments/assets/2fa7a644-6b0e-4556-becb-35498df84c77" />
-<img width="1063" height="613" alt="image" src="https://github.com/user-attachments/assets/6084ebee-d50b-4eca-8fda-fa65d57ce9a5" />
-<img width="940" height="665" alt="image" src="https://github.com/user-attachments/assets/ed05625c-ba46-44c7-8101-4d1f18876c2b" />
-
-
-### [ Updated ADT Singlylist]
+### . [Stack menggunakan fungsi array] 
 
 ```C++
-//singlylist.h
-#ifndef SINGLYLIST_H
-#define SINGLYLIST_H
+//stack.h
+#ifndef STACK_TABLE
+#define STACK_TABLE
 
 #include <iostream>
 using namespace std;
 
-struct Node {
-    int info;
-    Node *next;
+const int MAX = 10;
+
+struct stackTable{
+    int data[MAX];
+    int top; // -1 = kosong
+
 };
 
-struct List {
-    Node *first;
+bool isEmpty(stackTable s);
+bool isFull(stackTable s);
+void createStack(stackTable &s);
+
+void push(stackTable &s, int angka);
+void pop(stackTable &s);
+void update(stackTable &s, int posisi);
+void view(stackTable s);
+void searchData(stackTable s, int data);
+
+#endif
+
+//stack.cpp
+#include "stack.h"
+#include <iostream>
+
+using namespace std;
+
+bool isEmpty(stackTable s) {
+    return s.top == -1;
+}
+
+bool isFull(stackTable s){
+    return s.top == MAX -1;
+}
+
+void createStack(stackTable &s) {
+    s.top = -1;
+}
+
+void push(stackTable &s, int angka){
+    if(isFull(s)){
+        cout << "Stack Penuh!" << endl;
+    } else {
+        s.top++;
+        s.data[s.top] = angka;
+        cout << "Data " << angka << " berhasil ditambahkan kedalam stack!" << endl;
+    }
+}
+
+void pop(stackTable &s){
+    if(isEmpty(s)){
+        cout << "Stack kosong!" << endl;
+    } else {
+        int val = s.data[s.top];
+        s.top--;
+        cout << "Data " << val << " Berhasil dihapus dari stack!" << endl;
+    }
+}
+
+void update(stackTable &s, int posisi){
+    if(isEmpty(s)){
+        cout << "Stack kosong!" << endl;
+        return;
+    }
+    if(posisi <= 0){
+        cout << "Posisi tidak valid!" << endl;
+        return;
+    }
+
+    //index = top - (posisi -1)
+    int idx = s.top - (posisi -1);
+    if(idx < 0 || idx > s.top){
+        cout << "Posisi " << posisi << " Tidak valid!" << endl;
+        return;
+    }
+
+    cout << "Update data posisi ke-" << posisi << endl;
+    cout << "Masukkan angka: ";
+    cin >> s.data[idx];
+    cout << "Data berhasil diupdate!" << endl;
+    cout << endl;
+}
+
+void view(stackTable s){
+    if(isEmpty(s)){
+        cout << "Stack Kosong!" << endl;
+    } else {
+        for(int i = s.top; i >= 0; --i){
+            cout << s.data[i] << " ";
+        }
+    }
+    cout << endl;
+}
+
+void searchData(stackTable s, int data){
+    if(isEmpty(s)){
+        cout << "Stack Kosong!" << endl;
+        return;
+    }
+    cout << "Mencari data" << data << "..." << endl;
+    int posisi = 1;
+    bool found = false;
+
+    for(int i = s.top; i >= 0; --i){
+        if(s.data[i] == data){
+            cout << "Data " << data << " ditemukan pada posisi ke-" << posisi << endl;
+            cout << endl;
+            found = true;
+            break;
+        }
+        posisi++;
+    }
+
+    if(!found){
+        cout << "Data " << data << " tidak ditemukan didalam stack!" << endl;
+        cout << endl;
+    }
+}
+
+//main.cpp
+#include "stack.h"
+#include <iostream>
+
+using namespace std;
+
+int main(){
+    stackTable s;
+    createStack(s);
+
+    push(s, 1);
+    push(s, 2);
+    push(s, 3);
+    push(s, 4);
+    push(s, 5);
+    cout << endl;
+
+    cout << "--- Stack setelah push ---" << endl;
+    view(s);
+    cout << endl;
+
+    pop(s);
+    pop(s);
+    cout << endl;
+
+    cout << "--- Stack setelah pop 2 kali ---" << endl;
+    view(s);
+    cout << endl;
+
+    //Posisi dihitung dari TOP(1-based)
+    update(s, 2);
+    update(s, 1);
+    update(s, 4);
+    cout << endl;
+
+    cout << "--- Stack setelah update ---" << endl;
+    view(s);
+    cout << endl;
+
+    searchData(s, 4);
+    searchData(s, 9);
+
+    return 0;
+}
+
+```
+Program ini mengelola stack berbasis array yang menampung maksimal 10 data. Nilai top menunjukkan elemen teratas, dan jika bernilai -1 berarti stack kosong. Kondisi stack dicek melalui fungsi isEmpty dan isFull. Operasi push digunakan untuk menambahkan data, sedangkan pop untuk menghapus data paling atas. Program ini juga memungkinkan pengubahan, pencarian, serta penampilan isi stack dari atas ke bawah.
+
+## Unguided
+
+## soal 1. 
+<img width="954" height="882" alt="Screenshot 2025-11-19 153751" src="https://github.com/user-attachments/assets/41b17a66-1aa1-4b52-86dc-c9da13a93f26" />
+
+```C++
+//stack.h
+#ifndef STACK_H
+#define STACK_H
+
+#include <iostream>
+using namespace std;
+
+typedef int infotype;
+
+const int MAX = 20;
+
+struct Stack{
+    int data[MAX];
+    int top;
+
 };
 
-void createList(List &L);
-Node* alokasi(int x);
-void dealokasi(Node *P);
-void insertFirst(List &L, Node *P);
-void printInfo(List L);
-
-Node* findElm(List L, int x);
-int totalInfo(List L);
+void createStack(Stack &S);
+void push(Stack &S, infotype x);
+infotype pop(Stack &S);
+void printInfo(Stack S);
+void balikStack(Stack &S);
 
 #endif
 
 
-//singlylist.cpp
-#include "SinglyList.h"
+//stack.cpp
+#include "stack.h"
+#include <iostream>
 
-void createList(List &L) {
-    L.first = NULL;
+using namespace std;
+
+void createStack(Stack &S) {
+    S.top = -1;
 }
 
-Node* alokasi(int x) {
-    Node *P = new Node;
-    P->info = x;
-    P->next = NULL;
-    return P;
-}
-
-void dealokasi(Node *P) {
-    delete P;
-}
-
-void insertFirst(List &L, Node *P) {
-    if (L.first == NULL) {
-        L.first = P;
+void push(Stack &S, infotype X) {
+    if(S.top == MAX - 1){
+        cout << "Stack Penuh!" << endl;
     } else {
-        P->next = L.first;
-        L.first = P;
+        S.top++;
+        S.data[S.top] = X;
     }
 }
 
-void printInfo(List L) {
-    Node *P = L.first;
-    if (P == NULL) {
-        cout << "List masih kosong." << endl;
-        return;
+infotype pop(Stack &S) {
+    if(S.top == - 1){
+        cout << "Stack kosong!" << endl;
+        return -1;
+    } else {
+        int val = S.data[S.top];
+        S.top--;
+        return val;
     }
+}
 
-    cout << "Isi elemen di dalam list: ";
-    while (P != NULL) {
-        cout << P->info << " ";
-        P = P->next;
+void printInfo(Stack S) {
+    if(S.top == - 1){
+        cout << "Stack Kosong!" << endl;
+    } else {
+        cout << "[TOP] " ;
+        for(int i = S.top; i >= 0; --i){
+            cout << S.data[i] << " ";
+        }
     }
     cout << endl;
 }
 
-Node* findElm(List L, int x) {
-    Node *P = L.first;
-    while (P != NULL) {
-        if (P->info == x) {
-            return P;
-        }
-        P = P->next;
-    }
-    return NULL;
-}
-
-int totalInfo(List L) {
-    int total = 0;
-    Node *P = L.first;
-
-    while (P != NULL) {
-        total += P->info;
-        P = P->next;
+void balikStack(Stack &S) {
+    if(S.top == - 1){
+        cout << "Stack Kosong!" << endl;
+    } else {
+        if (S.top <= 0) return;
     }
 
-    return total;
+    int i = 0;
+    int j = S.top;
+
+    while (i < j) {
+        int temp = S.data[i];
+        S.data[i] = S.data[j];
+        S.data[j] = temp;
+        i++;
+        j--; 
+    }
 }
 
 
 //main.cpp
+#include "stack.h"
 #include <iostream>
-#include "SinglyList.h"
 using namespace std;
 
 int main() {
-    List L;
-    createList(L);
+    cout << "Hello world!" << endl;
 
-    Node *P1, *P2, *P3, *P4, *P5;
+    Stack S;
+    createStack(S);
 
-    P1 = alokasi(2);
-    insertFirst(L, P1);
+    push(S, 3);
+    push(S, 4);
+    push(S, 8);
+    pop(S);
+    push(S, 2);
+    push(S, 3);
+    pop(S);
+    push(S, 9);
 
-    P2 = alokasi(0);
-    insertFirst(L, P2);
+    printInfo(S);
 
-    P3 = alokasi(8);
-    insertFirst(L, P3);
-
-    P4 = alokasi(12);
-    insertFirst(L, P4);
-
-    P5 = alokasi(9);
-    insertFirst(L, P5);
-
-    cout << "Isi list: ";
-    printInfo(L);
-
-    Node *found = findElm(L, 8);
-    if (found != NULL) {
-        cout << "Elemen dengan nilai 8 ditemukan pada alamat: " << found << endl;
-    } else {
-        cout << "Elemen dengan nilai 8 tidak ditemukan." << endl;
-    }
-
-    cout << "Total seluruh nilai info pada list: " << totalInfo(L) << endl;
+    cout << "balik stack" << endl;
+    balikStack(S);
+    printInfo(S);
 
     return 0;
 }
 
 ```
-### 2. Hasil ADT Singly Linked list
+### Output soal 1 :
+<img width="1121" height="263" alt="Screenshot 2025-11-19 163150" src="https://github.com/user-attachments/assets/5671dacd-c71e-4972-a1ac-221ed188d947" />
+Program ini membuat stack menggunakan array. Data dimasukkan melalui fungsi push, dan elemen teratas dapat dihapus menggunakan pop. Pada contoh tersebut, pop menghapus nilai hasil push 8 dan push 3, sehingga hanya empat data yang tersisa dari enam input awal. Program juga menampilkan hasil akhir dalam urutan terbalik menggunakan fungsi balikstack, dan menampilkannya ke layar melalui printInfo.
+
+### soal 2. 
+<img width="867" height="798" alt="Screenshot 2025-11-19 163542" src="https://github.com/user-attachments/assets/3062ac6f-6178-4bc9-9206-5ead6754d90e" />
+
+```C++
+//stack.h
+#ifndef STACK_H
+#define STACK_H
+
+#include <iostream>
+using namespace std;
+
+typedef int infotype;
+
+const int MAX = 20;
+
+struct Stack{
+    int data[MAX];
+    int top;
+
+};
+
+void createStack(Stack &S);
+void push(Stack &S, infotype X);
+infotype pop(Stack &S);
+void printInfo(Stack S);
+void balikStack(Stack &S);
+void pushAscending(Stack &S, int X);
+
+#endif
+
+
+//stack.cpp
+#include "stack.h"
+#include <iostream>
+
+using namespace std;
+
+void createStack(Stack &S) {
+    S.top = -1;
+}
+
+void push(Stack &S, infotype X) {
+    if(S.top == MAX - 1){
+        cout << "Stack Penuh!" << endl;
+    } else {
+        S.top++;
+        S.data[S.top] = X;
+    }
+}
+
+infotype pop(Stack &S) {
+    if(S.top == - 1){
+        cout << "Stack kosong!" << endl;
+        return -1;
+    } else {
+        int val = S.data[S.top];
+        S.top--;
+        return val;
+    }
+}
+
+void printInfo(Stack S) {
+    if(S.top == - 1){
+        cout << "Stack Kosong!" << endl;
+    } else {
+        cout << "[TOP] " ;
+        for(int i = S.top; i >= 0; --i){
+            cout << S.data[i] << " ";
+        }
+    }
+    cout << endl;
+}
+
+void balikStack(Stack &S) {
+    if(S.top == - 1){
+        cout << "Stack Kosong!" << endl;
+    } else {
+        if (S.top <= 0) return;
+    }
+
+    int i = 0;
+    int j = S.top;
+
+    while (i < j) {
+        int temp = S.data[i];
+        S.data[i] = S.data[j];
+        S.data[j] = temp;
+        i++;
+        j--; 
+    }
+}
+void pushAscending(Stack &S, int X) {
+    Stack temp;
+    createStack(temp);
+
+    while (S.top != -1 && S.data[S.top] > X) {
+        int val = pop(S);
+        push(temp, val);
+    }
+
+    push(S, X);
+
+    while (temp.top != -1) {
+        push(S, pop(temp));
+    }
+}
+
+
+//main.cpp
+#include <iostream>
+#include "stack.h"
+using namespace std;
+
+int main() {
+    cout << "Hello world!" << endl;
+
+    Stack S;
+    createStack(S);
+    pushAscending(S,3);
+    pushAscending(S,4);
+    pushAscending(S,8);
+    pushAscending(S,2);
+    pushAscending(S,3);
+    pushAscending(S,9);
+    printInfo(S);
+
+    cout << "balik stack" << endl;
+    balikStack(S);
+    
+    printInfo(S);
+    return 0;
+}
+
+```
 ### Output:
-<img width="1102" height="152" alt="image" src="https://github.com/user-attachments/assets/d6888608-98f5-4318-bf7c-ddb7b397e745" />
+<img width="1126" height="208" alt="Screenshot 2025-11-19 164330" src="https://github.com/user-attachments/assets/f72d8af1-ba61-4316-9d88-2928868cbf6a" />
+Program ini membuat stack berbasis array, namun kali ini menggunakan fungsi pushAscending, yaitu fungsi yang menambahkan data sekaligus menyusunnya dari nilai terkecil sampai terbesar. Hasil data yang sudah terurut ditampilkan melalui printInfo. Selain itu, program juga menampilkan data dalam urutan terbalik dengan memanfaatkan fungsi balikStack, lalu kembali dicetak menggunakan printInfo
 
-### 3. Carilah elemen dengan info 8 dengan membuat fungsi baru. fungsi findElm( L : List, x : infotype ) : address
+### soal 3.
+<img width="964" height="458" alt="image" src="https://github.com/user-attachments/assets/19f0a8f1-d321-4c9a-a71d-84bd078623c9" />
+
+```C++
+//stack.h
+#ifndef STACK_H
+#define STACK_H
+
+#include <iostream>
+using namespace std;
+
+typedef int infotype;
+
+const int MAX = 20;
+
+struct Stack{
+    int data[MAX];
+    int top;
+
+};
+
+void createStack(Stack &S);
+void push(Stack &S, infotype X);
+infotype pop(Stack &S);
+void printInfo(Stack S);
+void balikStack(Stack &S);
+void pushAscending(Stack &S, int X);
+void getInputStream(Stack &S);
+
+#endif
+
+
+//stack.cpp
+#include "stack.h"
+#include <iostream>
+
+using namespace std;
+
+void createStack(Stack &S) {
+    S.top = -1;
+}
+
+void push(Stack &S, infotype X) {
+    if(S.top == MAX - 1){
+        cout << "Stack Penuh!" << endl;
+    } else {
+        S.top++;
+        S.data[S.top] = X;
+    }
+}
+
+infotype pop(Stack &S) {
+    if(S.top == - 1){
+        cout << "Stack kosong!" << endl;
+        return -1;
+    } else {
+        int val = S.data[S.top];
+        S.top--;
+        return val;
+    }
+}
+
+void printInfo(Stack S) {
+    if(S.top == - 1){
+        cout << "Stack Kosong!" << endl;
+    } else {
+        cout << "[TOP] " ;
+        for(int i = S.top; i >= 0; --i){
+            cout << S.data[i] << " ";
+        }
+    }
+    cout << endl;
+}
+
+void balikStack(Stack &S) {
+    if(S.top == - 1){
+        cout << "Stack Kosong!" << endl;
+    } else {
+        if (S.top <= 0) return;
+    }
+
+    int i = 0;
+    int j = S.top;
+
+    while (i < j) {
+        int temp = S.data[i];
+        S.data[i] = S.data[j];
+        S.data[j] = temp;
+        i++;
+        j--; 
+    }
+}
+void pushAscending(Stack &S, int X) {
+    Stack temp;
+    createStack(temp);
+
+    while (S.top != -1 && S.data[S.top] > X) {
+        int val = pop(S);
+        push(temp, val);
+    }
+
+    push(S, X);
+
+    while (temp.top != -1) {
+        push(S, pop(temp));
+    }
+}
+
+void getInputStream(Stack &S) {
+    createStack(S);
+
+    char n;
+    while(true){
+        n = cin.get();
+        if(n == '\n') {
+            break;
+        }
+        if(n >= '0' && n <= '9' ) {
+            int val = n - '0';
+            push(S, val);
+        }
+    }
+}
+
+
+//main.cpp
+#include "stack.h"
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello world!" << endl;
+    Stack S;
+    createStack(S);
+    getInputStream(S);
+    printInfo(S);
+    cout << "balik stack" << endl;
+    balikStack(S);
+    printInfo(S);
+    return 0;
+}
+
+```
 ### Output:
-<img width="1094" height="31" alt="image" src="https://github.com/user-attachments/assets/3dc4f611-b0aa-4477-8d17-aca6551b078c" />
+<img width="1124" height="233" alt="Screenshot 2025-11-19 165415" src="https://github.com/user-attachments/assets/ea655f04-4cd1-41d3-8627-140ff7951261" />
+Program ini membuat stack berbasis array, di mana pengguna dapat memasukkan beberapa data secara langsung dan proses input berhenti saat menekan tombol Enter. Berbeda dari sebelumnya, program tidak memakai fungsi push, melainkan menggunakan getInputStream untuk menerima data hingga kapasitas array penuh. Program juga menampilkan hasil stack yang sudah dibalik melalui fungsi balikStack dan mencetaknya menggunakan printInfo.
 
-### 4. Hitunglah jumlah total info seluruh elemen (9+12+8+0+2=31).
-### Output:
-<img width="1119" height="33" alt="image" src="https://github.com/user-attachments/assets/870e1bcd-99f3-40b2-a525-f4d71988c4d9" />
+### Kesimpulan
+Melalui pembelajaran ini, mahasiswa mempelajari stack, stack dibekali beberapa fungsi tambahan, seperti pushAscending yang tidak hanya menambahkan data ke stack, tetapi juga langsung menyusunnya secara ascending dari nilai terbesar di bagian atas hingga terkecil di bawah. Selain itu, pengguna juga bisa memasukkan data secara manual melalui getStreamInput selama jumlah elemen belum melebihi batas MAX (yakni 20). Program ini juga menyediakan fungsi balikStack untuk membalik urutan data, dan seluruh hasil ditampilkan menggunakan printInfo.
 
-Kode di atas digunakan untuk mempelajari dan menerapkan konsep dasar struktur data Linked List (daftar berantai tunggal) dalam bahasa C++.
-dengan kata lain Program ini mengaplikasikan struktur data Singly Linked List menggunakan bahasa C++ guna mengelola kumpulan data secara fleksibel, termasuk melakukan operasi penambahan, pencarian, serta penjumlahan nilai elemen.
-
-
-#### Full code Screenshot:
-<img width="1919" height="1125" alt="image" src="https://github.com/user-attachments/assets/98f7b5de-c6e1-4d74-8b3e-b1e3e756f27e" />
-
-
-## Kesimpulan
-Melalui pembelajaran ini, mahasiswa belajar mengimplementasikan struktur data Singly Linked List pada bahasa C++.
-Latihan ini membantu memahami penggunaan node dan pointer dengan memori dinamis dalam berbagai operasi, termasuk menambah, menampilkan, mencari, dan menghitung elemen di dalam list.
 
 ## Referensi
-[1] C++ Program To Check If A Singly Linked List Is Palindrome. https://www.geeksforgeeks.org/cpp/cpp-program-to-check-if-a-singly-linked-list-is-palindrome/
+[1] Stack in C++ STL. https://www.geeksforgeeks.org/cpp/stack-in-cpp-stl/
+[2] stack::push() and stack::pop() in C++ STL. https://www.geeksforgeeks.org/cpp/stack-push-and-pop-in-c-stl/
