@@ -1,0 +1,1 @@
+# Stuktur-Data-Assignment
