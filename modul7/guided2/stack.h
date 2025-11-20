@@ -1,10 +1,10 @@
 #ifndef STACK_TABLE
 #define STACK_TABLE
 
+//ubah kapasitas sesuai kebutuhan
 #include <iostream>
 using namespace std;
 
-//ubah kapasitas sesuai kebutuhan
 const int MAX = 10;
 
 struct stackTable{
