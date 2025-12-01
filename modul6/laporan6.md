@@ -20,6 +20,8 @@ Komponen-komponen dalam Doubly linked list:
 #### 1. Searching
 Searching merupakan operasi dasar list dengan melakukan aktivitas pencarian terhadap node tertentu. Proses ini berjalan dengan mengunjungi setiap node dan berhenti setelah node yang dicari ketemu. Dengan melakukan operasi searching, operasi-operasi seperti insert after, delete after, dan update akan lebih mudah.
 
+#### 2. Delete
+Fungsi penghapusan pada Doubly Linked List terdiri dari deleteFirst untuk menghapus node pertama, deleteLast untuk menghapus node terakhir, dan deleteAfter untuk menghapus node yang berada di tengah linked list.
 
 ## Guided 
 
