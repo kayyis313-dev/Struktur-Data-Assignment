@@ -321,7 +321,7 @@ int main(){
 ```
 program ini Digunakan untuk menambahkan beberapa elemen dengan memanfaatkan fungsi insert, serta mengatur kembali urutan data melalui fungsi updateFirst, updateLast, dan updateBefore.
 
-###. 2 [Doubly linked list dan mencari data dengan menggunakan fungsi search dan delete]
+### 2 [Doubly linked list dan mencari data dengan menggunakan fungsi search dan delete]
 ```C++
 //listmakanan.h
 #ifndef LISTMAKANAN_H
