@@ -832,8 +832,10 @@ program ini berfungsi untuk menampilkan hasil pembaruan, kemudian mencari data m
 
 ## 1. 
 <img width="944" height="618" alt="image" src="https://github.com/user-attachments/assets/e5912248-6522-4f20-b1d5-2eb6ea82c49b" />
+
 ## 2.
 <img width="891" height="842" alt="image" src="https://github.com/user-attachments/assets/1971c994-f543-4de0-a6a8-edf186f7f140" />
+
 ## 3.
 <img width="750" height="450" alt="image" src="https://github.com/user-attachments/assets/e2ccdec6-d5c8-4815-9f5f-f8137728ad38" />
 
