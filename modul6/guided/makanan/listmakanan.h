@@ -44,18 +44,4 @@ void updateLast(linkedlist List);
 void updateAfter(linkedlist List, address prev);
 void updateBefore(linkedlist List, address nodeNext);
 
-// Searching
-void findByName(linkedlist List, string nama);
-void findByJenis(linkedlist List, string jenis);
-void findByMinRating(linkedlist List, float minRating);
-
-// Delete
-void deleteFirst(linkedlist &List);
-void deleteLast(linkedlist &List);
-void deleteAfter(linkedlist &List, address Prev);
-void deleteBefore(linkedlist &List, address nodeNext);
-
-void deleteNode(linkedlist &List, address target);
-void deleteByName(linkedlist &List, string nama);
-
 #endif
