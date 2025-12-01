@@ -7,7 +7,15 @@ Bahasa pemrograman C merupakan bahasa yang bersifat terstruktur, di mana program
 Sementara itu, program C++ biasanya disimpan dengan ekstensi .CPP(singkatan dari *C plus plus*).
 Sebelum program tersebut dapat dijalankan (dieksekusi), ia harus terlebih dahulu dikompilasi menggunakan kompiler C++.
 
-#### A. Pada materi ini TUJUAN PRAKTIKUM supaya bisa memahami penggunaan linked list dengan pointer operator- operator dalam program, Memahami operasi-operasi dasar dalam linked list, Membuat program dengan menggunakan linked list dengan prototype yang ada
+#### A. Doubly Linked List (DLL)
+pada materi kali ini, Doubly Linked list adalah linked list yang masing – masing elemen nya memiliki 2 successor, yaitu successor yang menunjuk pada elemen sebelumnya (prev) dan successor yang menunjuk pada elemen sesudahnya (next).
+Doubly linked list juga menggunakan dua buah successor utama yang terdapat pada list, yaitu first
+(successor yang menunjuk elemen pertama) dan last (susesor yang menunjuk elemen terakhir list).
+Komponen-komponen dalam Doubly linked list:
+1. First : pointer pada list yang menunjuk pada elemen pertama list.
+2. Last : pointer pada list yang menunjuk pada elemen terakhir list.
+3. Next : pointer pada elemen sebagai successor yang menunjuk pada elemen didepannya.
+4. Prev : pointer pada elemen sebagai successor yang menunjuk pada elemen dibelakangnya.
 
 #### 1. Searching
 Searching merupakan operasi dasar list dengan melakukan aktivitas pencarian terhadap node tertentu. Proses ini berjalan dengan mengunjungi setiap node dan berhenti setelah node yang dicari ketemu. Dengan melakukan operasi searching, operasi-operasi seperti insert after, delete after, dan update akan lebih mudah.
@@ -15,73 +23,64 @@ Searching merupakan operasi dasar list dengan melakukan aktivitas pencarian terh
 
 ## Guided 
 
-### . [ADT Linked List] 
+### . 1 [Doubly Linked List pada list makanan] 
 
 ```C++
-//listbuah.h
-//Header guard digunakan untuk mencegah file header yg sama
+ //listmakanan.h
+#ifndef LISTMAKANAN_H
+#define LISTMAKANAN_H
+#define Nil NULL
 
-#ifndef LISTBUAH_H
-#define LISTBUAH_H
-#define Nil NULL 
-
-#include <iostream>
+#include<iostream>
 using namespace std;
 
-// deklarasi isi data struct mahasiswa
-struct buah{
+struct makanan{
     string nama;
-    int jumlah;
+    string jenis; 
     float harga;
+    float rating; 
 };
 
-typedef buah dataBuah; //memberikan nama alias dataMahasiswa untuk struct mahasiswa
+typedef makanan dataMakanan;
 
-typedef struct node *address; //mendefinisikan alias address sebagai pointer ke struct node
+typedef struct node *address;
 
-struct node{ //node untuk isi linked listnya, isi setiap node adalah data & pointer next
-    dataBuah isidata;
+struct node{
+    dataMakanan isidata;
     address next;
+    address prev;
 };
 
-struct linkedlist{//ini linked listnya 
+struct linkedlist{
     address first;
+    address last;
 };
 
-//semua function &prosedur yg akan dipakai 
-//materi modul 4
 bool isEmpty(linkedlist List);
 void createList(linkedlist &List);
-address alokasi(string nama, int jumlah, float harga);
+address alokasi(string nama, string jenis, float harga, float rating);
 void dealokasi(address &node);
-void printList(linkedlist List);
-void insertFirst(linkedlist &List, address nodebaru);
-void insertAfter(linkedlist &List, address nodebaru, address prev);
-void insertLast(linkedlist &List, address nodebaru);
-void delFirst(linkedlist &List);
-void delLast(linkedlist &List);
-void delAfter(linkedlist &list, address nodeHapus, address nodePrev);
-int nbList(linkedlist List);
-void deleteList(linkedlist &List);
 
-//materi modul 5(part 1 - update)
+void insertFirst(linkedlist &List, address nodeBaru);
+void insertLast(linkedlist &List, address nodeBaru);
+void insertAfter(linkedlist &List, address nodeBaru, address Prev);
+void insertBefore(linkedlist &List, address nodeBaru, address nodeNext);
+
+void printList(linkedlist List);
+
 void updateFirst(linkedlist List);
 void updateLast(linkedlist List);
 void updateAfter(linkedlist List, address prev);
-
-//materi modul 5(part 2 - searching)
-void FindNodeByData(linkedlist list, string data);
-void FindNodeByAddress(linkedlist list, address node);
-void FindNodeByRange(linkedlist list, float hargaAwal, float hargaAkhir);
+void updateBefore(linkedlist List, address nodeNext);
 
 #endif
 
-//listbuah.cpp
-#include "listBuah.h"
+
+//listmakanan.cpp
+#include "listMakanan.h"
 #include <iostream>
 using namespace std;
 
-//fungsi untuk cek apakah list kosong atau tidak
 bool isEmpty(linkedlist List) {
     if(List.first == Nil){
         return true; 
@@ -90,177 +89,142 @@ bool isEmpty(linkedlist List) {
     }
 }
 
-//pembuatan linked list kosong
 void createList(linkedlist &List) {
     List.first = Nil;
+    List.last = Nil;
 }
 
 //pembuatan node baru dengan menerapkan manajemen memori
-address alokasi(string nama, int jumlah, float harga) { 
-    address nodeBaru = new node; 
+address alokasi(string nama, string jenis, float harga, float rating) { 
+    address nodeBaru = new node;
     nodeBaru->isidata.nama = nama;
-    nodeBaru->isidata.jumlah = jumlah; 
+    nodeBaru->isidata.jenis = jenis; 
     nodeBaru->isidata.harga = harga;
+    nodeBaru->isidata.rating =  rating;
     nodeBaru->next = Nil;
+    nodeBaru->prev = Nil;
     return nodeBaru;
 }
 
-//penghapusan node dengan menerapkan manajemen memori
 void dealokasi(address &node) {
     node->next = Nil;
+    node->prev = Nil;
     delete node;
 }
 
-//prosedur-prosedur untuk insert / menambahkan node baru kedalam list
-void insertFirst(linkedlist &List, address nodeBaru) {
-    nodeBaru->next = List.first; 
-    List.first = nodeBaru;
-}
-
-void insertAfter(linkedlist &List, address nodeBaru, address Prev) {
-    if (Prev != Nil) {
-        nodeBaru->next = Prev->next;
-        Prev->next = nodeBaru;
-    } else {
-        cout << "Node sebelumnya tidak valid!" << endl;
-    }
-}
-
-void insertLast(linkedlist &List, address nodeBaru) {
+void insertFirst(linkedlist &List, address nodeBaru){
     if (isEmpty(List)) {
+        List.first = List.last = nodeBaru;
+    } else {
+        nodeBaru->next = List.first;
+        List.first->prev = nodeBaru;
         List.first = nodeBaru;
-    } else {
-        address nodeBantu = List.first;
-        while (nodeBantu->next != Nil) {
-            nodeBantu = nodeBantu->next;
-        }
-        nodeBantu->next = nodeBaru;
     }
+    cout << "Node " << nodeBaru->isidata.nama << " berhasil ditambahkan sebagai node pertama list" << endl;
 }
 
-//prosedur-prosedur untuk delete / menghapus node yang ada didalam list
-void delFirst(linkedlist &List){
-    address nodeHapus;
-    if (isEmpty(List) == false) {
-        nodeHapus = List.first;
-        List.first = List.first->next;
-        nodeHapus->next = Nil;
-        dealokasi(nodeHapus);
-        cout << "Node pertama berhasil terhapus!" << endl;
-    } else {
-        cout << "List kosong!" << endl;
-    }
-}
-
-void delLast(linkedlist &List){
-    address nodeHapus, nodePrev;
-    if(isEmpty(List) == false){
-        nodeHapus = List.first;
-        if(nodeHapus->next == Nil){
-            List.first->next = Nil;
-            dealokasi(nodeHapus);
-        } else { 
-            while(nodeHapus->next != Nil){
-                nodePrev = nodeHapus; 
-                nodeHapus = nodeHapus->next;
-            }
-            nodePrev->next = Nil; 
-            dealokasi(nodeHapus);
-        }
-        cout << "Node terakhir berhasil terhapus!" << endl;
-    } else {
-        cout << "list kosong" << endl;
-    }
-}
-
-void delAfter(linkedlist &List, address nodeHapus, address nodePrev){
+void insertLast(linkedlist &List, address nodeBaru){
     if(isEmpty(List) == true){
-        cout << "List kosong!" << endl;
-    } else { //jika list tidak kosong
-        if (nodePrev != Nil && nodePrev->next != Nil) { 
-            nodeHapus = nodePrev->next;       
-            nodePrev->next = nodeHapus->next;  
-            nodeHapus->next = Nil;         
-            dealokasi(nodeHapus);
-            cout << "Node setelah node " << nodePrev->isidata.nama << " berhasil terhapus!" << endl;
+        List.first = List.last = nodeBaru;
+    } else {
+        nodeBaru->prev = List.last;
+        List.last->next = nodeBaru;
+        List.last = nodeBaru;
+    }
+    cout << "Node " << nodeBaru->isidata.nama << " berhasil ditambahkan sebagai node terakhir list" << endl;
+}
+
+void insertAfter(linkedlist &List, address nodeBaru, address nodePrev){
+    if(isEmpty(List) == true){
+        List.first = List.last = nodeBaru;
+    } else {
+        if (nodePrev != Nil){
+            if(nodePrev == List.last){
+                insertLast(List, nodeBaru);
+            } else {
+                nodeBaru->next = nodePrev->next;
+                nodeBaru->prev = nodePrev;
+                (nodePrev->next)->prev = nodeBaru;
+                nodePrev->next = nodeBaru;
+                cout << "Node " << nodeBaru->isidata.nama << " berhasil ditambahkan setelah node " << nodePrev->isidata.nama << endl;
+            }
         } else {
-            cout << "Node sebelumnya (prev) tidak valid!" << endl;
+            cout << "node sebelumnya (nodePrev) tidak valid!" << endl;
         }
     }
 }
 
-//prosedur untuk menampilkan isi list
+void insertBefore(linkedlist &List, address nodeBaru, address nodeNext){
+    if(isEmpty(List) == true){
+        List.first = List.last = nodeBaru;
+    } else {
+        if (nodeNext != Nil){
+            if(nodeNext == List.first){
+                insertFirst(List, nodeBaru);
+            } else {
+                nodeBaru->next = nodeNext;
+                nodeBaru->prev = nodeNext->prev;
+                (nodeNext->prev)->next = nodeBaru;
+                nodeNext->prev = nodeBaru;
+                cout << "Node " << nodeBaru->isidata.nama << " berhasil ditambahkan sebelum node " << nodeNext->isidata.nama << endl;
+            }
+        } else {
+            cout << "node setelahnya (nodeNext) tidak valid!" << endl;
+        }
+    }
+}
+
 void printList(linkedlist List) {
-    if (isEmpty(List)) {
-        cout << "List kosong." << endl;
+    if (isEmpty(List) == true) {
+        cout << "List kosong!" << endl;
     } else {
         address nodeBantu = List.first;
         while (nodeBantu != Nil) { 
-            cout << "Nama Buah : " << nodeBantu->isidata.nama << ", Jumlah : " << nodeBantu->isidata.jumlah << ", Harga : " << nodeBantu->isidata.harga << endl;
+            cout << "Nama makanan : " << nodeBantu->isidata.nama << endl;
+            cout << "Jenis        : " << nodeBantu->isidata.jenis << endl;
+            cout << "Harga        : " << nodeBantu->isidata.harga << endl; 
+            cout << "Rating       : " << nodeBantu->isidata.rating << endl;
+            cout << "-------------------------------" << endl;
             nodeBantu = nodeBantu->next;
         }
     }
 }
 
-//function untuk menampilkan jumlah node didalam list
-int nbList(linkedlist List) {
-    int count = 0;
-    address nodeBantu = List.first;
-    while (nodeBantu != Nil) {
-        count++;
-        nodeBantu = nodeBantu->next; 
-    }
-    return count;
-}
-
-//prosedur untuk menghapus list (menghapus semua node didalam list)
-void deleteList(linkedlist &List){
-    address nodeBantu, nodeHapus;
-    nodeBantu = List.first;
-    while(nodeBantu != Nil){
-        nodeHapus = nodeBantu;
-        nodeBantu = nodeBantu->next;
-        dealokasi(nodeHapus); 
-    }
-    List.first = Nil; 
-    cout << "List berhasil terhapus!" << endl;
-}
-
-/*----- MATERI PERTEMUAN 5 - SINGLY LINKED LIST (BAGIAN KEDUA) - PART 1 (UPDATE) -----*/
-//prosedur-prosedur untuk melakukan update data node
 void updateFirst(linkedlist List){
     if(isEmpty(List) == true){
         cout << "List kosong!" << endl;
     } else {
         cout << "Masukkan update data node pertama : " << endl;
-        cout << "Nama buah : ";
-        cin >> List.first->isidata.nama;
-        cout << "Jumlah : ";
-        cin >> List.first->isidata.jumlah;
+        cout << "Nama makanan : ";
+        getline(cin, List.first->isidata.nama);
+        cout << "Jenis makanan : ";
+        getline(cin, List.first->isidata.jenis);
         cout << "Harga : ";
         cin >> List.first->isidata.harga;
+        cout << "Rating : ";
+        cin >> List.first->isidata.rating;
+        cin.ignore(); //menghapus karakter newline (/n) dari input buffer
         cout << "Data Berhasil Diupdate!" << endl;
-        cout << endl;
+        cout << endl; 
     }
 }
 
 void updateLast(linkedlist List){
-    if (isEmpty(List) == true) {
-        cout << "List Kosong!" << endl;
+    if(isEmpty(List) == true){
+        cout << "List kosong!" << endl;
     } else {
-        address nodeBantu = List.first;
-        while (nodeBantu->next != Nil) {
-            nodeBantu = nodeBantu->next;
-        }
-        cout << "masukkan update data node terakhir : " << endl;
-        cout << "Nama buah : ";
-        cin >> nodeBantu->isidata.nama;
-        cout << "Jumlah : ";
-        cin >> nodeBantu->isidata.jumlah;
+        cout << "Masukkan update data node terakhir : " << endl;
+        cout << "Nama makanan : ";
+        getline(cin, List.last->isidata.nama);
+        cout << "Jenis makanan : ";
+        getline(cin, List.last->isidata.jenis);
         cout << "Harga : ";
-        cin >> nodeBantu->isidata.harga;
+        cin >> List.last->isidata.harga;
+        cout << "Rating : ";
+        cin >> List.last->isidata.rating;
+        cin.ignore(); //menghapus karakter newline (/n) dari input buffer
         cout << "Data Berhasil Diupdate!" << endl;
-        cout << endl;
+        cout << endl; 
     }
 }
 
@@ -268,15 +232,42 @@ void updateAfter(linkedlist List, address nodePrev){
     if(isEmpty(List) == true){
         cout << "List kosong!" << endl;
     } else {
-        if (nodePrev != Nil && nodePrev->next != Nil){
+        if(nodePrev != Nil && nodePrev->next != Nil){
             address nodeBantu = nodePrev->next;
             cout << "masukkan update data node setelah node " << nodePrev->isidata.nama << " : " << endl;
-            cout << "Nama buah : ";
-            cin >> nodeBantu->isidata.nama;
-            cout << "Jumlah : ";
-            cin >> nodeBantu->isidata.jumlah;
+            cout << "Nama makanan : ";
+            getline(cin, nodeBantu->isidata.nama);
+            cout << "Jenis makanan : ";
+            getline(cin, nodeBantu->isidata.jenis);
             cout << "Harga : ";
             cin >> nodeBantu->isidata.harga;
+            cout << "Rating : ";
+            cin >> nodeBantu->isidata.rating;
+            cin.ignore(); //menghapus karakter newline (/n) dari input buffer
+            cout << "Data Berhasil Diupdate!" << endl;
+            cout << endl;
+        } else {
+            cout << "Node sebelumnya (nodePrev) tidak valid!" << endl;
+        }
+    }
+}
+
+void updateBefore(linkedlist List, address nodeNext){
+    if(isEmpty(List) == true){
+        cout << "List kosong!" << endl;
+    } else {
+        if (nodeNext != Nil && nodeNext->prev != Nil){
+            address nodeBantu = nodeNext->prev;
+            cout << "masukkan update data node sebelum node " << nodeNext->isidata.nama << " : " << endl;
+            cout << "Nama makanan : ";
+            getline(cin, nodeBantu->isidata.nama);
+            cout << "Jenis makanan : ";
+            getline(cin, nodeBantu->isidata.jenis);
+            cout << "Harga : ";
+            cin >> nodeBantu->isidata.harga;
+            cout << "Rating : ";
+            cin >> nodeBantu->isidata.rating;
+            cin.ignore(); //menghapus karakter newline (/n) dari input buffer
             cout << "Data Berhasil Diupdate!" << endl;
             cout << endl;
         } else {
@@ -285,93 +276,11 @@ void updateAfter(linkedlist List, address nodePrev){
     }
 }
 
-/*----- MATERI PERTEMUAN 5 - SINGLY LINKED LIST (BAGIAN KEDUA) - PART 2 (SEARCHING) -----*/
-//prosedur-prosedur untuk searching data
-//prosedur untuk mencari node berdasarkan data
-void FindNodeByData(linkedlist list, string data){
-    if(isEmpty(list) == true){
-        cout << "List kosong!" << endl;
-    } else {
-        address nodeBantu = list.first;
-        int posisi = 0;
-        bool found = false;
-        while(nodeBantu != Nil){
-            posisi++;
-            if(nodeBantu->isidata.nama == data){
-                cout << "Data " << data << " ditemukan pada posisi ke-" << posisi << "!" << endl;
-                cout << "Nama Buah : " << nodeBantu->isidata.nama << ", Jumlah : " << nodeBantu->isidata.jumlah << ", Harga : " << nodeBantu->isidata.harga << endl;
-                found = true;
-                break;
-            }
-            nodeBantu = nodeBantu->next;
-        }
-        if(found == false){
-            cout << "Node dengan data " << data << " tidak ditemukan!" << endl;
-        }
-    }
-    cout << endl;
-}
-
-//prosedur untuk mencari node berdasarkan alamat node
-void FindNodeByAddress(linkedlist list, address node) {
-    if(isEmpty(list) == true) {
-        cout << "List kosong!" << endl;
-    } else {
-        address nodeBantu = list.first;
-        int posisi = 0;
-        bool found = false;
-        while (nodeBantu != Nil) {
-            posisi++;
-            if(nodeBantu == node) {
-                cout << "Node ditemukan pada posisi ke-" << posisi << "!" << endl;
-                cout << "Alamat node : " << nodeBantu << endl;
-                cout << "Nama Buah : " << nodeBantu->isidata.nama << ", Jumlah : " << nodeBantu->isidata.jumlah << ", Harga : " << nodeBantu->isidata.harga << endl;
-                found = true;
-                break;
-            }
-            nodeBantu = nodeBantu->next;
-        }
-        if(found == false) {
-            cout << "Node dengan alamat " << node << " tidak ditemukan dalam list!" << endl;
-        }
-    }
-    cout << endl;
-}
-
-//prosedur untuk mencari node berdasarkan range data (range harga)
-void FindNodeByRange(linkedlist list, float hargaAwal, float hargaAkhir) {
-    if(isEmpty(list) == true) {
-        cout << "List kosong!" << endl;
-    } else {
-        address nodeBantu = list.first;
-        int posisi = 0;
-        bool found = false;
-        cout << "--- Buah dalam range harga " << hargaAwal << " - " << hargaAkhir << " ---" << endl;
-        cout << "-------------------------------------------" << endl;
-        while (nodeBantu != Nil) {
-            posisi++;
-            float harga = nodeBantu->isidata.harga;
-            if(harga >= hargaAwal && harga <= hargaAkhir) {
-                cout << "Data ditemukan pada posisi ke-" << posisi << " :" << endl;
-                cout << "Nama Buah : " << nodeBantu->isidata.nama << ", Jumlah : " << nodeBantu->isidata.jumlah << ", Harga : " << nodeBantu->isidata.harga << endl;
-                cout << "-------------------------------------------" << endl;
-                found = true;
-            }
-            nodeBantu = nodeBantu->next;
-        }
-        if(found == false) {
-            cout << "Tidak ada data buah dalam range harga tersebut!" << endl;
-            cout << "-------------------------------------------" << endl;
-        }
-    }
-    cout << endl;
-}
-
 
 //main.cpp
-#include "listbuah.h"
+#include "listMakanan.h"
+#include <iostream>
 
-#include<iostream>
 using namespace std;
 
 int main(){
@@ -379,66 +288,811 @@ int main(){
     address nodeA, nodeB, nodeC, nodeD, nodeE = Nil;
     createList(List);
 
-    dataBuah dtBuah;
+    dataMakanan dtMakanan;
 
-    nodeA = alokasi("Jeruk", 100, 3000);
-    nodeB = alokasi("Apel", 75, 4000);
-    nodeC = alokasi("Pir", 87, 5000);
-    nodeD = alokasi("Semangka", 43, 11500);
-    nodeE = alokasi("Durian", 15, 31450);
+    nodeA = alokasi("Nasi Rames", "Makanan Berat", 10000, 8.5);
+    nodeB = alokasi("Ayam Geprek", "Makanan Berat", 13000, 9.0);
+    nodeC = alokasi("Risol Mayo", "Makanan Ringan", 3500, 8.8);
+    nodeD = alokasi("Mie Ayam", "Makanan Berat", 15000, 9.9);
+    nodeE = alokasi("Donat", "Makanan Ringan", 2000, 7.7);
 
-    insertFirst(List, nodeA);
-    insertLast(List, nodeB);
-    insertAfter(List, nodeC, nodeA);
-    insertAfter(List, nodeD, nodeC);
+    insertFirst(List, nodeD);
     insertLast(List, nodeE);
-
-    cout << "--- ISI LIST SETELAH DILAKUKAN INSERT ---" << endl;
-    printList(List);
-    cout << "Jumlah node : " << nbList(List) << endl;
+    insertAfter(List, nodeA, nodeD);
+    insertBefore(List, nodeC, nodeE);
+    insertLast(List, nodeB);
     cout << endl;
 
-   updateFirst(List);
-   updateLast(List);
-   updateAfter(List, nodeD);
-
-    cout << "--- ISI LIST SETELAH DILAKUKAN UPDATE ---" << endl;
+    //D - A - C - E - B
+    cout << "--- Isi List Setelah Insert ---" << endl;
     printList(List);
-    cout << "Jumlah node : " << nbList(List) << endl;
     cout << endl;
 
-    FindNodeByData (List, "Kelapa");
-    FindNodeByAddress(List, nodeC);
-    FindNodeByRange(List, 5000, 10000);
+    updateFirst(List);
+    updateLast(List);
+    updateBefore(List, nodeC);
+    updateAfter(List, nodeC);
 
-    delFirst(List);
-    delLast(List);
-    delAfter(List, nodeD, nodeC);
-
-    cout << "--- ISI LIST SETELAH DILAKUKAN DELETE ---" << endl;
+    cout << "--- Isi List Setelah Update ---" << endl;
     printList(List);
-    cout << "Jumlah node : " << nbList(List) << endl;
-    cout << endl;
-
-    deleteList(List);
-    cout << "--- ISI LIST SETELAH DILAKUKAN HAPUS LIST ---" << endl;
-    printList(List);
-    cout << "Jumlah node : " << nbList(List) << endl;
-    cout << endl;
 
     return 0;
 }
 ```
-Program ini menerapkan konsep ADT Single Linked List dalam bahasa C++ untuk mengelola data buah. Di dalamnya digunakan konsep node, pointer, dan manajemen memori dinamis guna melakukan operasi seperti penyimpanan, penambahan, penghapusan, pembaruan, serta pencarian data.
+program ini Digunakan untuk menambahkan beberapa elemen dengan memanfaatkan fungsi insert, serta mengatur kembali urutan data melalui fungsi updateFirst, updateLast, dan updateBefore.
+
+###. 2 [Doubly linked list dan mencari data dengan menggunakan fungsi search dan delete]
+```C++
+//listmakanan.h
+#ifndef LISTMAKANAN_H
+#define LISTMAKANAN_H
+#define Nil NULL
+
+#include<iostream>
+using namespace std;
+
+struct makanan{
+    string nama;
+    string jenis; 
+    float harga;
+    float rating; 
+};
+
+typedef makanan dataMakanan;
+
+typedef struct node *address;
+
+struct node{
+    dataMakanan isidata;
+    address next;
+    address prev;
+};
+
+struct linkedlist{
+    address first;
+    address last;
+};
+
+bool isEmpty(linkedlist List);
+void createList(linkedlist &List);
+address alokasi(string nama, string jenis, float harga, float rating);
+void dealokasi(address &node);
+
+void insertFirst(linkedlist &List, address nodeBaru);
+void insertLast(linkedlist &List, address nodeBaru);
+void insertAfter(linkedlist &List, address nodeBaru, address Prev);
+void insertBefore(linkedlist &List, address nodeBaru, address nodeNext);
+
+void printList(linkedlist List);
+
+void updateFirst(linkedlist List);
+void updateLast(linkedlist List);
+void updateAfter(linkedlist List, address prev);
+void updateBefore(linkedlist List, address nodeNext);
+
+// Searching
+void findByName(linkedlist List, string nama);
+void findByJenis(linkedlist List, string jenis);
+void findByMinRating(linkedlist List, float minRating);
+
+// Delete
+void deleteFirst(linkedlist &List);
+void deleteLast(linkedlist &List);
+void deleteAfter(linkedlist &List, address Prev);
+void deleteBefore(linkedlist &List, address nodeNext);
+
+void deleteNode(linkedlist &List, address target);
+void deleteByName(linkedlist &List, string nama);
+
+#endif
+
+//listmakanan.cpp
+#include "listMakanan.h"
+#include <iostream>
+#include <string>
+using namespace std;
+
+bool isEmpty(linkedlist List) {
+    if(List.first == Nil){
+        return true; 
+    } else {
+        return false;
+    }
+}
+
+void createList(linkedlist &List) {
+    List.first = Nil;
+    List.last = Nil;
+}
+
+//pembuatan node baru dengan menerapkan manajemen memori
+address alokasi(string nama, string jenis, float harga, float rating) { 
+    address nodeBaru = new node;
+    nodeBaru->isidata.nama = nama;
+    nodeBaru->isidata.jenis = jenis; 
+    nodeBaru->isidata.harga = harga;
+    nodeBaru->isidata.rating =  rating;
+    nodeBaru->next = Nil;
+    nodeBaru->prev = Nil;
+    return nodeBaru;
+}
+
+void dealokasi(address &node) {
+    node->next = Nil;
+    node->prev = Nil;
+    delete node;
+}
+
+void insertFirst(linkedlist &List, address nodeBaru){
+    if (isEmpty(List)) {
+        List.first = List.last = nodeBaru;
+    } else {
+        nodeBaru->next = List.first;
+        List.first->prev = nodeBaru;
+        List.first = nodeBaru;
+    }
+    cout << "Node " << nodeBaru->isidata.nama << " berhasil ditambahkan sebagai node pertama list" << endl;
+}
+
+void insertLast(linkedlist &List, address nodeBaru){
+    if(isEmpty(List) == true){
+        List.first = List.last = nodeBaru;
+    } else {
+        nodeBaru->prev = List.last;
+        List.last->next = nodeBaru;
+        List.last = nodeBaru;
+    }
+    cout << "Node " << nodeBaru->isidata.nama << " berhasil ditambahkan sebagai node terakhir list" << endl;
+}
+
+void insertAfter(linkedlist &List, address nodeBaru, address nodePrev){
+    if(isEmpty(List) == true){
+        List.first = List.last = nodeBaru;
+    } else {
+        if (nodePrev != Nil){
+            if(nodePrev == List.last){
+                insertLast(List, nodeBaru);
+            } else {
+                nodeBaru->next = nodePrev->next;
+                nodeBaru->prev = nodePrev;
+                (nodePrev->next)->prev = nodeBaru;
+                nodePrev->next = nodeBaru;
+                cout << "Node " << nodeBaru->isidata.nama << " berhasil ditambahkan setelah node " << nodePrev->isidata.nama << endl;
+            }
+        } else {
+            cout << "node sebelumnya (nodePrev) tidak valid!" << endl;
+        }
+    }
+}
+
+void insertBefore(linkedlist &List, address nodeBaru, address nodeNext){
+    if(isEmpty(List) == true){
+        List.first = List.last = nodeBaru;
+    } else {
+        if (nodeNext != Nil){
+            if(nodeNext == List.first){
+                insertFirst(List, nodeBaru);
+            } else {
+                nodeBaru->next = nodeNext;
+                nodeBaru->prev = nodeNext->prev;
+                (nodeNext->prev)->next = nodeBaru;
+                nodeNext->prev = nodeBaru;
+                cout << "Node " << nodeBaru->isidata.nama << " berhasil ditambahkan sebelum node " << nodeNext->isidata.nama << endl;
+            }
+        } else {
+            cout << "node setelahnya (nodeNext) tidak valid!" << endl;
+        }
+    }
+}
+
+void printList(linkedlist List) {
+    if (isEmpty(List) == true) {
+        cout << "List kosong!" << endl;
+    } else {
+        address nodeBantu = List.first;
+        while (nodeBantu != Nil) { 
+            cout << "Nama makanan : " << nodeBantu->isidata.nama << endl;
+            cout << "Jenis        : " << nodeBantu->isidata.jenis << endl;
+            cout << "Harga        : " << nodeBantu->isidata.harga << endl; 
+            cout << "Rating       : " << nodeBantu->isidata.rating << endl;
+            cout << "-------------------------------" << endl;
+            nodeBantu = nodeBantu->next;
+        }
+    }
+}
+
+void updateFirst(linkedlist List){
+    if(isEmpty(List) == true){
+        cout << "List kosong!" << endl;
+    } else {
+        cout << "Masukkan update data node pertama : " << endl;
+        cout << "Nama makanan : ";
+        getline(cin, List.first->isidata.nama);
+        cout << "Jenis makanan : ";
+        getline(cin, List.first->isidata.jenis);
+        cout << "Harga : ";
+        cin >> List.first->isidata.harga;
+        cout << "Rating : ";
+        cin >> List.first->isidata.rating;
+        cin.ignore(); //menghapus karakter newline (/n) dari input buffer
+        cout << "Data Berhasil Diupdate!" << endl;
+        cout << endl; 
+    }
+}
+
+void updateLast(linkedlist List){
+    if(isEmpty(List) == true){
+        cout << "List kosong!" << endl;
+    } else {
+        cout << "Masukkan update data node terakhir : " << endl;
+        cout << "Nama makanan : ";
+        getline(cin, List.last->isidata.nama);
+        cout << "Jenis makanan : ";
+        getline(cin, List.last->isidata.jenis);
+        cout << "Harga : ";
+        cin >> List.last->isidata.harga;
+        cout << "Rating : ";
+        cin >> List.last->isidata.rating;
+        cin.ignore(); //menghapus karakter newline (/n) dari input buffer
+        cout << "Data Berhasil Diupdate!" << endl;
+        cout << endl; 
+    }
+}
+
+void updateAfter(linkedlist List, address nodePrev){
+    if(isEmpty(List) == true){
+        cout << "List kosong!" << endl;
+    } else {
+        if(nodePrev != Nil && nodePrev->next != Nil){
+            address nodeBantu = nodePrev->next;
+            cout << "masukkan update data node setelah node " << nodePrev->isidata.nama << " : " << endl;
+            cout << "Nama makanan : ";
+            getline(cin, nodeBantu->isidata.nama);
+            cout << "Jenis makanan : ";
+            getline(cin, nodeBantu->isidata.jenis);
+            cout << "Harga : ";
+            cin >> nodeBantu->isidata.harga;
+            cout << "Rating : ";
+            cin >> nodeBantu->isidata.rating;
+            cin.ignore(); //menghapus karakter newline (/n) dari input buffer
+            cout << "Data Berhasil Diupdate!" << endl;
+            cout << endl;
+        } else {
+            cout << "Node sebelumnya (nodePrev) tidak valid!" << endl;
+        }
+    }
+}
+
+void updateBefore(linkedlist List, address nodeNext){
+    if(isEmpty(List) == true){
+        cout << "List kosong!" << endl;
+    } else {
+        if (nodeNext != Nil && nodeNext->prev != Nil){
+            address nodeBantu = nodeNext->prev;
+            cout << "masukkan update data node sebelum node " << nodeNext->isidata.nama << " : " << endl;
+            cout << "Nama makanan : ";
+            getline(cin, nodeBantu->isidata.nama);
+            cout << "Jenis makanan : ";
+            getline(cin, nodeBantu->isidata.jenis);
+            cout << "Harga : ";
+            cin >> nodeBantu->isidata.harga;
+            cout << "Rating : ";
+            cin >> nodeBantu->isidata.rating;
+            cin.ignore(); //menghapus karakter newline (/n) dari input buffer
+            cout << "Data Berhasil Diupdate!" << endl;
+            cout << endl;
+        } else {
+            cout << "Node sebelumnya (prev) tidak valid!" << endl;
+        }
+    }
+}
+
+// SEARCHING
+void findByName(linkedlist List, string nama){
+    if(isEmpty(List)){
+        cout << "List kosong!" << endl;
+        return;
+    }
+    address p = List.first;
+    while(p != Nil){
+        if(p->isidata.nama == nama){
+            cout << "Ditemukan (berdasarkan nama):" << endl;
+            cout << "Nama makanan : " << p->isidata.nama << endl;
+            cout << "Jenis        : " << p->isidata.jenis << endl;
+            cout << "Harga        : " << p->isidata.harga << endl;
+            cout << "Rating       : " << p->isidata.rating << endl;
+            return;
+        }
+        p = p->next;
+    }
+    cout << "Data dengan nama \"" << nama << "\" tidak ditemukan." << endl;
+}
+
+void findByJenis(linkedlist List, string jenis){
+    if(isEmpty(List)){
+        cout << "List kosong!" << endl;
+        return;
+    }
+    address p = List.first;
+    while(p != Nil){
+        if(p->isidata.jenis == jenis){
+            cout << "Ditemukan (berdasarkan jenis):" << endl;
+            cout << "Nama makanan : " << p->isidata.nama << endl;
+            cout << "Jenis        : " << p->isidata.jenis << endl;
+            cout << "Harga        : " << p->isidata.harga << endl;
+            cout << "Rating       : " << p->isidata.rating << endl;
+            return;
+        }
+        p = p->next;
+    }
+    cout << "Data dengan jenis \"" << jenis << "\" tidak ditemukan." << endl;
+}
+
+void findByMinRating(linkedlist List, float minRating){
+    if(isEmpty(List)){
+        cout << "List kosong!" << endl;
+        return;
+    }
+    address p = List.first;
+    while(p != Nil){
+        if(p->isidata.rating >= minRating){
+            cout << "Ditemukan (rating >= " << minRating << "):" << endl;
+            cout << "Nama makanan : " << p->isidata.nama << endl;
+            cout << "Jenis        : " << p->isidata.jenis << endl;
+            cout << "Harga        : " << p->isidata.harga << endl;
+            cout << "Rating       : " << p->isidata.rating << endl;
+            return;
+        }
+        p = p->next;
+    }
+    cout << "Tidak ada data dengan rating >= " << minRating << "." << endl;
+}
+
+// DELETE
+void deleteFirst(linkedlist &List){
+    if(isEmpty(List) == true){
+        cout << "List kosong! Tidak ada node yang dihapus." << endl;
+        return;
+    }
+    address pDel = List.first;
+    if(List.first == List.last){
+        List.first = List.last = Nil;
+    } else {
+        List.first = pDel->next;
+        List.first->prev = Nil;
+        pDel->next = Nil;
+    }
+    pDel->prev = Nil;
+    cout << "Node " << pDel->isidata.nama << " berhasil dihapus dari posisi pertama." << endl;
+    dealokasi(pDel);
+}
+
+void deleteLast(linkedlist &List){
+    if(isEmpty(List) == true){
+        cout << "List kosong! Tidak ada node yang dihapus." << endl;
+        return;
+    }
+    address pDel = List.last;
+    if(List.first == List.last){
+        List.first = List.last = Nil;
+    } else {
+        List.last = pDel->prev;
+        List.last->next = Nil;
+        pDel->prev = Nil;
+    }
+    pDel->next = Nil;
+    cout << "Node " << pDel->isidata.nama << " berhasil dihapus dari posisi terakhir." << endl;
+    dealokasi(pDel);
+}
+
+void deleteAfter(linkedlist &List, address Prev){
+    if(isEmpty(List) == true){
+        cout << "List kosong! Tidak ada node yang dihapus." << endl;
+        return;
+    }
+    if(Prev == Nil || Prev->next == Nil){
+        cout << "Node sebelumnya (Prev) tidak valid atau tidak ada node setelahnya!" << endl;
+        return;
+    }
+    if(Prev->next == List.last){
+        deleteLast(List);
+        return;
+    }
+    address pDel = Prev->next;
+    Prev->next = pDel->next;
+    pDel->next->prev = Prev;
+    pDel->next = Nil;
+    pDel->prev = Nil;
+    cout << "Node " << pDel->isidata.nama << " berhasil dihapus setelah node " << Prev->isidata.nama << "." << endl;
+    dealokasi(pDel);
+}
+
+void deleteBefore(linkedlist &List, address nodeNext){
+    if(isEmpty(List) == true){
+        cout << "List kosong! Tidak ada node yang dihapus." << endl;
+        return;
+    }
+    if(nodeNext == Nil || nodeNext->prev == Nil){
+        cout << "Node setelahnya (nodeNext) tidak valid atau tidak ada node sebelumnya!" << endl;
+        return;
+    }
+    if(nodeNext->prev == List.first){
+        deleteFirst(List);
+        return;
+    }
+    address pDel = nodeNext->prev;
+    nodeNext->prev = pDel->prev;
+    pDel->prev->next = nodeNext;
+    pDel->next = Nil;
+    pDel->prev = Nil;
+    cout << "Node " << pDel->isidata.nama << " berhasil dihapus sebelum node " << nodeNext->isidata.nama << "." << endl;
+    dealokasi(pDel);
+}
+
+void deleteNode(linkedlist &List, address target){
+    if(isEmpty(List) == true || target == Nil){
+        cout << "Target tidak valid atau list kosong!" << endl;
+        return;
+    }
+    if(target == List.first){
+        deleteFirst(List);
+    } else if(target == List.last){
+        deleteLast(List);
+    } else {
+        address L = target->prev;
+        address R = target->next;
+        L->next = R;
+        R->prev = L;
+        target->next = Nil;
+        target->prev = Nil;
+        cout << "Node " << target->isidata.nama << " berhasil dihapus dari tengah list." << endl;
+        dealokasi(target);
+    }
+}
+
+void deleteByName(linkedlist &List, string nama){
+    if(isEmpty(List)){
+        cout << "List kosong! Tidak ada node yang dihapus." << endl;
+        return;
+    }
+
+    address target = List.first;
+    while(target != Nil && target->isidata.nama != nama){
+        target = target->next;
+    }
+    if(target == Nil){
+        cout << "Node dengan nama \"" << nama << "\" tidak ditemukan." << endl;
+        return;
+    }
+
+    deleteNode(List, target);
+    cout << "Node dengan nama \"" << nama << "\" telah dihapus dan didealokasi." << endl;
+}
+
+
+//main.cpp
+#include "listMakanan.h"
+#include <iostream>
+
+using namespace std;
+
+int main(){
+    linkedlist List;
+    address nodeA, nodeB, nodeC, nodeD, nodeE = Nil;
+    createList(List);
+
+    dataMakanan dtMakanan;
+
+    nodeA = alokasi("Nasi Rames", "Makanan Berat", 10000, 8.5);
+    nodeB = alokasi("Ayam Geprek", "Makanan Berat", 13000, 9.0);
+    nodeC = alokasi("Risol Mayo", "Makanan Ringan", 3500, 8.8);
+    nodeD = alokasi("Mie Ayam", "Makanan Berat", 15000, 9.9);
+    nodeE = alokasi("Donat", "Makanan Ringan", 2000, 7.7);
+
+    insertFirst(List, nodeD);
+    insertLast(List, nodeE);
+    insertAfter(List, nodeA, nodeD);
+    insertBefore(List, nodeC, nodeE);
+    insertLast(List, nodeB);
+    cout << endl;
+
+    //D - A - C - E - B
+    cout << "--- Isi List Setelah Insert ---" << endl;
+    printList(List);
+    cout << endl;
+
+    updateFirst(List);
+    updateLast(List);
+    updateBefore(List, nodeC);
+    updateAfter(List, nodeA);
+
+    cout << "--- Isi List Setelah Update ---" << endl;
+    printList(List);
+
+    cout << endl;
+
+    findByName(List, "Nasgor");
+
+    deleteByName(List, "Nasgor");
+    deleteFirst(List);
+    deleteBefore(List, nodeE);
+
+    cout << endl << "--- Isi List Setelah Delete ---" << endl;
+    printList(List);
+
+    return 0;
+}
+```
+program ini berfungsi untuk menampilkan hasil pembaruan, kemudian mencari data menggunakan fungsi searchByName, serta menghapus data baik secara umum, berdasarkan data pertama, maupun berdasarkan data sebelumnya (dataBefore).
 
 
 ## Unguided
 
-## 2. 
-<img width="974" height="576" alt="image" src="https://github.com/user-attachments/assets/2fa7a644-6b0e-4556-becb-35498df84c77" />
-<img width="1063" height="613" alt="image" src="https://github.com/user-attachments/assets/6084ebee-d50b-4eca-8fda-fa65d57ce9a5" />
-<img width="940" height="665" alt="image" src="https://github.com/user-attachments/assets/ed05625c-ba46-44c7-8101-4d1f18876c2b" />
+## 1. 
+<img width="944" height="618" alt="image" src="https://github.com/user-attachments/assets/e5912248-6522-4f20-b1d5-2eb6ea82c49b" />
 
+```C++
+//Doublylist.h
+#ifndef DOUBLYLIST_H
+#define DOUBLYLIST_H
+#define Nil NULL
+
+#include<iostream>
+using namespace std;
+
+struct kendaraan{
+    string nopol;
+    string warna; 
+    int thnBuat; 
+};
+
+typedef kendaraan infotype;
+
+typedef struct node *address;
+
+struct node{
+    infotype info;
+    address next;
+    address prev;
+};
+
+struct linkedlist{
+    address first;
+    address last;
+};
+
+bool isEmpty(linkedlist List);
+void createList(linkedlist &List);
+address alokasi(string nopol, string warna, int thnBuat);
+void dealokasi(address &P);
+void printInfo(linkedlist List);
+void insertLast(linkedlist &List, address P);
+
+void findElm(linkedlist List, string nopol);
+
+void deleteFirst(linkedlist &List);
+void deleteLast(linkedlist &List);
+void deleteAfter(linkedlist &List, address Prev);
+
+#endif
+
+
+//Doublylist.cpp
+#include "Doublylist.h"
+#include <iostream>
+#include <string>
+using namespace std;
+
+bool isEmpty(linkedlist List) {
+    return (List.first == Nil);
+}
+
+void createList(linkedlist &List) {
+    List.first = Nil;
+    List.last = Nil;
+}
+
+address alokasi(string nopol, string warna, int thnBuat) {
+    address nodeBaru = new node;
+    nodeBaru->info.nopol = nopol;
+    nodeBaru->info.warna = warna;
+    nodeBaru->info.thnBuat = thnBuat;
+    nodeBaru->next = Nil;
+    nodeBaru->prev = Nil;
+    return nodeBaru;
+}
+
+void dealokasi(address &P) {
+    P->next = Nil;
+    P->prev = Nil;
+    delete P;
+    P = Nil;
+}
+
+void printInfo(linkedlist List) {
+    if (isEmpty(List)) {
+        cout << "List kosong!" << endl;
+    } else {
+        address bantu = List.last;
+        cout << "DATA LIST 1" << endl;
+        cout << endl;
+        while (bantu != Nil) {
+            cout << "no polisi : " << bantu->info.nopol << endl;
+            cout << "warna     : " << bantu->info.warna << endl;
+            cout << "tahun     : " << bantu->info.thnBuat << endl;
+            bantu = bantu->prev;
+        }
+    }
+}
+
+void insertLast(linkedlist &List, address P) {
+    bool duplikat = false;
+    address bantu = List.first;
+    while (bantu != Nil) {
+        if (bantu->info.nopol == P->info.nopol) {
+            duplikat = true;
+            break;
+        }
+        bantu = bantu->next;
+    }
+
+    cout << "masukkan nomor polisi: " << P->info.nopol << endl;
+    cout << "masukkan warna kendaraan: " << P->info.warna << endl;
+    cout << "masukkan tahun kendaraan: " << P->info.thnBuat << endl;
+
+    if (duplikat) {
+        cout << "nomor polisi sudah terdaftar" << endl;
+        cout << endl;
+        dealokasi(P);
+        return;
+    }
+
+    cout << endl;
+
+    if (isEmpty(List)) {
+        List.first = P;
+        List.last = P;
+    } else {
+        P->prev = List.last;
+        List.last->next = P;
+        List.last = P;
+    }
+}
+
+void findElm(linkedlist List, string nopol){
+    if(isEmpty(List)){
+        cout << "List kosong!" << endl;
+        return;
+    }
+    address P = List.first;
+    while(P != Nil){
+        if(P->info.nopol == nopol){
+            cout << "Masukkan nomor polisi yang dicari : " << P->info.nopol << endl;
+            cout << "Nomor Polisi : " << P->info.nopol << endl;
+            cout << "Warna        : " << P->info.warna << endl;
+            cout << "Tahun        : " << P->info.thnBuat << endl;
+            return;
+        }
+        P = P->next;
+    }
+}
+
+void deleteFirst(linkedlist &List){
+    if(isEmpty(List) == true){
+        cout << "List kosong! Tidak ada node yang dihapus." << endl;
+        return;
+    }
+    address pDel = List.first;
+    if(List.first == List.last){
+        List.first = List.last = Nil;
+    } else {
+        List.first = pDel->next;
+        List.first->prev = Nil;
+        pDel->next = Nil;
+    }
+    pDel->prev = Nil;
+    dealokasi(pDel);
+}
+
+void deleteLast(linkedlist &List){
+    if(isEmpty(List) == true){
+        cout << "List kosong! Tidak ada node yang dihapus." << endl;
+        return;
+    }
+    address pDel = List.last;
+    if(List.first == List.last){
+        List.first = List.last = Nil;
+    } else {
+        List.last = pDel->prev;
+        List.last->next = Nil;
+        pDel->prev = Nil;
+    }
+    pDel->prev = Nil;
+    dealokasi(pDel);
+}
+
+void deleteAfter(linkedlist &List, address Prev){
+    if(isEmpty(List) == true){
+        cout << "List kosong! Tidak ada node yang dihapus." << endl;
+        return;
+    }
+    if(Prev == Nil || Prev->next == Nil){
+        cout << "Node sebelumnya (Prev) tidak valid atau tidak ada node setelahnya!" << endl;
+        return;
+    }
+    if(Prev->next == List.last){
+        deleteLast(List);
+        return;
+    }
+    address pDel = Prev->next;
+    Prev->next = pDel->next;
+    pDel->next->prev = Prev;
+    pDel->next = Nil;
+    pDel->prev = Nil;
+    dealokasi(pDel);
+}
+
+
+//main.cpp
+#include "Doublylist.h"
+#include <iostream>
+
+using namespace std;
+
+int main(){
+    linkedlist List;
+    address nodeA, nodeB, nodeC, nodeD = Nil;
+    createList(List);
+
+    infotype dtPlat;
+
+    nodeA = alokasi("D001", "hitam", 90);
+    nodeB = alokasi("D003", "putih", 70);
+    nodeC = alokasi("D001", "merah", 80);
+    nodeD = alokasi("D004", "kuning", 90);
+
+    insertLast(List, nodeA);
+    insertLast(List, nodeB);
+    insertLast(List, nodeC);
+    insertLast(List, nodeD);
+    cout << endl;
+
+    cout << "--- Data List 1 ---" << endl;
+    printInfo(List);
+    cout << endl;
+
+    findElm(List, "D001");  
+
+ string hapusNopol = "D003";
+    cout << "Masukkan Nomor Polisi yang akan dihapus : " << hapusNopol << endl;
+
+    address P = List.first;
+    address prev = Nil;
+
+    while (P != Nil && P->info.nopol != hapusNopol) {
+        prev = P;
+        P = P->next;
+    }
+
+    if (P == Nil) {
+        cout << "Data dengan nomor polisi " << hapusNopol << " tidak ditemukan." << endl;
+    } else {
+        if (P == List.first) {
+            deleteFirst(List);
+        } else if (P == List.last) {
+            deleteLast(List);
+        } else {
+            deleteAfter(List, prev);
+        }
+        cout << "Data dengan nomor polisi " << hapusNopol << " berhasil dihapus." << endl;
+    }
+
+    cout << endl;
+    printInfo(List);
+
+    return 0;
+}
+```
 
 ### [ Updated ADT Singlylist]
 
