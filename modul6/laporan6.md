@@ -830,6 +830,11 @@ program ini berfungsi untuk menampilkan hasil pembaruan, kemudian mencari data m
 
 ## 1. 
 <img width="944" height="618" alt="image" src="https://github.com/user-attachments/assets/e5912248-6522-4f20-b1d5-2eb6ea82c49b" />
+## 2.
+<img width="891" height="842" alt="image" src="https://github.com/user-attachments/assets/1971c994-f543-4de0-a6a8-edf186f7f140" />
+## 3.
+<img width="750" height="450" alt="image" src="https://github.com/user-attachments/assets/e2ccdec6-d5c8-4815-9f5f-f8137728ad38" />
+
 
 ```C++
 //Doublylist.h
@@ -1093,172 +1098,32 @@ int main(){
     return 0;
 }
 ```
-### Full code Screenshot:
-<img width="1910" height="1107" alt="image" src="https://github.com/user-attachments/assets/a8ecac8e-1545-4e12-93f9-8b73deda5d2a" />
-### Output unguided/kendaraan
 
-
-
-### [ Updated ADT Singlylist]
-
-```C++
-//singlylist.h
-#ifndef SINGLYLIST_H
-#define SINGLYLIST_H
-
-#include <iostream>
-using namespace std;
-
-struct Node {
-    int info;
-    Node *next;
-};
-
-struct List {
-    Node *first;
-};
-
-void createList(List &L);
-Node* alokasi(int x);
-void dealokasi(Node *P);
-void insertFirst(List &L, Node *P);
-void printInfo(List L);
-
-Node* findElm(List L, int x);
-int totalInfo(List L);
-
-#endif
-
-
-//singlylist.cpp
-#include "SinglyList.h"
-
-void createList(List &L) {
-    L.first = NULL;
-}
-
-Node* alokasi(int x) {
-    Node *P = new Node;
-    P->info = x;
-    P->next = NULL;
-    return P;
-}
-
-void dealokasi(Node *P) {
-    delete P;
-}
-
-void insertFirst(List &L, Node *P) {
-    if (L.first == NULL) {
-        L.first = P;
-    } else {
-        P->next = L.first;
-        L.first = P;
-    }
-}
-
-void printInfo(List L) {
-    Node *P = L.first;
-    if (P == NULL) {
-        cout << "List masih kosong." << endl;
-        return;
-    }
-
-    cout << "Isi elemen di dalam list: ";
-    while (P != NULL) {
-        cout << P->info << " ";
-        P = P->next;
-    }
-    cout << endl;
-}
-
-Node* findElm(List L, int x) {
-    Node *P = L.first;
-    while (P != NULL) {
-        if (P->info == x) {
-            return P;
-        }
-        P = P->next;
-    }
-    return NULL;
-}
-
-int totalInfo(List L) {
-    int total = 0;
-    Node *P = L.first;
-
-    while (P != NULL) {
-        total += P->info;
-        P = P->next;
-    }
-
-    return total;
-}
-
-
-//main.cpp
-#include <iostream>
-#include "SinglyList.h"
-using namespace std;
-
-int main() {
-    List L;
-    createList(L);
-
-    Node *P1, *P2, *P3, *P4, *P5;
-
-    P1 = alokasi(2);
-    insertFirst(L, P1);
-
-    P2 = alokasi(0);
-    insertFirst(L, P2);
-
-    P3 = alokasi(8);
-    insertFirst(L, P3);
-
-    P4 = alokasi(12);
-    insertFirst(L, P4);
-
-    P5 = alokasi(9);
-    insertFirst(L, P5);
-
-    cout << "Isi list: ";
-    printInfo(L);
-
-    Node *found = findElm(L, 8);
-    if (found != NULL) {
-        cout << "Elemen dengan nilai 8 ditemukan pada alamat: " << found << endl;
-    } else {
-        cout << "Elemen dengan nilai 8 tidak ditemukan." << endl;
-    }
-
-    cout << "Total seluruh nilai info pada list: " << totalInfo(L) << endl;
-
-    return 0;
-}
-
-```
-### 2. Hasil ADT Singly Linked list
+### 1. 
 ### Output:
-<img width="1102" height="152" alt="image" src="https://github.com/user-attachments/assets/d6888608-98f5-4318-bf7c-ddb7b397e745" />
+<img width="1119" height="944" alt="image" src="https://github.com/user-attachments/assets/6673b5f1-6354-4784-954e-40c6506e6047" />
 
-### 3. Carilah elemen dengan info 8 dengan membuat fungsi baru. fungsi findElm( L : List, x : infotype ) : address
+### 2. 
 ### Output:
-<img width="1094" height="31" alt="image" src="https://github.com/user-attachments/assets/3dc4f611-b0aa-4477-8d17-aca6551b078c" />
+<img width="1071" height="114" alt="image" src="https://github.com/user-attachments/assets/109c2175-d625-4596-863a-a743d3c72908" />
 
+### 3. 
+### Output:
+<img width="1063" height="309" alt="image" src="https://github.com/user-attachments/assets/b6972edf-90d3-444a-b7f8-e9823a2e48a0" />
 
-
-Kode di atas digunakan untuk mempelajari dan menerapkan konsep dasar struktur data Linked List (daftar berantai tunggal) dalam bahasa C++.
-dengan kata lain Program ini mengaplikasikan struktur data Singly Linked List menggunakan bahasa C++ guna mengelola kumpulan data secara fleksibel, termasuk melakukan operasi penambahan, pencarian, serta penjumlahan nilai elemen.
+Program ini dibuat menggunakan struktur data Doubly Linked List untuk menyimpan dan mengelola data kendaraan seperti Nomor Polisi, warna, dan tahun pembuatan. Program memperbolehkan Nomor Polisi yang sama untuk dimasukkan lebih dari satu kali dan menyediakan fungsi khusus untuk mencari serta menghapus semua data yang sesuai.
 
 
 #### Full code Screenshot:
 <img width="1919" height="1125" alt="image" src="https://github.com/user-attachments/assets/98f7b5de-c6e1-4d74-8b3e-b1e3e756f27e" />
+<img width="1919" height="1132" alt="image" src="https://github.com/user-attachments/assets/9d354bca-80da-41d4-b200-f60c99d3b9e2" />
+<img width="1869" height="1086" alt="image" src="https://github.com/user-attachments/assets/fd2e7449-2b6d-4c43-af93-79a91da20357" />
 
 
 ## Kesimpulan
-Melalui pembelajaran ini, mahasiswa belajar mengimplementasikan struktur data Singly Linked List pada bahasa C++.
-Latihan ini membantu memahami penggunaan node dan pointer dengan memori dinamis dalam berbagai operasi, termasuk menambah, menampilkan, mencari, dan menghitung elemen di dalam list.
+Melalui pembelajaran ini, Penggunaan Doubly Linked List (DLL) termasuk efisien karena setiap node memiliki dua pointer (next dan prev) yang memungkinkan traversal data secara dua arah, baik maju maupun mundur. Meskipun operasi dasar DLL sudah mendukung pencarian dan penghapusan data, modifikasi pada program memungkinkan pengelolaan data duplikat (misalnya Nomor Polisi yang sama) melalui fungsi searchAndPrintAll dan deleteAllMatches. Hal ini menunjukkan bahwa DLL bersifat fleksibel dan mudah dioptimalkan untuk proses penyisipan dan penghapusan data di berbagai posisi.
 
 ## Referensi
-[1] C++ Program To Check If A Singly Linked List Is Palindrome. https://www.geeksforgeeks.org/cpp/cpp-program-to-check-if-a-singly-linked-list-is-palindrome/
+[1] Doubly Linked List in C++. https://www.geeksforgeeks.org/cpp/doubly-linked-list-in-cpp/
+[2] Deletion in a Doubly Linked List. https://www.geeksforgeeks.org/dsa/delete-a-node-in-a-doubly-linked-list/
+[3] Search an element in a Doubly Linked List. https://www.geeksforgeeks.org/dsa/search-an-element-in-a-doubly-linked-list/
