@@ -1,4 +1,4 @@
-# <h1 align="center">Laporan Praktikum Modul 5 - Singly Linked List (Bagian Kedua)</h1>
+# <h1 align="center">Laporan Praktikum Modul 6 - Doubly Linked List (Bagian Kedua)</h1>
 <p align="center">Thoriq Al Kayyis</p>
 
 ## Dasar Teori
