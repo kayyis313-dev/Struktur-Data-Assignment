@@ -1093,6 +1093,11 @@ int main(){
     return 0;
 }
 ```
+### Full code Screenshot:
+<img width="1910" height="1107" alt="image" src="https://github.com/user-attachments/assets/a8ecac8e-1545-4e12-93f9-8b73deda5d2a" />
+### Output unguided/kendaraan
+
+
 
 ### [ Updated ADT Singlylist]
 
@@ -1241,9 +1246,7 @@ int main() {
 ### Output:
 <img width="1094" height="31" alt="image" src="https://github.com/user-attachments/assets/3dc4f611-b0aa-4477-8d17-aca6551b078c" />
 
-### 4. Hitunglah jumlah total info seluruh elemen (9+12+8+0+2=31).
-### Output:
-<img width="1119" height="33" alt="image" src="https://github.com/user-attachments/assets/870e1bcd-99f3-40b2-a525-f4d71988c4d9" />
+
 
 Kode di atas digunakan untuk mempelajari dan menerapkan konsep dasar struktur data Linked List (daftar berantai tunggal) dalam bahasa C++.
 dengan kata lain Program ini mengaplikasikan struktur data Singly Linked List menggunakan bahasa C++ guna mengelola kumpulan data secara fleksibel, termasuk melakukan operasi penambahan, pencarian, serta penjumlahan nilai elemen.
