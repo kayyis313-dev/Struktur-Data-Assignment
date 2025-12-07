@@ -1,5 +1,5 @@
 # <h1 align="center">Laporan Praktikum Modul 8 - Queue</h1>
-<p align="center">Thoriq Al Kayyis</p>
+<p align="center">Thoriq Al Kayyis - 103112400251</p>
 
 ## Dasar Teori
 Queue (dibaca : kyu) merupakan struktur data yang dapat diumpamakan seperti sebuah antrean.
@@ -802,10 +802,16 @@ int main()
 
 Program ini digunakan untuk membentuk struktur antrian (queue) menggunakan array berukuran tetap dengan kapasitas maksimum 5 elemen, serta menerapkan implementasi ketiga, yaitu head dan tail yang bergerak secara berputar (circular).
 
+
+### Full code Screenshot:
+<img width="1919" height="1124" alt="image" src="https://github.com/user-attachments/assets/1ad9c5c7-22aa-4915-accc-c55f7847863c" />
+
+
 ### Kesimpulan
 Pada pembelajaran ini, kita mempelajari struktur data queue, yaitu antrian yang menggunakan prinsip FIFO (First In First Out), di mana data yang pertama masuk akan keluar terlebih dahulu. Hal ini berbeda dengan stack yang menggunakan prinsip LIFO (Last In First Out). Selain itu, dalam implementasinya, queue dapat dibuat dengan beberapa metode, yaitu terdapat tiga jenis implementasi yang berbeda.
 
 
 ## Referensi
-[1] 
-[2] 
+[1] Queue in C++ STL. https://www.geeksforgeeks.org/cpp/queue-cpp-stl/
+[2] https://www.geeksforgeeks.org/cpp/how-to-enqueue-an-element-into-a-queue-in-cpp/
+[3] Deque in C++ STL. https://www.geeksforgeeks.org/cpp/deque-cpp-stl/
