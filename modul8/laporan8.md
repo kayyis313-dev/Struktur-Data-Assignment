@@ -1,5 +1,5 @@
 # <h1 align="center">Laporan Praktikum Modul 8 - Queue</h1>
-<p align="center">Thoriq Al Kayyis - 103112400251</p>
+<p align="center">Thoriq Al Kayyis</p>
 
 ## Dasar Teori
 Queue (dibaca : kyu) merupakan struktur data yang dapat diumpamakan seperti sebuah antrean.
