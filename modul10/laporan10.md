@@ -1,5 +1,5 @@
 # <h1 align="center">Laporan Praktikum Modul 10 - tree(bagian pertama)</h1>
-<p align="center">Thoriq Al Kayyiss</p>
+<p align="center">Thoriq Al Kayyis</p>
 
 ## Dasar Teori
 Kita telah mengenal dan mempelajari jenis-jenis strukur data yang linear, seperti : list, stack dan
