@@ -1,21 +1,24 @@
 #ifndef BSTREE_H
 #define BSTREE_H
-
 #define Nil NULL
 
+using namespace std;
+
 typedef int infotype;
-typedef struct Node* address;
 
 struct Node {
     infotype info;
-    address left;
-    address right;
+    Node* left;
+    Node* right;
 };
 
-address alokasi(infotype x);
-void insertNode(address &root, infotype x);
+typedef Node* address;
 
-void PreOrder(address root);
-void PostOrder(address root);
+address alokasi(infotype X);
+void insertNode(address &root, infotype X);
+address findNode(infotype X, address &root);
+void printInorder(address root);
+void preOrder(address root);
+void postOrder(address root);
 
 #endif
