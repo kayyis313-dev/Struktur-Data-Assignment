@@ -1223,4 +1223,4 @@ Pada materi tree ini, Materi yang dipelajari mencakup implementasi Multi Linked 
 ## Referensi
 [1] Introduction to Multi Linked List. https://www.geeksforgeeks.org/dsa/introduction-to-multi-linked-list/
 
-[2] Lock-free linked lists and skip lists. Fomitchev, Mikhail, and Eric Ruppert. "Lock-free linked lists and skip lists." Proceedings of the twenty-third annual ACM symposium on Principles of distributed computing. 2004.
+[2] Lock-free linked lists and skip lists. Fomitchev, Mikhail, and Eric Ruppert. "Lock-free linked lists and skip lists." Proceedings of the twenty-third annual ACM symposium on Principles of distributed computing. 2004. https://dl.acm.org/doi/epdf/10.1145/1011767.1011776
