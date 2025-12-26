@@ -1207,9 +1207,9 @@ int main() {
 
 ```
 ### Full code screenshot:
-<img width="1919" height="1115" alt="image" src="https://github.com/user-attachments/assets/e03aaad9-6d6c-4f04-af7c-271ec47061c8" />
-<img width="1917" height="1125" alt="image" src="https://github.com/user-attachments/assets/72c6c6cc-73f7-45ec-b876-f69379144b9b" />
-<img width="1919" height="1128" alt="image" src="https://github.com/user-attachments/assets/dba3d402-0e15-472c-a1f1-a1f13b42f3a6" />
+<img width="1919" height="1123" alt="image" src="https://github.com/user-attachments/assets/f64e4af4-6152-4f81-92f9-989dcc0fb329" />
+<img width="1917" height="1127" alt="image" src="https://github.com/user-attachments/assets/d9a86731-6b25-4ef6-bc10-bb0443dd01f6" />
+<img width="1919" height="1128" alt="image" src="https://github.com/user-attachments/assets/5c5f7404-510c-4275-ac6b-6f8becc5ebec" />
 
 ### Output:
 <img width="940" height="835" alt="image" src="https://github.com/user-attachments/assets/abd0f14c-6bd7-4e1c-8303-272e27e05a7f" />
