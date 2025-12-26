@@ -1,5 +1,5 @@
 # <h1 align="center">Laporan Praktikum Modul 13 - Multi Linked List</h1>
-<p align="center">Thoriq Al Kayyiss</p>
+<p align="center">Thoriq Al Kayyis</p>
 
 ## Dasar Teori
 Multi List merupakan sekumpulan list yang berbeda yang memiliki suatu keterhubungan satu sama
