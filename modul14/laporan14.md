@@ -1,872 +1,915 @@
-# <h1 align="center">Laporan Praktikum Modul 10 - tree(bagian pertama)</h1>
+# <h1 align="center">Laporan Praktikum Modul 14 - Graph</h1>
 <p align="center">Thoriq Al Kayyis</p>
 
 ## Dasar Teori
-Kita telah mengenal dan mempelajari jenis-jenis strukur data yang linear, seperti : list, stack dan
-queue. Adapun jenis struktur data yang kita pelajari kali ini adalah struktur data yang non-liniar (nonlinear data structure) yang disebut tree.
-Tree digambarkan sebagai suatu graph tak berarah terhubung dan tidak terhubung dan tidak
-mengandung sirkuit.
-Karateristik dari suatu tree T adalah :
-1. T kosong berarti empty tree
-2. Hanya terdapat satu node tanpa pendahulu, disebut akar (root)
-3. Semua node lainnya hanya mempunyai satu node pendahulu
+Graph merupakan himpunan tidak kosong dari node (vertec) dan garis penghubung (edge). Contoh
+sederhana tentang graph, yaitu antara Tempat Kost Anda dengan Common Lab. Tempat Kost Anda
+dan Common Lab merupakan node (vertec). Jalan yang menghubungkan tempat Kost dan Common
+Lab merupakan garis penghubung antara keduanya (edge).
 
-#### A. Materi modul 10
-Pada pertemuan ini, kita akan membahas fungsi fungsi pada struktur tree pada BST (Binary Search Tree).
+#### A. Materi modul 14
+Pada pertemuan ini, kita akan membuat sebuah fungsi dengan menggunakan algoritma graph
+ 
+#### 1. Breadth First Search (BFS)
+metode penelusuran atau traversal pada graph atau tree yang dilakukan dengan cara menjelajah melebar (berdasarkan tingkat / level) dari simpul awal ke seluruh tetangga terdekat terlebih dahulu, kemudian lanjut ke tetangga dari simpul-simpul tersebut, dan seterusnya.
+Cara kerja algoritma ini adalah dengan mengunjungi root (depth 0) kemudian ke depth 1, 2, dan
+seterusnya. Kunjungan pada masing-masing level dimulai dari kiri ke kanan.
 
-#### 1. Insert
-Jika node yang akan di-insert lebih kecil, maka di-insert pada Left Subtree
-Jika lebih besar, maka di-insert pada Right Subtree.
-
-#### 2. Search
-Proses pencarian elemen pada binary tree dapat menggunakan algoritma rekursif binary search.
-Berikut adalah algoritma binary search :
-1. Pencarian pada binary search tree dilakukan dengan menaruh pointer dan membandingkan nilai
-yang dicari dengan node awal ( root )
-2. Jika nilai yang dicari tidak sama dengan node, maka pointer akan diganti ke child dari node yang
-ditunjuk:
-a. Pointer akan pindah ke child kiri bila, nilai dicari lebih kecil dari nilai node yang ditunjuk saat
-itu
-b. Pointer akan pindah ke child kanan bila, nilai dicari lebih besar dari nilai node yang ditunjuk
-saat itu
-3. Nilai node saat itu akan dibandingkan lagi dengan nilai yang dicari dan apabila belum ditemukan,
-maka perulangan akan kembali ke tahap 2
-4. Pencarian akan berhenti saat nilai yang dicari ketemu, atau pointer menunjukan nilai NULL
-
-#### 3. Delete
-LEAF, tidak perlu dilakukan modifikasi.
-2. Node dengan 1 Child, maka child langsung menggantikan posisi Parent.
-3. Node dengan 2 Child:
-- Left Subtree, yang diambil adalah node yang paling kiri (nilai terbesar).
-- Right Subtree, yang diambil adalah node yang paling kanan (nilai terkecil).
-
-#### 4. Most Left
-Most-left node adalah node yang berada paling kiri dalam tree. Dalam konteks binary search tree
-(BST), most-left node adalah node dengan nilai terkecil, yang dapat ditemukan dengan mengikuti
-anak kiri (left child) dari root hingga mencapai node yang tidak memiliki anak kiri lagi.
-
-#### 5. Most right
-Most-right node adalah node yang berada paling kanan dalam tree. Dalam konteks binary search
-tree (BST), most-right node adalah node dengan nilai terbesar, yang dapat ditemukan dengan
-mengikuti anak kanan (right child) dari root hingga mencapai node yang tidak memiliki anak kanan
-lagi.
-
-#### 6. Pre-Order
-Proses Traverse yang melakukan tahapan cetak node yang dikunjungi, kunjungi left node , kunjungi right node.
-
-#### 7. In-Order
-Proses Traverse yang melakukan tahapan kunjungi left node, cetak node yang dikunjungi, kunjungi right node.
-
-#### 8. Post-Order
-Proses Traverse yang melakukan tahapan kunjungi left node, kunjungi right node, cetak node yang dikunjungi
+#### 2. Depth First Search (DFS)
+Depth First Search (DFS) adalah metode penelusuran atau traversal pada struktur data grafik (graph) atau pohon (tree) dengan cara menjelajah sedalam mungkin ke satu jalur terlebih dahulu sebelum kembali (backtracking) dan beralih ke jalur lain.
+Cara kerja algoritma ini adalah dengan mengunjungi root, kemudian rekursif ke subtree node tersebut.
 
 
-## Guided 1
+## Guided 
 
-### . [Binary Searh Tree] 
+### . [Graph dengan beberapa fungsi] 
 
 ```C++
-//bst.h
-#ifndef BST_H
-#define BST_H
-#define Nil NULL
+//graph.h
+#ifndef GRAPH_H
+#define GRAPH_H
+
+#include <iostream>
 
 using namespace std;
 
-typedef struct BST *node; //alias pointer = node
+typedef char infoGraph;
+typedef struct ElmNode *adrNode;
+typedef struct ElmEdge *adrEdge;
 
-struct BST{ //nama struct BST
-    int angka;
-    node left;
-    node right;
+struct ElmNode {
+    infoGraph info;      //menyimpan data node (misal: char/int)
+    int visited;        //Penanda untuk traversal (0/1) (penanda apakah node sudah dikunjungi)
+    adrEdge firstEdge; //Pointer ke edge pertama yang terhubung
+    adrNode Next;     //Pointer ke node berikutnya dalam graph
 };
 
-typedef node BinTree; //alias tree = BinTree (merujuk ke node root dari BST)
+struct ElmEdge {
+    adrNode Node;  //Pointer yang menunjuk ke lokasi node tujuan
+    adrEdge Next;  //Pointer ke edge berikutnya (jika satu node memiliki banyak cabang)
+};
 
-bool isEmpty(BinTree tree);
-void createTree(BinTree &tree);
-node alokasi(int angka);
-void dealokasi(node nodeHapus);
+struct Graph {
+    adrNode First;  //Pointer ke node pertama dalam list graph
+};
 
-void insertNode(BinTree &tree, node nodeBaru);
-void searchByData(BinTree tree, int angka);
-void preOrder(BinTree tree);
-void inOrder(BinTree tree);
-void postOrder(BinTree tree);
+void CreateGraph(Graph &G);  //prosedur untuk mengeset fitur dari graph sebagai NULL
+adrNode AlokasiNode(infoGraph data);  //alokasi node baru
+adrEdge AlokasiEdge(adrNode nodeTujuan);  //alokasi Edge baru
 
-bool deleteNode(BinTree &tree, int angka);
-node mostRight(BinTree tree);
-node mostLeft(BinTree tree);
-void deleteTree(BinTree &tree);
-int size(BinTree tree);
-int height(BinTree tree);
+void InsertNode(Graph &G, infoGraph data);  //menambahkan node ke dalam graph
+adrNode FindNode(Graph G, infoGraph data);  //function untuk mencari alamat node berdasarkan nilai info yang diberikan
+void ConnectNode(Graph &G, infoGraph info1, infoGraph info2); //prosedur untuk menghubungkan dua node (membuat edge dari info1 ke info2)
+void DisconnectNode(adrNode node1, adrNode node2);  //prosedur untuk memutuskan hubungan dua node (menghapus edge dari node1 ke node2)
+void DeleteNode(Graph &G, infoGraph X);  //prosedur untuk menghapus node X beserta semua Edge yang terhubung
+
+void PrintInfoGraph(Graph G);  //Menampilkan isi graph(Adjency list)
+void ResetVisited(Graph &G);  //Reset status visited sebelum traversal
+void PrintBFS(Graph G, infoGraph StartInfo);  //traversal Breadth Search / BFS (Menggunakan queue untuk menelusuri node berdasarkan tingkat)
+void PrintDFS(Graph G, infoGraph StartInfo);  //traversal Depth First Search / DFS (menggunakan stack untuk menelusuri node secara mendalam)
 
 #endif
 
-//bst.cpp
-#include "bst.h"
+//graph.cpp
+#include "graph.h"
 #include <iostream>
+#include <queue> //library queue untuk BFS
+#include <stack> //library stack untuk DFS
 
 using namespace std;
 
-//NOTE : parameter tree disini maksudnya merujuk ke node; baik itu node root atau node lain dari tree
-
-bool isEmpty(BinTree tree){
-    if(tree == Nil){
-        return true;
-    } else {
-        return false;
-    }
+//prosedur untuk mengeset first dari graph sebagai NULL
+void CreateGraph(Graph &G) {
+    G.First = NULL;
 }
 
-void createTree(BinTree &tree){
-    tree = Nil;
-}
-
-node alokasi(int angkaInput){
-    node nodeBaru = new BST;
-    nodeBaru->angka = angkaInput;
-    nodeBaru->left = Nil;
-    nodeBaru->right = Nil;
+//alokasi Node baru
+adrNode AlokasiNode(infoGraph data) {
+    adrNode nodeBaru = new ElmNode;
+    nodeBaru->info = data;
+    nodeBaru->visited = 0; //isinya 0/1
+    nodeBaru->firstEdge = NULL;
+    nodeBaru->Next = NULL;
     return nodeBaru;
 }
 
-void dealokasi(node nodeHapus){
+//alokasi Edge baru
+adrEdge AlokasiEdge(adrNode nodeTujuan) {
+    adrEdge edgeBaru = new ElmEdge;
+    edgeBaru->Node = nodeTujuan;
+    edgeBaru->Next = NULL;
+    return edgeBaru;
+}
+
+//Menambahkan Node ke dalam Graph
+void InsertNode(Graph &G, infoGraph data) {
+    adrNode nodeBaru = AlokasiNode(data);
+    if (G.First == NULL) {
+        G.First = nodeBaru;
+    } else {
+        //konsepnya insert last
+        adrNode nodeBantu = G.First;
+        while (nodeBantu->Next != NULL) {
+            nodeBantu = nodeBantu->Next;
+        }
+        nodeBantu->Next = nodeBaru;
+    }
+}
+
+//function untuk mencari alamat Node berdasarkan infonya
+adrNode FindNode(Graph G, infoGraph data) {
+    adrNode nodeBantu = G.First;
+    while (nodeBantu != NULL) {
+        if (nodeBantu->info == data) {
+            return nodeBantu;
+        }
+        nodeBantu = nodeBantu->Next;
+    }
+    return NULL;
+}
+
+//prosedur untuk menghubungkan dua Node (Undirected Graph)
+void ConnectNode(Graph &G, infoGraph info1, infoGraph info2) {
+    adrNode node1 = FindNode(G, info1);
+    adrNode node2 = FindNode(G, info2);
+
+    if (node1 != NULL && node2 != NULL) {
+        //Hubungkan node1 ke node2
+        adrEdge Edge1 = AlokasiEdge(node2);
+        Edge1->Next = node1->firstEdge; // Insert First pada list edge
+        node1->firstEdge = Edge1;
+
+        //Hubungkan node2 ke node1 (Karena Undirected/Bolak-balik)
+        adrEdge Edge2 = AlokasiEdge(node1);
+        Edge2->Next = node2->firstEdge;
+        node2->firstEdge = Edge2;
+    } else {
+        cout << "Node tidak ditemukan!" << endl;
+    }
+}
+
+//prosedur untuk memutuskan hubungan dua node
+void DisconnectNode(adrNode node1, adrNode node2) {
+    if (node1 != NULL && node2 != NULL) {
+        adrEdge edgeBantu = node1->firstEdge;
+        adrEdge PrevE = NULL;
+
+        //Cari edge yang mengarah ke node2 di dalam list milik node1
+        while (edgeBantu != NULL && edgeBantu->Node != node2) {
+            PrevE = edgeBantu;
+            edgeBantu = edgeBantu->Next;
+        }
+
+        if (edgeBantu != NULL) { //jika Edge ditemukan
+            if (PrevE == NULL) {
+                //Hapus edge pertama
+                node1->firstEdge = edgeBantu->Next;
+            } else {
+                //Hapus edge di tengah/akhir
+                PrevE->Next = edgeBantu->Next;
+            }
+            delete edgeBantu;
+        }
+    }
+}
+
+//prosedur untuk menghapus Node X beserta semua edge yang berhubungan dengannya
+void DeleteNode(Graph &G, infoGraph X) {
+    //1. Cari Node yang akan dihapus (nodeHapus)
+    adrNode nodeHapus = FindNode(G, X);
+    if (nodeHapus == NULL) {
+        cout << "Node tidak ditemukan." << endl;
+        return;
+    }
+
+    //2. Hapus semua Edge yang MENGARAH ke nodeHapus (Incoming Edges)
+    //cek setiap node di graph, apakah punya edge ke nodeHapus
+    adrNode nodeLainnya = G.First;
+    while (nodeLainnya != NULL) {
+        DisconnectNode(nodeLainnya, nodeHapus); //putus hubungan nodeLainnya ke nodeHapus
+        nodeLainnya = nodeLainnya->Next;
+    }
+
+    //3. Hapus semua Edge yang KELUAR dari nodeHapus (Outgoing Edges)
+    //Deallokasi list edge milik nodeHapus
+    adrEdge edgeBantu = nodeHapus->firstEdge;
+    while (edgeBantu != NULL) {
+        adrEdge tempE = edgeBantu;
+        edgeBantu = edgeBantu->Next;
+        delete tempE;
+    }
+    nodeHapus->firstEdge = NULL;
+
+    //4. Hapus nodeHapus dari List Utama Graph
+    if (G.First == nodeHapus) {
+        //jika nodeHapus di awal
+        G.First = nodeHapus->Next;
+    } else {
+        //jika nodeHapus di tengah/akhir
+        adrNode nodeBantu = G.First;
+        while (nodeBantu->Next != nodeHapus) {
+            nodeBantu = nodeBantu->Next;
+        }
+        nodeBantu->Next = nodeHapus->Next;
+    }
+
+    //5. delete nodeHapus
     delete nodeHapus;
 }
 
-void insertNode(BinTree &tree, node nodeBaru){
-    if(tree == Nil){
-        tree = nodeBaru;
-        cout << "Node " << nodeBaru->angka << " berhasil ditambahkan ke dalam tree!" << endl;
-        return;
-    } else if(nodeBaru->angka < tree->angka){
-        insertNode(tree->left, nodeBaru);
-    } else if(nodeBaru->angka > tree->angka){
-        insertNode(tree->right, nodeBaru);
-    }
-}
-
-void searchByData(BinTree tree, int angkaCari){
-    if(isEmpty(tree) == true){
-        cout << "Tree kosong!" << endl;
-    } else {
-        node nodeBantu = tree;
-        node parent = Nil;
-        bool ketemu = false;
-        while(nodeBantu != Nil){
-            if(angkaCari < nodeBantu->angka){
-                parent = nodeBantu;
-                nodeBantu = nodeBantu->left;
-            } else if(angkaCari > nodeBantu->angka){
-                parent = nodeBantu;
-                nodeBantu = nodeBantu->right;
-            } else if(angkaCari == nodeBantu->angka){
-                ketemu = true;
-                break;
-            }
+//Menampilkan isi Graph (Adjacency List) 
+void PrintInfoGraph(Graph G) {
+    adrNode nodeBantu = G.First;
+    while (nodeBantu != NULL) {
+        cout << "Node " << nodeBantu->info << " terhubung ke: ";
+        adrEdge edgeBantu = nodeBantu->firstEdge;
+        while (edgeBantu != NULL) {
+            cout << edgeBantu->Node->info << " "; //Akses info dari node tujuan
+            edgeBantu = edgeBantu->Next;
         }
-        if(ketemu == false){
-            cout << "Data tidak ditemukan" << endl;
-        } else if(ketemu == true){
-            cout << "Data ditemukan didalam tree!" << endl;
-            cout << "Data Angka : " << nodeBantu->angka << endl;
-
-            //menampilkan parentnya & pengecekan sibling
-            node sibling = Nil;
-            if(parent != Nil){
-                cout << "Parent : " << parent->angka << endl;
-                if(parent->left == nodeBantu){
-                    sibling = parent->right;
-                } else if(parent->right == nodeBantu){
-                    sibling = parent->left;
-                }
-            } else {
-                cout << "Parent : - (node root)"<< endl;
-            }
-
-            //menampilkan siblingnya
-            if(sibling != Nil){
-                cout << "Sibling : " << sibling->angka << endl;
-            } else {
-                cout << "Sibling : - " << endl;
-            }
-
-            //menampilkan childnya
-            if(nodeBantu->left != Nil){
-                cout << "Child kiri : " << nodeBantu->left->angka << endl;
-            } else if(nodeBantu->left == Nil){
-                cout << "Child kiri : -" << endl;
-            }
-            if(nodeBantu->right != Nil){
-                cout << "Child kanan : " << nodeBantu->right->angka << endl;
-            } else if(nodeBantu->right == Nil){
-                cout << "Child kanan : -" << endl;
-            }
-        }
-    }
-}
-
-void preOrder(BinTree tree){ //tengah - kiri - kanan atau root - child kiri - child kanan
-    if(tree == Nil){
-        return;
-    }
-    cout << tree->angka << " - ";
-    preOrder(tree->left);
-    preOrder(tree->right);
-}
-
-void inOrder(BinTree tree){ //kiri - tengah - kanan atau child kiri - root - child kanan
-    if(tree == Nil){
-        return;
-    }
-    inOrder(tree->left);
-    cout << tree->angka << " - ";
-    inOrder(tree->right);
-}
-
-void postOrder(BinTree tree){ //kiri - kanan - tengah atau child kiri - child kanan - root
-    if(tree == Nil){
-        return;
-    }
-    postOrder(tree->left);
-    postOrder(tree->right);
-    cout << tree->angka << " - ";
-}
-
-
-
-bool deleteNode(BinTree &tree, int angka) {
-    if (tree == Nil) {
-        return false; //data tidak ditemukan di subtree ini
-    } else {
-        if (angka < tree->angka) {
-            return deleteNode(tree->left, angka);
-        } else if (angka > tree->angka) {
-            return deleteNode(tree->right, angka);
-        } else {
-            //jika node yang mau dihapus ditemukan
-            //Case 1 : node yang mau dihapus adalah leaf
-            if (tree->left == Nil && tree->right == Nil) {
-                node tmp = tree;
-                tree = Nil;
-                dealokasi(tmp);
-            }
-            //Case 2 : node yang mau dihapus hanya punya right child
-            else if (tree->left == Nil) {
-                node tmp = tree;
-                tree = tree->right;
-                dealokasi(tmp);
-            }
-            //Case 3 : node yang mau dihapus hanya punya left child
-            else if (tree->right == Nil) {
-                node tmp = tree;
-                tree = tree->left;
-                dealokasi(tmp);
-            }
-            // Case 4 : jika node yang mau dihapus punya dua child, maka ambil mostleft dari subtree kanan untuk menggantikan node yang mau dihapus
-            else {
-                //mostleft dari subtree kanan = node successor (node penerus)
-                node successor = mostLeft(tree->right);
-                //salin data successor ke node saat ini
-                tree->angka = successor->angka;
-                //hapus successor pada subtree kanan
-                return deleteNode(tree->right, successor->angka);
-            }
-            return true; //berhasil dihapus
-        }
-    }
-}
-
-node mostRight(BinTree tree){
-    while (tree->right != Nil){
-        tree = tree->right;
-    }
-    return tree;    
-}
-
-node mostLeft(BinTree tree){
-    while (tree->left != Nil){
-        tree = tree->left;
-    }
-    return tree;
-}
-
-void deleteTree(BinTree &tree){
-    if(tree == Nil){
-        return;
-    } else {
-        deleteTree(tree->left);
-        deleteTree(tree->right);
-        dealokasi(tree);
-        tree = Nil;
-    }
-}
-
-int size(BinTree tree){ //mengembalikan jumlah semua node
-    if(isEmpty(tree) == true){
-        return 0;
-    } else {
-        return 1 + size(tree->left) + size(tree->right);
-    }
-    cout << endl;
-}
-
-int height(BinTree tree){ //mengembalikan jumlah level tree
-    if(isEmpty(tree) == true){
-        return -1; //tree kosong jika height = -1
-    } else {
-        int hl = height(tree->left);
-        int hr = height(tree->right);
-        int maxHeight;
-        if (hl > hr){
-            maxHeight = hl;
-        } else {
-            maxHeight = hr;
-        }
-        return 1 + maxHeight;
-    }
-    cout << endl;
-}
-//main.cpp
-#include <iostream>
-#include "bst.h"
-#include "bst.cpp"
-
-using namespace std;
-
-int main() {
-    BinTree tree;
-    createTree(tree);
-
-    int pilih, angka;
-
-    do {
-        cout << "========= MENU BST =========" << endl;
-        cout << "1. Insert Node" << endl;
-        cout << "2. Delete Node" << endl;
-        cout << "3. Search Data" << endl;
-        cout << "4. Tampilkan PreOrder" << endl;
-        cout << "5. Tampilkan InOrder" << endl;
-        cout << "6. Tampilkan PostOrder" << endl;
-        cout << "7. Size Tree (jumlah node)" << endl;
-        cout << "8. Height Tree (tinggi level)" << endl;
-        cout << "9. Tampilkan mostright" << endl;
-        cout << "10. Tampilkan mostleft" << endl;
-        cout << "11. Delete Seluruh Tree" << endl;
-        cout << "0. Keluar" << endl;
-        cout << "pilihan anda : ";
-        cin >> pilih;
         cout << endl;
+        nodeBantu = nodeBantu->Next;
+    }
+}
 
-        switch (pilih){
-        case 1:
-            cout << "Masukkan angka: ";
-            cin >> angka;
-            insertNode(tree, alokasi(angka));
-            cout << endl;
-            break;
+//Reset status visited sebelum traversal
+void ResetVisited(Graph &G) {
+    adrNode nodeReset = G.First;
+    while (nodeReset != NULL) {
+        nodeReset->visited = 0;
+        nodeReset = nodeReset->Next;
+    }
+}
 
-        case 2:
-            if(isEmpty(tree) == true){
-                cout << "Tree kosong!" << endl;
-            } else {
-                cout << "Masukkan angka yang ingin dihapus: ";
-                cin >> angka;
-                if(deleteNode(tree, angka)){
-                    cout << "Data " << angka << " berhasil dihapus!" << endl;
-                } else {
-                    cout << "Data " << angka << " tidak ditemukan!" << endl;
-                }
+//traversal Breadth First Search / BFS (Menggunakan Queue)
+void PrintBFS(Graph G, infoGraph StartInfo) {
+    ResetVisited(G);
+    adrNode StartNode = FindNode(G, StartInfo);
+    
+    if (StartNode == NULL) return;
+
+    queue<adrNode> Qyu;
+    
+    //Enqueue start
+    Qyu.push(StartNode);
+    StartNode->visited = 1;
+
+    cout << "BFS Traversal: ";
+    while (!Qyu.empty()) {
+        adrNode nodeBantu = Qyu.front();
+        Qyu.pop();
+        cout << nodeBantu->info << " - ";
+
+        //Cek semua tetangga atau edge nya
+        adrEdge edgeBantu = nodeBantu->firstEdge;
+        while (edgeBantu != NULL) {
+            if (edgeBantu->Node->visited == 0) {
+                edgeBantu->Node->visited = 1;
+                Qyu.push(edgeBantu->Node);
             }
-            cout << endl;
-            break;
-
-        case 3:
-            if(isEmpty(tree) == true){
-                cout << "Tree kosong!" << endl;
-            } else {
-                cout << "Masukkan angka yang ingin dicari: ";
-                cin >> angka;
-                searchByData(tree, angka);
-            }
-            cout << endl;
-            break;
-
-        case 4:
-            if(isEmpty(tree) == true){
-                cout << "Tree kosong!" << endl;
-            } else {
-                cout << "PreOrder : ";
-                preOrder(tree);
-                cout << endl;
-            }
-            cout << endl;
-            break;
-
-        case 5:
-            if(isEmpty(tree) == true){
-                cout << "Tree kosong!" << endl;
-            } else {
-                cout << "InOrder : ";
-                inOrder(tree);
-                cout << endl;
-            }
-            cout << endl;
-            break;
-
-        case 6:
-            if(isEmpty(tree) == true){
-                cout << "Tree kosong!" << endl;
-            } else {
-                cout << "PostOrder : ";
-                postOrder(tree);
-                cout << endl;
-            }
-            cout << endl;
-            break;
-
-        case 7:
-            cout << "Size Tree = " << size(tree) << endl;
-            cout << endl;
-            break;
-
-        case 8:
-            cout << "Height Tree = " << height(tree) << endl;
-            cout << endl;
-            break;
-
-        case 9: 
-            if(isEmpty(tree) == true){
-                cout << "Tree kosong!" << endl;
-                cout << endl;
-            } else {
-                cout << "Mostright : " << mostRight(tree)->angka << endl;
-                cout << endl;
-            }
-            break;
-        
-        case 10:
-            if(isEmpty(tree) == true){
-                cout << "Tree kosong!" << endl;
-                cout << endl;
-            } else {
-                cout << "Mostleft : " << mostLeft(tree)->angka << endl;
-                cout << endl;
-            }
-            break;
-
-        case 11:
-            if(isEmpty(tree) == true){
-                cout << "Tree kosong!" << endl;
-            } else {
-                deleteTree(tree);
-                cout << "Seluruh tree berhasil dihapus!" << endl;
-            }
-            cout << endl;
-            break;
-
-        case 0:
-            cout << "Keluar dari program..." << endl;
-            break;
-
-        default:
-            cout << "Pilihan tidak valid!" << endl;
-            break;
+            edgeBantu = edgeBantu->Next;
         }
+    }
+    cout << endl;
+}
 
-    } while (pilih != 0);
+//Traversal Depth First Search / DFS (Menggunakan Stack)
+void PrintDFS(Graph G, infoGraph StartInfo) {
+    ResetVisited(G);
+    adrNode StartNode = FindNode(G, StartInfo);
+    
+    if (StartNode == NULL) return;
+
+    stack<adrNode> Stak;
+    
+    Stak.push(StartNode);
+
+    cout << "DFS Traversal: ";
+    while (!Stak.empty()) {
+        adrNode nodeBantu = Stak.top();
+        Stak.pop();
+
+        if (nodeBantu->visited == 0) {
+            nodeBantu->visited = 1;
+            cout << nodeBantu->info << " - ";
+
+            //masukkan tetangga ke stack
+            adrEdge edgeBantu = nodeBantu->firstEdge;
+            while (edgeBantu != NULL) {
+                if (edgeBantu->Node->visited == 0) {
+                    Stak.push(edgeBantu->Node);
+                }
+                edgeBantu = edgeBantu->Next;
+            }
+        }
+    }
+    cout << endl;
+}
+
+
+//main.cpp
+#include "graph.h"
+#include "graph.cpp"
+#include <iostream>
+#include <queue>
+#include <stack>
+using namespace std;
+int main(){
+    Graph G;
+    CreateGraph(G);
+
+    InsertNode(G, 'A');
+    InsertNode(G, 'B');
+    InsertNode(G, 'C');
+    InsertNode(G, 'D');
+    InsertNode(G, 'E');
+    InsertNode(G, 'F');
+    
+    //hubungkan antar node
+    ConnectNode(G, 'A', 'B');
+    ConnectNode(G, 'A', 'D');
+    ConnectNode(G, 'B', 'C');
+    ConnectNode(G, 'D', 'C');
+    ConnectNode(G, 'B', 'E');
+    ConnectNode(G, 'C', 'E');
+    ConnectNode(G, 'C', 'F');
+    ConnectNode(G, 'E', 'F');
+
+    cout << "=== REPRESENTASI ADJACENCY LIST ===" << endl;
+    PrintInfoGraph(G);
+    cout << endl;
+
+    cout << "=== HASIL TRAVERSAL ===" << endl;
+    //mulai traversal dari node A
+    PrintBFS(G, 'A');  //BFS
+    PrintDFS(G, 'A');  //DFS
+    cout << endl;
+
+    cout << "=== HAPUS NODE E ===" << endl;
+    DeleteNode(G, 'E');
+    if(FindNode(G, 'E') == NULL) {
+        cout << "node E berhasil dihapus" << endl;
+    } else {
+        cout << "Node E tidak berhasil dihapus" << endl;
+    }
+    cout << endl;
+
+    cout << "=== REPRESENTASI ADJACENCY LIST ===" << endl;
+    PrintInfoGraph(G);
+    cout << endl;
+
+    cout << "=== HASIL TRAVERSAL ===" << endl;
+    //mulai traversal dari node A
+    PrintBFS(G, 'A');  //BFS
+    PrintDFS(G, 'A');  //DFS
 
     return 0;
 }
-   
+
 ```
-Dengan menggunakan menu yang ada di main.cpp, program ini dapat membuat BST. Pada program ini, ada menu yang memungkinkan untuk memasukkan node ke dalam pohon, menghapus node untuk menghapus node yang ada di pohon, mencari pohon untuk mencari data atau node yang ada di pohon, dapat menampilkan pohon secara preorder, inorder, dan postorder, menghitung jumlah node, dan menampilkan pohon secara mostright dan mostleft. Selain itu, ada menu yang memungkinkan untuk menghapus seluruh pohon.
+Program ini digunakan untuk membangun sebuah graph dengan cara menambahkan node melalui fungsi InsertNode, kemudian menghubungkan dua node atau membentuk edge menggunakan fungsi ConnectNode. Selain itu, program ini juga mampu melakukan penelusuran node menggunakan dua metode, yaitu Breadth First Search (BFS) yang menelusuri node berdasarkan tingkat dengan bantuan queue, serta Depth First Search (DFS) yang melakukan penelusuran secara mendalam menggunakan stack. Pada proses penghapusan node, program memanfaatkan dua fungsi, yaitu FindNode untuk mencari node yang akan dihapus dan DeleteNode untuk melakukan proses penghapusannya.
 
 
 ## Unguided
 
 ## soal 1. 
-<img width="1035" height="827" alt="image" src="https://github.com/user-attachments/assets/ebbdf9d1-a1d0-495c-af1c-3c9fed174358" />
-<img width="736" height="157" alt="image" src="https://github.com/user-attachments/assets/6e2c3767-bf9b-444c-8ed7-8ca122374c15" />
+<img width="964" height="880" alt="image" src="https://github.com/user-attachments/assets/32d96757-249b-40d1-8e5d-e6a5ea16c05d" />
 
 ```C++
-//bstree.h
-#ifndef BSTREE_H
-#define BSTREE_H
+//graph.h
+#ifndef GRAPH_H
+#define GRAPH_H
 
-#define Nil NULL
+#include <iostream>
+using namespace std;
 
-typedef int infotype;
-typedef struct Node* address;
+typedef char infoGraph;
+typedef struct ElmNode *adrNode;
+typedef struct ElmEdge *adrEdge;
 
-struct Node {
-    infotype info;
-    address left;
-    address right;
+struct ElmEdge {
+    adrNode Node;
+    adrEdge Next;
 };
 
-// alokasi node
-address alokasi(infotype x);
+struct ElmNode {
+    infoGraph info;
+    int visited;
+    adrEdge firstEdge;
+    adrNode Next;
+};
 
-// insert node ke BST
-void insertNode(address &root, infotype x);
+struct graph {
+    adrNode first;
+};
 
-// mencari node
-address findNode(infotype x, address root);
-
-// traversal inorder
-void InOrder(address root);
+void CreateGraph(graph &G);
+void InsertNode(graph &G, infoGraph X);
+void ConnectNode(adrNode N1, adrNode N2);
+void PrintInfoGraph(graph &G);
 
 #endif
 
-
-//bstree.cpp
+//graph.cpp
+#include "graph.h"
 #include <iostream>
-#include "bstree.h"
+#include <queue>
+#include <stack>
+
 using namespace std;
 
-// fungsi alokasi
-address alokasi(infotype x) {
-    address P = new Node;
-    if (P != Nil) {
-        P->info = x;
-        P->left = Nil;
-        P->right = Nil;
-    }
-    return P;
+void CreateGraph(graph &G){
+    G.first = NULL;
 }
 
-// fungsi insert BST
-void insertNode(address &root, infotype x) {
-    if (root == Nil) {
-        root = alokasi(x);
-    } else if (x < root->info) {
-        insertNode(root->left, x);
-    } else if (x > root->info) {
-        insertNode(root->right, x);
-    }
-    // jika sama → tidak dimasukkan
-}
+void InsertNode(graph &G, infoGraph X){
+    adrNode nodeBaru = new ElmNode;
+    nodeBaru->info = X;
+    nodeBaru->firstEdge = NULL;
+    nodeBaru->Next = NULL;
 
-// fungsi cari node
-address findNode(infotype x, address root) {
-    if (root == Nil || root->info == x)
-        return root;
-    if (x < root->info)
-        return findNode(x, root->left);
-    return findNode(x, root->right);
-}
-
-// traversal InOrder
-void InOrder(address root) {
-    if (root != Nil) {
-        InOrder(root->left);
-        cout << root->info << " ";
-        InOrder(root->right);
+    if(G.first == NULL) {
+        G.first = nodeBaru;
+    } else {
+        adrNode nodeBantu = G.first;
+        while (nodeBantu->Next != NULL) {
+            nodeBantu = nodeBantu->Next;
+        }
+        nodeBantu->Next = nodeBaru;
     }
 }
+
+void ConnectNode(adrNode N1, adrNode N2) {
+    if (N1 != NULL && N2 != NULL) {
+        adrEdge E1 = new ElmEdge;
+        E1->Node = N2;
+        E1->Next = N1->firstEdge;
+        N1->firstEdge = E1;
+
+        adrEdge E2 = new ElmEdge;
+        E2->Node = N1;
+        E2->Next = N2->firstEdge;
+        N2->firstEdge = E2;
+    }
+}
+
+void PrintInfoGraph(graph &G) {
+    adrNode nodeBantu = G.first;
+    while (nodeBantu != NULL) {
+        cout << "Node " << nodeBantu->info << " terhubung ke: ";
+        adrEdge edgeBantu = nodeBantu->firstEdge;
+        while (edgeBantu != NULL) {
+            cout << edgeBantu->Node->info << " ";
+            edgeBantu = edgeBantu->Next;
+        }
+        cout << endl;
+        nodeBantu = nodeBantu->Next;
+    }
+}
+
 
 //main.cpp
+#include "graph.h"
 #include <iostream>
-#include "bstree.h"
-
+#include <queue>
+#include <stack>
 using namespace std;
+int main(){
+    graph G;
+    CreateGraph(G);
 
-int main() {
-    cout << "Hello World" << endl;
+    InsertNode(G, 'A'); adrNode A = G.first;
+    InsertNode(G, 'B'); adrNode B = A->Next;
+    InsertNode(G, 'C'); adrNode C = B->Next;
+    InsertNode(G, 'D'); adrNode D = C->Next;
+    InsertNode(G, 'E'); adrNode E = D->Next;
+    InsertNode(G, 'F'); adrNode F = E->Next;
+    InsertNode(G, 'G'); adrNode Gn = F->Next;
+    InsertNode(G, 'H'); adrNode H = Gn->Next;
+    
+    //hubungkan antar node
+    ConnectNode(A, B);
+    ConnectNode(A, C);
+    ConnectNode(B, D);
+    ConnectNode(B, E);
+    ConnectNode(C, F);
+    ConnectNode(C, Gn);
+    ConnectNode(D, H);
+    ConnectNode(E, H);
+    ConnectNode(F, H);
+    ConnectNode(Gn, H);
 
-    address root = Nil;
-    insertNode(root,1);
-    insertNode(root,2);
-    insertNode(root,6);
-    insertNode(root,4);
-    insertNode(root,5);
-    insertNode(root,3);
-    insertNode(root,6);
-    insertNode(root,7);
-
-    InOrder(root);
-    return 0;
+    cout << "=== LIST GRAPH ===" << endl;
+    PrintInfoGraph(G);
+    cout << endl;   
 }
 
 ```
 ### Full code screenshot:
-<img width="1916" height="1120" alt="image" src="https://github.com/user-attachments/assets/95497d4e-5867-445b-819b-0d4136395b4d" />
-<img width="1917" height="1128" alt="image" src="https://github.com/user-attachments/assets/24e2d285-6105-4b71-b2b8-f4640136b051" />
-<img width="1915" height="983" alt="image" src="https://github.com/user-attachments/assets/27569ff1-0ac2-4a40-9d45-007ab82d1e1a" />
+<img width="1918" height="1136" alt="image" src="https://github.com/user-attachments/assets/6c5e1a7c-7caa-4043-9d64-f3e916130762" />
+<img width="1919" height="1126" alt="image" src="https://github.com/user-attachments/assets/6c9f95c6-fe1e-4490-92e0-077283819c84" />
+
 
 ### Output soal 1 :
-<img width="1258" height="109" alt="image" src="https://github.com/user-attachments/assets/69126e65-f415-4968-9a56-05bb6f051ab7" />
+<img width="940" height="240" alt="image" src="https://github.com/user-attachments/assets/7bef2a38-3ed8-4ff0-8751-f8ef21c4763b" />
 
-Dengan menggunakan metode alokasi dan insert untuk menambah data atau node, program ini dapat membuat pohon secara BST dan meng-output kan inputan tersebut secara inOrder. Dengan kata lain, program akan mengunjungi subtree kiri, mencetak nilai dari node saat ini, dan kemudian mengunjungi subtree kanan.
+Program ini digunakan untuk membangun graph tak berarah (undirected graph) dengan memanfaatkan adjacency list sebagai struktur penyimpanan edge atau hubungan antar node. Node disimpan dalam bentuk karakter, lalu seluruh hubungan antar node dapat ditampilkan sebagai output. Berbeda dengan contoh pada guided, program ini hanya menggunakan satu fungsi InsertNode untuk menambahkan node ke dalam graph. Pada saat membuat graph baru, G.first diinisialisasi dengan nilai NULL sebagai tanda graph masih kosong, dan hasil akhirnya ditampilkan menggunakan fungsi PrintInfoGraph.
 
-### soal 2. 
-<img width="889" height="196" alt="image" src="https://github.com/user-attachments/assets/86122002-be0b-4f46-8397-3f8119f0d379" />
-<img width="908" height="647" alt="image" src="https://github.com/user-attachments/assets/42baeba7-7f3f-4c3c-8c0b-81a452a8e5d7" />
+
+### soal 2.  Buatlah prosedur untuk menampilkanhasil penelusuran DFS. Prosedur PrintDFS (Graph G, adrNode N);
 
 ```C++
-//bstree.h
-#ifndef BSTREE_H
-#define BSTREE_H
+//graph.h
+#ifndef GRAPH_H
+#define GRAPH_H
 
-#define Nil NULL
+#include <iostream>
+using namespace std;
 
-typedef int infotype;
-typedef struct Node* address;
+typedef char infoGraph;
+typedef struct ElmNode *adrNode;
+typedef struct ElmEdge *adrEdge;
 
-struct Node {
-    infotype info;
-    address left;
-    address right;
+struct ElmEdge {
+    adrNode Node;
+    adrEdge Next;
 };
 
-address alokasi(infotype x);
-void insertNode(address &root, infotype x);
-void InOrder(address root);
+struct ElmNode {
+    infoGraph info;
+    int visited;
+    adrEdge firstEdge;
+    adrNode Next;
+};
 
-int hitungNode(address root);
-int hitungTotal(address root);
-int hitungKedalaman(address root, int start);
+struct graph {
+    adrNode first;
+};
+
+void CreateGraph(graph &G);
+void InsertNode(graph &G, infoGraph X);
+void ConnectNode(adrNode N1, adrNode N2);
+void PrintInfoGraph(graph &G);
+void PrintDFS(graph &G, adrNode N);
 
 #endif
 
-//bstree.cpp
+//graph.cpp
+#include "graph.h"
 #include <iostream>
-#include "bstree.h"
-using namespace std;
-
-address alokasi(infotype x) {
-    address P = new Node;
-    if (P != Nil) {
-        P->info = x;
-        P->left = Nil;
-        P->right = Nil;
-    }
-    return P;
-}
-
-void insertNode(address &root, infotype x) {
-    if (root == Nil)
-        root = alokasi(x);
-    else if (x < root->info)
-        insertNode(root->left, x);
-    else if (x > root->info)
-        insertNode(root->right, x);
-}
-
-void InOrder(address root) {
-    if (root != Nil) {
-        InOrder(root->left);
-        cout << root->info << " ";
-        InOrder(root->right);
-    }
-}
-
-int hitungNode(address root) {
-    if (root == Nil)
-        return 0;
-    return 1 + hitungNode(root->left) + hitungNode(root->right);
-}
-
-int hitungTotal(address root) {
-    if (root == Nil)
-        return 0;
-    return root->info + hitungTotal(root->left) + hitungTotal(root->right);
-}
-
-int hitungKedalaman(address root, int start) {
-    if (root == Nil)
-        return start;
-    int kiri = hitungKedalaman(root->left, start + 1);
-    int kanan = hitungKedalaman(root->right, start + 1);
-    return (kiri > kanan) ? kiri : kanan;
-}
-
-//main.cpp
-#include <iostream>
-#include "bstree.h"
-using namespace std;
-
-int main() {
-    address root = Nil;
-
-    insertNode(root,1);
-    insertNode(root,2);
-    insertNode(root,6);
-    insertNode(root,4);
-    insertNode(root,5);
-    insertNode(root,3);
-    insertNode(root,7);
-
-    InOrder(root);
-    cout << "\n";
-
-    cout << "kedalaman : " << hitungKedalaman(root,0) << endl;
-    cout << "jumlah Node : " << hitungNode(root) << endl;
-    cout << "total : " << hitungTotal(root) << endl;
-
-    return 0;
-}
-
-```
-### Full code screenshot:
-<img width="1919" height="1115" alt="image" src="https://github.com/user-attachments/assets/e03aaad9-6d6c-4f04-af7c-271ec47061c8" />
-<img width="1917" height="1125" alt="image" src="https://github.com/user-attachments/assets/72c6c6cc-73f7-45ec-b876-f69379144b9b" />
-<img width="1919" height="1128" alt="image" src="https://github.com/user-attachments/assets/dba3d402-0e15-472c-a1f1-a1f13b42f3a6" />
-
-### Output:
-<img width="1257" height="164" alt="image" src="https://github.com/user-attachments/assets/eba34332-7f02-4465-acf7-a3950e0998aa" />
-
-Dengan menggunakan alokasi dan insertNode untuk menambah data tanaman atau node, program ini dapat membuat BST (Binary Search Tree). Kemudian, program dapat menggunakan fungsi hitung JumlahNode untuk menghitung jumlah node, fungsi hitung TotalInfo untuk menghitung total node, dan fungsi untuk menghitung kedalaman tanaman. Perbedaan antara pengukuran kedalaman dan ketinggian terletak pada jarak: kedalaman mengukur jarak antara node dari root, sedangkan ketinggian mengukur jarak antara node dan lead (daun) terjauh di bawahnya.
-
-### soal 3.
-<img width="877" height="438" alt="image" src="https://github.com/user-attachments/assets/451700e8-cc21-46c1-bcc1-26878676f2f5" />
-
-```C++
-//bstree.h
-#ifndef BSTREE_H
-#define BSTREE_H
-#define Nil NULL
+#include <queue>
+#include <stack>
 
 using namespace std;
 
-typedef int infotype;
+void CreateGraph(graph &G){
+    G.first = NULL;
+}
 
-struct Node {
-    infotype info;
-    Node* left;
-    Node* right;
-};
-
-typedef Node* address;
-
-address alokasi(infotype X);
-void insertNode(address &root, infotype X);
-address findNode(infotype X, address &root);
-void printInorder(address root);
-void preOrder(address root);
-void postOrder(address root);
-
-#endif
-
-//bstree.cpp
-#include "bstree.h"
-#include <iostream>
-using namespace std;
-
-address alokasi(infotype X){
-    address nodeBaru = new Node;
+void InsertNode(graph &G, infoGraph X){
+    adrNode nodeBaru = new ElmNode;
     nodeBaru->info = X;
-    nodeBaru->left = Nil;
-    nodeBaru->right = Nil;
-    return nodeBaru;
-}
+    nodeBaru->visited = 0;
+    nodeBaru->firstEdge = NULL;
+    nodeBaru->Next = NULL;
 
-void insertNode(address &root, infotype X){
-    if(root == Nil){
-        root = alokasi(X);
-    } else if (X < root->info){
-        insertNode(root->left, X);
-    } else if (X > root->info){
-        insertNode(root->right, X);
+    if(G.first == NULL) {
+        G.first = nodeBaru;
+    } else {
+        adrNode nodeBantu = G.first;
+        while (nodeBantu->Next != NULL) {
+            nodeBantu = nodeBantu->Next;
+        }
+        nodeBantu->Next = nodeBaru;
     }
 }
 
-address findNode(infotype X, address &root){
-    if(root == Nil){
-        cout << "Tree kosong!" << endl;
-    } else {
-        address nodeBantu = root;
-        address parent = Nil;
-        bool ketemu = false;
-        while(nodeBantu != Nil){
-            if(X < nodeBantu->info){
-                parent = nodeBantu;
-                nodeBantu = nodeBantu->left;
-            } else if (X > nodeBantu->info){
-                parent = nodeBantu;
-                nodeBantu = nodeBantu->right;
-            } else if (X == nodeBantu->info){
-                ketemu = true;
-                break;
+void ConnectNode(adrNode N1, adrNode N2) {
+    if (N1 != NULL && N2 != NULL) {
+
+        // Buat edge dari N1 -> N2
+        adrEdge E1 = new ElmEdge;
+        E1->Node = N2;
+        E1->Next = N1->firstEdge;
+        N1->firstEdge = E1;
+
+        // Buat edge dari N2 -> N1 (undirected)
+        adrEdge E2 = new ElmEdge;
+        E2->Node = N1;
+        E2->Next = N2->firstEdge;
+        N2->firstEdge = E2;
+    }
+}
+
+void PrintInfoGraph(graph &G) {
+    adrNode nodeBantu = G.first;
+    while (nodeBantu != NULL) {
+        cout << "Node " << nodeBantu->info << " terhubung ke: ";
+        adrEdge edgeBantu = nodeBantu->firstEdge;
+        while (edgeBantu != NULL) {
+            cout << edgeBantu->Node->info << " ";
+            edgeBantu = edgeBantu->Next;
+        }
+        cout << endl;
+        nodeBantu = nodeBantu->Next;
+    }
+}
+
+void PrintDFS(graph &G, adrNode N){
+    if (N == NULL) return;
+    stack<adrNode> Stak;
+    Stak.push(N);
+    cout << "DFS Traversal: ";
+    while (!Stak.empty()) {
+        adrNode nodeBantu = Stak.top();
+        Stak.pop();
+
+        if (nodeBantu->visited == 0) {
+            nodeBantu->visited = 1;
+            cout << nodeBantu->info << " - ";
+
+            //masukkan tetangga ke stack
+            adrEdge edgeBantu = nodeBantu->firstEdge;
+            while (edgeBantu != NULL) {
+                if (edgeBantu->Node->visited == 0) {
+                    Stak.push(edgeBantu->Node);
+                }
+                edgeBantu = edgeBantu->Next;
             }
         }
-        if(ketemu == false){
-            cout << "Data tidak ditemukan" << endl;
-        } else if(ketemu = true){
-            cout << "Data ditemukan didalam tree!" << endl;
-            cout << "Data: " << nodeBantu->info << endl;
-        }
     }
-    return Nil;
-}
-
-void printInorder(address root){
-    if(root != Nil){
-        printInorder(root->left);
-        cout << root->info << " - ";
-        printInorder(root->right);
-    }
-}
-
-void preOrder(address root){
-    if(root == Nil){
-        return;
-    }
-    cout << root->info << " - ";
-    preOrder(root->left);
-    preOrder(root->right);
-}
-
-void postOrder(address root){
-    if(root == Nil){
-        return;
-    }
-    postOrder(root->left);
-    postOrder(root->right);
-    cout << root->info << " - ";
+    cout << endl;
 }
 
 //main.cpp
+#include "graph.h"
 #include <iostream>
-#include "bstree.h"
+#include <queue>
+#include <stack>
 using namespace std;
-int main()
-{
-    cout << "Hello World" << endl;
-    address root = Nil;
-    insertNode(root, 6);
-    insertNode(root, 7);
-    insertNode(root, 4);
-    insertNode(root, 5);
-    insertNode(root, 2);
-    insertNode(root, 3);
-    insertNode(root, 1);
-    cout << "Tampilkan preOrder : " ;
-             preOrder(root); 
-             cout << endl;
-    cout << "Tampilkan postOrder : "; 
-             postOrder(root);
-             cout << endl;
-    return 0;
+int main(){
+    graph G;
+    CreateGraph(G);
+
+    InsertNode(G, 'A'); adrNode A = G.first;
+    InsertNode(G, 'B'); adrNode B = A->Next;
+    InsertNode(G, 'C'); adrNode C = B->Next;
+    InsertNode(G, 'D'); adrNode D = C->Next;
+    InsertNode(G, 'E'); adrNode E = D->Next;
+    InsertNode(G, 'F'); adrNode F = E->Next;
+    InsertNode(G, 'G'); adrNode Gn = F->Next;
+    InsertNode(G, 'H'); adrNode H = Gn->Next;
+    
+    //hubungkan antar node
+    ConnectNode(A, B);
+    ConnectNode(A, C);
+    ConnectNode(B, D);
+    ConnectNode(B, E);
+    ConnectNode(C, F);
+    ConnectNode(C, Gn);
+    ConnectNode(D, H);
+    ConnectNode(E, H);
+    ConnectNode(F, H);
+    ConnectNode(Gn, H);
+
+    cout << "=== LIST GRAPH ===" << endl;
+    PrintInfoGraph(G);
+    cout << endl;
+
+    cout << "=== Hasil Traversal DFS ===" << endl;
+    PrintDFS(G, A);
+    cout << endl;
 }
 
 ```
 ### Full code screenshot:
-<img width="1918" height="1111" alt="image" src="https://github.com/user-attachments/assets/e171c807-c512-4e5f-a7a9-f3446ac86b28" />
-<img width="1918" height="1125" alt="image" src="https://github.com/user-attachments/assets/5cad3df6-0db3-477b-ab5e-c32c18fdcfbf" />
-<img width="1919" height="1124" alt="image" src="https://github.com/user-attachments/assets/3afa001d-20c4-4e8d-8cd2-429d598e347a" />
+<img width="1919" height="1125" alt="image" src="https://github.com/user-attachments/assets/ba56ee96-e153-4c73-bad9-652f13dafbf1" />
+<img width="1918" height="1117" alt="image" src="https://github.com/user-attachments/assets/630335fc-c57d-47f3-bb14-ae6929b64334" />
 
-### Output:
-<img width="1264" height="148" alt="image" src="https://github.com/user-attachments/assets/5cacdbcb-24cb-4e64-a4d4-661b747c2218" />
+### Output soal 2:
+<img width="940" height="297" alt="image" src="https://github.com/user-attachments/assets/56ea4c20-3566-4af9-a44e-a062513e3eb7" />
 
-Berfungsi untuk membuat pohon (BST), program ini kemudian dapat menampilkan output dari pohon tersebut secara preOrder (yaitu, mengunjungi dasar dan mencetak atau menampilkan node terlebih dahulu, kemudian mengunjungi subtree kiri, kemudian mengunjungi subtree kanan), dan secara postOrder (yaitu, mengunjungi subtree kiri terlebih dahulu, kemudian mengunjungi subtree kanan, dan node atau root diproses/dicetak dan ditampilkan di akhir).
+Program ini membangun graph tak berarah (undirected) menggunakan adjacency list untuk menyimpan hubungan antar node yang berupa karakter. Program juga mampu melakukan penelusuran DFS menggunakan stack. Karena tidak ada fungsi resetVisited, setiap node diinisialisasi dengan visited = 0 sebelum penelusuran. Hasil DFS ditampilkan dengan memanggil fungsi PrintDFS dengan node awal A.
+
+### soal 3. Buatlah prosedur untuk menampilkanhasil penelusuran DFS. Prosedur PrintBFS (Graph G, adrNode N);
+
+```C++
+//graph.h
+#ifndef GRAPH_H
+#define GRAPH_H
+
+#include <iostream>
+using namespace std;
+
+typedef char infoGraph;
+typedef struct ElmNode *adrNode;
+typedef struct ElmEdge *adrEdge;
+
+struct ElmEdge {
+    adrNode Node;
+    adrEdge Next;
+};
+
+struct ElmNode {
+    infoGraph info;
+    int visited;
+    adrEdge firstEdge;
+    adrNode Next;
+};
+
+struct graph {
+    adrNode first;
+};
+
+void CreateGraph(graph &G);
+void InsertNode(graph &G, infoGraph X);
+void ConnectNode(adrNode N1, adrNode N2);
+void PrintInfoGraph(graph &G);
+void PrintDFS(graph &G, adrNode N);
+void PrintBFS(graph &G, adrNode N);
+
+#endif
+
+//graph.cpp
+#include "graph.h"
+#include <iostream>
+#include <queue>
+#include <stack>
+
+using namespace std;
+
+void CreateGraph(graph &G){
+    G.first = NULL;
+}
+
+void InsertNode(graph &G, infoGraph X){
+    adrNode nodeBaru = new ElmNode;
+    nodeBaru->info = X;
+    nodeBaru->visited = 0;
+    nodeBaru->firstEdge = NULL;
+    nodeBaru->Next = NULL;
+
+    if(G.first == NULL) {
+        G.first = nodeBaru;
+    } else {
+        adrNode nodeBantu = G.first;
+        while (nodeBantu->Next != NULL) {
+            nodeBantu = nodeBantu->Next;
+        }
+        nodeBantu->Next = nodeBaru;
+    }
+}
+
+void ConnectNode(adrNode N1, adrNode N2) {
+    if (N1 != NULL && N2 != NULL) {
+
+        // Buat edge dari N1 -> N2
+        adrEdge E1 = new ElmEdge;
+        E1->Node = N2;
+        E1->Next = N1->firstEdge;
+        N1->firstEdge = E1;
+
+        // Buat edge dari N2 -> N1 (undirected)
+        adrEdge E2 = new ElmEdge;
+        E2->Node = N1;
+        E2->Next = N2->firstEdge;
+        N2->firstEdge = E2;
+    }
+}
+
+void PrintInfoGraph(graph &G) {
+    adrNode nodeBantu = G.first;
+    while (nodeBantu != NULL) {
+        cout << "Node " << nodeBantu->info << " terhubung ke: ";
+        adrEdge edgeBantu = nodeBantu->firstEdge;
+        while (edgeBantu != NULL) {
+            cout << edgeBantu->Node->info << " ";
+            edgeBantu = edgeBantu->Next;
+        }
+        cout << endl;
+        nodeBantu = nodeBantu->Next;
+    }
+}
+
+void PrintDFS(graph &G, adrNode N){
+    adrNode temp = G.first;
+    while (temp != NULL) {
+        temp->visited = 0;
+        temp = temp->Next;
+    }
+    if (N == NULL) return;
+    stack<adrNode> Stak;
+    Stak.push(N);
+    cout << "DFS Traversal: ";
+    while (!Stak.empty()) {
+        adrNode nodeBantu = Stak.top();
+        Stak.pop();
+
+        if (nodeBantu->visited == 0) {
+            nodeBantu->visited = 1;
+            cout << nodeBantu->info << " - ";
+
+            //masukkan tetangga ke stack
+            adrEdge edgeBantu = nodeBantu->firstEdge;
+            while (edgeBantu != NULL) {
+                if (edgeBantu->Node->visited == 0) {
+                    Stak.push(edgeBantu->Node);
+                }
+                edgeBantu = edgeBantu->Next;
+            }
+        }
+    }
+    cout << endl;
+}
+
+void PrintBFS(graph &G, adrNode N){
+    adrNode temp = G.first;
+    while (temp != NULL) {
+        temp->visited = 0;
+        temp = temp->Next;
+    }
+    if (N == NULL ){
+        return;
+    }
+    queue<adrNode> Qyu;
+    Qyu.push(N);
+    N->visited = 1;
+    cout << "BFS Traversal: ";
+    while (!Qyu.empty()) {
+        adrNode nodeBantu = Qyu.front();
+        Qyu.pop();
+        cout << nodeBantu->info << " - ";
+
+        adrEdge edgeBantu = nodeBantu->firstEdge;
+        while (edgeBantu != NULL) {
+            if (edgeBantu->Node->visited == 0) {
+                edgeBantu->Node->visited = 1;
+                Qyu.push(edgeBantu->Node);
+            }
+            edgeBantu = edgeBantu->Next;
+        }
+    }
+    cout << endl;
+}
+
+//main.cpp
+#include "graph.h"
+#include <iostream>
+#include <queue>
+#include <stack>
+using namespace std;
+int main(){
+    graph G;
+    CreateGraph(G);
+
+    InsertNode(G, 'A'); adrNode A = G.first;
+    InsertNode(G, 'B'); adrNode B = A->Next;
+    InsertNode(G, 'C'); adrNode C = B->Next;
+    InsertNode(G, 'D'); adrNode D = C->Next;
+    InsertNode(G, 'E'); adrNode E = D->Next;
+    InsertNode(G, 'F'); adrNode F = E->Next;
+    InsertNode(G, 'G'); adrNode Gn = F->Next;
+    InsertNode(G, 'H'); adrNode H = Gn->Next;
+    
+    //hubungkan antar node
+    ConnectNode(A, B);
+    ConnectNode(A, C);
+    ConnectNode(B, D);
+    ConnectNode(B, E);
+    ConnectNode(C, F);
+    ConnectNode(C, Gn);
+    ConnectNode(D, H);
+    ConnectNode(E, H);
+    ConnectNode(F, H);
+    ConnectNode(Gn, H);
+
+    cout << "=== LIST GRAPH ===" << endl;
+    PrintInfoGraph(G);
+    cout << endl;
+
+     cout << "=== Hasil Traversal DFS ===" << endl;
+    PrintDFS(G, A);
+    cout << endl;
+
+    cout << "=== Hasil Traversal BFS ===" << endl;
+    PrintBFS(G, A);
+    cout << endl;
+
+}
+
+```
+### Full code screenshot:
+<img width="1911" height="1128" alt="image" src="https://github.com/user-attachments/assets/77345ae3-a350-4c78-a57b-b8c6cd24ff53" />
+<img width="1911" height="1117" alt="image" src="https://github.com/user-attachments/assets/c69cf8ec-6067-43f5-85b4-61709132d93f" />
+
+### Output soal 3:
+<img width="940" height="360" alt="image" src="https://github.com/user-attachments/assets/0e6168b7-49aa-4950-86f8-e50cc24a77e6" />
+
+Program ini digunakan untuk membangun graph tak berarah (undirected) dengan menyimpan hubungan antar node menggunakan adjacency list, di mana setiap node direpresentasikan sebagai karakter dan hubungan antar node dapat ditampilkan sebagai output. Selain penelusuran menggunakan DFS (stack), program juga melakukan penelusuran dengan metode BFS (queue). Karena tidak tersedia fungsi reset visited, setiap node diinisialisasi dengan nilai visited = 0 di awal fungsi. Hasil penelusuran BFS ditampilkan dengan memanggil fungsi PrintBFS di dalam main dengan graph dan node awal A sebagai parameter.
 
 ### Kesimpulan
-Pada materi tree ini, dibahas beberapa fungsi utama yang digunakan dalam struktur data tree, seperti proses penyisipan data menggunakan fungsi alokasi dan insertNode. Selain itu, juga dibahas perhitungan jumlah node melalui fungsi hitungJumlahNode, perhitungan total nilai informasi dengan fungsi hitungTotalInfo, serta perhitungan kedalaman tree menggunakan fungsi hitungKedalaman. Meskipun secara konsep kedalaman dan ketinggian tree terlihat serupa, keduanya memiliki perbedaan dalam implementasi. Oleh karena itu, perhitungan kedalaman dan ketinggian pada suatu tree merupakan dua fungsi yang berbeda dan tidak dapat disamakan.
+Pada materi ini dibahas beberapa operasi pada graph, seperti penambahan node menggunakan InsertNode, penghubung antar node dengan ConnectNode, serta penelusuran graph menggunakan metode DFS dan BFS. DFS bekerja dengan bantuan stack, sedangkan BFS menggunakan queue. Walaupun tidak menggunakan fungsi alokasi, FindNode, dan ResetVisited, program tetap dapat berjalan dengan melakukan modifikasi pada fungsi InsertNode serta menginisialisikan nilai visited = 0 pada awal proses penelusuran DFS dan BFS.
 
 ## Referensi
-[1] Binary Tree in C++. https://www.geeksforgeeks.org/cpp/binary-tree-in-cpp/
-[2] Binary Search Tree (BST) Traversals – Inorder, Preorder, Post Order. https://www.geeksforgeeks.org/dsa/binary-search-tree-traversal-inorder-preorder-post-order/
-[3] Memahami Konsep Tree dalam Struktur Data Lengkap dengan Source Code Programnya. https://daismabali.medium.com/memahami-konsep-tree-dalam-struktur-data-lengkap-dengan-source-code-programnya-acbd0a8733d6
+[1] Implementation of Graph in C++. https://www.geeksforgeeks.org/cpp/implementation-of-graph-in-cpp/
+[2] BFS and DFS Beginners Overview in c++. https://blog.garybricks.com/bfs-and-dfs-beginners-overview-in-c
